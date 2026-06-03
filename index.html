@@ -1,0 +1,1093 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>퀸즈 · Queens</title>
+  <style>
+    :root {
+      --bg-deep: #070512;
+      --bg-mid: #0f0a1e;
+      --ink: #f3eef8;
+      --muted: #a89bb8;
+      --pink: #f5aecb;
+      --pink-soft: #ffc4dd;
+      --pink-glow: rgba(245, 174, 203, 0.35);
+      --purple: #9d6bff;
+      --purple-deep: #6d28d9;
+      --purple-glow: rgba(157, 107, 255, 0.32);
+      --blue: #5b9dff;
+      --blue-deep: #2563eb;
+      --blue-glow: rgba(91, 157, 255, 0.28);
+      --glass: rgba(18, 12, 32, 0.72);
+      --line: rgba(245, 174, 203, 0.18);
+      --shadow: 0 24px 80px rgba(0, 0, 0, 0.55);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
+      line-height: 1.75;
+      word-break: keep-all;
+      background:
+        radial-gradient(ellipse 80% 50% at 50% -10%, rgba(157, 107, 255, 0.22), transparent 55%),
+        radial-gradient(ellipse 60% 40% at 10% 30%, rgba(91, 157, 255, 0.12), transparent 50%),
+        radial-gradient(ellipse 50% 35% at 90% 60%, rgba(245, 174, 203, 0.14), transparent 45%),
+        linear-gradient(180deg, var(--bg-deep) 0%, var(--bg-mid) 45%, #0a0618 100%);
+      min-height: 100vh;
+      position: relative;
+      overflow-x: hidden;
+    }
+
+    /* floating mana particles */
+    body::before,
+    body::after {
+      content: "";
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    body::before {
+      background-image:
+        radial-gradient(circle at 20% 80%, rgba(91, 157, 255, 0.08) 0 2px, transparent 3px),
+        radial-gradient(circle at 70% 20%, rgba(245, 174, 203, 0.1) 0 1.5px, transparent 2.5px),
+        radial-gradient(circle at 45% 55%, rgba(157, 107, 255, 0.09) 0 2px, transparent 3px);
+      background-size: 280px 280px, 220px 220px, 320px 320px;
+      animation: drift 28s linear infinite;
+      opacity: 0.7;
+    }
+
+    body::after {
+      background: linear-gradient(180deg, transparent 60%, rgba(91, 157, 255, 0.06) 100%);
+    }
+
+    @keyframes drift {
+      0% { background-position: 0 0, 0 0, 0 0; }
+      100% { background-position: 280px -420px, -220px 330px, 160px -280px; }
+    }
+
+    @keyframes pulse-ring {
+      0%, 100% { opacity: 0.35; transform: scale(1); }
+      50% { opacity: 0.65; transform: scale(1.03); }
+    }
+
+    @keyframes shimmer {
+      0%, 100% { opacity: 0.4; }
+      50% { opacity: 0.85; }
+    }
+
+    @keyframes canal-drift {
+      0% { transform: translateX(-8%); }
+      100% { transform: translateX(8%); }
+    }
+
+    @keyframes canal-shine {
+      0% { left: -20%; opacity: 0; }
+      15% { opacity: 1; }
+      85% { opacity: 1; }
+      100% { left: 120%; opacity: 0; }
+    }
+
+    @keyframes canal-pulse {
+      0%, 100% { opacity: 0.45; filter: blur(18px); }
+      50% { opacity: 0.85; filter: blur(22px); }
+    }
+
+    @keyframes vine-sway {
+      0%, 100% { transform: rotate(-1deg) translateY(0); }
+      50% { transform: rotate(1.5deg) translateY(-4px); }
+    }
+
+    @keyframes petal-float {
+      0%, 100% { transform: translateY(0) scale(1); opacity: 0.55; }
+      50% { transform: translateY(-6px) scale(1.04); opacity: 0.9; }
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .wrap {
+      position: relative;
+      z-index: 1;
+      width: min(1080px, calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    /* ── Fantasy nav (no pill dropdown) ── */
+    .realm-nav {
+      position: sticky;
+      top: 0;
+      z-index: 30;
+      padding: 14px 0 10px;
+      background: linear-gradient(180deg, rgba(7, 5, 18, 0.94) 0%, rgba(7, 5, 18, 0.78) 85%, transparent 100%);
+      backdrop-filter: blur(12px);
+    }
+
+    .realm-nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0;
+      padding: 10px 8px;
+      border: 1px solid var(--line);
+      background:
+        linear-gradient(135deg, rgba(157, 107, 255, 0.08), rgba(91, 157, 255, 0.05)),
+        var(--glass);
+      box-shadow:
+        0 0 0 1px rgba(157, 107, 255, 0.12),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06),
+        0 12px 40px rgba(0, 0, 0, 0.35);
+      clip-path: polygon(
+        12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px),
+        calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px), 0 12px
+      );
+    }
+
+    .realm-mark {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 0 18px 0 14px;
+      border-right: 1px solid rgba(245, 174, 203, 0.2);
+      margin-right: 4px;
+      flex-shrink: 0;
+    }
+
+    .sigil {
+      width: 34px;
+      height: 34px;
+      position: relative;
+      flex-shrink: 0;
+    }
+
+    .sigil svg {
+      width: 100%;
+      height: 100%;
+      animation: pulse-ring 4s ease-in-out infinite;
+    }
+
+    .realm-mark span {
+      font-family: "Nanum Myeongjo", "Batang", serif;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      background: linear-gradient(90deg, var(--pink-soft), var(--purple), var(--blue));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+    }
+
+    .realm-links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      align-items: stretch;
+      gap: 0;
+    }
+
+    .realm-links a {
+      position: relative;
+      padding: 10px 16px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      transition: color 0.25s, text-shadow 0.25s;
+    }
+
+    .realm-links a::before {
+      content: "◆";
+      display: inline-block;
+      margin-right: 8px;
+      font-size: 7px;
+      vertical-align: middle;
+      color: var(--purple);
+      opacity: 0.5;
+    }
+
+    .realm-links a:first-child::before { content: none; margin: 0; }
+
+    .realm-links a:hover,
+    .realm-links a:focus {
+      color: var(--pink-soft);
+      text-shadow: 0 0 16px var(--pink-glow);
+    }
+
+    .realm-links a.is-here {
+      color: var(--blue);
+      text-shadow: 0 0 14px var(--blue-glow);
+    }
+
+    /* ── Hero: typography + code-only florals ── */
+    .hero {
+      padding: 36px 0 40px;
+      text-align: center;
+    }
+
+    .hero-gate {
+      position: relative;
+      width: min(760px, 100%);
+      margin: 0 auto 32px;
+      padding: 48px 20px 52px;
+    }
+
+    /* greenhouse glass arch */
+    .hero-gate::before {
+      content: "";
+      position: absolute;
+      inset: 0 8% 0;
+      border: 1px solid rgba(245, 174, 203, 0.22);
+      border-bottom: none;
+      border-radius: 50% 50% 0 0 / 28% 28% 0 0;
+      background:
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 42px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 42px),
+        linear-gradient(180deg, rgba(91, 157, 255, 0.08) 0%, rgba(157, 107, 255, 0.06) 45%, transparent 100%);
+      box-shadow:
+        inset 0 0 60px rgba(91, 157, 255, 0.06),
+        0 -8px 40px rgba(245, 174, 203, 0.08);
+      pointer-events: none;
+    }
+
+    .hero-gate::after {
+      content: "";
+      position: absolute;
+      left: 8%;
+      right: 8%;
+      bottom: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--pink), var(--purple), var(--blue), transparent);
+      opacity: 0.6;
+    }
+
+    /* 온실 하단 — 가로로 얽힌 장미 덤불 (기둥형 X) */
+    .hero-florals {
+      position: absolute;
+      left: 4%;
+      right: 4%;
+      bottom: 0;
+      height: 88px;
+      pointer-events: none;
+      overflow: visible;
+      z-index: 1;
+    }
+
+    .hero-florals .briar-skirt {
+      display: block;
+      width: 100%;
+      height: 100%;
+      opacity: 0.92;
+      filter: drop-shadow(0 4px 20px var(--pink-glow));
+    }
+
+    .hero-florals .rose-bloom { transform-origin: center; }
+    .hero-florals .rose-bloom.b1 { animation: petal-float 5.5s ease-in-out infinite; }
+    .hero-florals .rose-bloom.b2 { animation: petal-float 6s ease-in-out infinite 0.6s; }
+    .hero-florals .rose-bloom.b3 { animation: petal-float 4.5s ease-in-out infinite 1.1s; }
+    .hero-florals .rose-bloom.b4 { animation: petal-float 5.8s ease-in-out infinite 1.8s; }
+
+    .hero-type {
+      position: relative;
+      z-index: 2;
+      padding: 8px 0 4px;
+    }
+
+    .hero-type em {
+      display: block;
+      font-style: normal;
+      font-size: 11px;
+      letter-spacing: 0.34em;
+      text-transform: uppercase;
+      color: var(--pink);
+      margin-bottom: 8px;
+    }
+
+    .hero-type h1 {
+      margin: 0;
+      font-family: "Nanum Myeongjo", "Batang", serif;
+      font-size: clamp(56px, 14vw, 96px);
+      line-height: 0.92;
+      letter-spacing: -0.05em;
+      background: linear-gradient(165deg, #fff 0%, var(--pink-soft) 35%, var(--purple) 72%, var(--blue) 100%);
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      filter: drop-shadow(0 0 28px var(--purple-glow));
+    }
+
+    .hero-type .hero-sub {
+      display: block;
+      margin-top: 14px;
+      font-size: 12px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--blue);
+      font-weight: 800;
+      animation: shimmer 3.5s ease-in-out infinite;
+    }
+
+    .eyebrow {
+      font-size: 12px;
+      letter-spacing: 0.32em;
+      text-transform: uppercase;
+      color: var(--blue);
+      font-weight: 800;
+      margin-bottom: 10px;
+      animation: shimmer 3s ease-in-out infinite;
+    }
+
+    .hero-quote {
+      max-width: 640px;
+      margin: 0 auto 24px;
+      padding: 20px 24px;
+      font-family: "Nanum Myeongjo", "Batang", serif;
+      font-size: clamp(15px, 2.2vw, 18px);
+      font-weight: 600;
+      line-height: 1.85;
+      color: rgba(243, 238, 248, 0.92);
+      border-left: 2px solid var(--pink);
+      border-right: 2px solid var(--blue);
+      background: linear-gradient(90deg, rgba(245, 174, 203, 0.06), transparent 30%, transparent 70%, rgba(91, 157, 255, 0.06));
+    }
+
+    .hero-desc {
+      max-width: 720px;
+      margin: 0 auto;
+      color: var(--muted);
+      font-size: 15px;
+    }
+
+    .hero-desc strong {
+      color: var(--pink-soft);
+      font-weight: 700;
+    }
+
+    /* mana canal — flowing glow channel */
+    .canal-wrap {
+      position: relative;
+      margin: 40px auto 0;
+      width: min(680px, 92%);
+      padding: 10px 0 8px;
+    }
+
+    .canal-wrap::before,
+    .canal-wrap::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      width: 28px;
+      height: 2px;
+      background: linear-gradient(90deg, transparent, rgba(245, 174, 203, 0.35));
+      transform: translateY(-50%);
+    }
+
+    .canal-wrap::before { left: 0; }
+    .canal-wrap::after {
+      right: 0;
+      transform: translateY(-50%) scaleX(-1);
+    }
+
+    .canal-glow {
+      position: absolute;
+      left: 5%;
+      right: 5%;
+      top: 50%;
+      height: 28px;
+      transform: translateY(-50%);
+      background: linear-gradient(90deg,
+        transparent,
+        rgba(91, 157, 255, 0.35) 20%,
+        rgba(157, 107, 255, 0.45) 50%,
+        rgba(245, 174, 203, 0.35) 80%,
+        transparent
+      );
+      filter: blur(18px);
+      animation: canal-pulse 3s ease-in-out infinite;
+      pointer-events: none;
+    }
+
+    .canal {
+      position: relative;
+      height: 14px;
+      border-radius: 999px;
+      overflow: hidden;
+      border: 1px solid rgba(91, 157, 255, 0.35);
+      background:
+        linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 40%, rgba(0,0,0,0.25) 100%),
+        linear-gradient(90deg, #0a1628 0%, #12102a 50%, #0a1628 100%);
+      box-shadow:
+        0 0 20px var(--blue-glow),
+        0 0 36px var(--purple-glow),
+        inset 0 0 16px rgba(91, 157, 255, 0.15);
+    }
+
+    .canal-flow {
+      position: absolute;
+      inset: 2px 0;
+      background: linear-gradient(90deg,
+        transparent 0%,
+        rgba(37, 99, 235, 0.5) 12%,
+        rgba(157, 107, 255, 0.75) 30%,
+        rgba(245, 174, 203, 0.85) 50%,
+        rgba(157, 107, 255, 0.75) 70%,
+        rgba(91, 157, 255, 0.5) 88%,
+        transparent 100%
+      );
+      background-size: 200% 100%;
+      animation: canal-drift 4.5s ease-in-out infinite alternate;
+      opacity: 0.9;
+    }
+
+    .canal-flow::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: repeating-linear-gradient(90deg,
+        transparent 0 18px,
+        rgba(255, 255, 255, 0.07) 18px 19px
+      );
+      animation: canal-drift 2.2s linear infinite;
+      opacity: 0.5;
+    }
+
+    .canal-shine {
+      position: absolute;
+      top: 1px;
+      bottom: 1px;
+      width: 18%;
+      left: -20%;
+      background: linear-gradient(90deg,
+        transparent,
+        rgba(255, 255, 255, 0.55),
+        rgba(196, 225, 255, 0.35),
+        transparent
+      );
+      filter: blur(1px);
+      animation: canal-shine 5s ease-in-out infinite;
+    }
+
+    .canal-mist {
+      position: absolute;
+      left: 10%;
+      right: 10%;
+      bottom: 0;
+      height: 20px;
+      background: radial-gradient(ellipse 50% 100% at 50% 0%, rgba(91, 157, 255, 0.18), transparent 70%);
+      pointer-events: none;
+      animation: shimmer 4s ease-in-out infinite;
+    }
+
+    /* ── Section cards ── */
+    .section {
+      margin: 56px 0;
+      scroll-margin-top: 88px;
+    }
+
+    .section-head {
+      display: flex;
+      align-items: flex-end;
+      gap: 16px;
+      margin-bottom: 22px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(157, 107, 255, 0.2);
+      position: relative;
+    }
+
+    .section-head::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -1px;
+      width: 120px;
+      height: 2px;
+      background: linear-gradient(90deg, var(--pink), var(--purple), transparent);
+    }
+
+    .section-num {
+      font-family: "Nanum Myeongjo", serif;
+      font-size: 42px;
+      line-height: 1;
+      font-weight: 700;
+      background: linear-gradient(180deg, var(--pink-soft), var(--purple-deep));
+      -webkit-background-clip: text;
+      background-clip: text;
+      color: transparent;
+      opacity: 0.55;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-family: "Nanum Myeongjo", "Batang", serif;
+      font-size: clamp(22px, 4vw, 30px);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+    }
+
+    .section-head h2 small {
+      display: block;
+      margin-top: 4px;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: var(--blue);
+      font-family: "Pretendard", sans-serif;
+    }
+
+    .arcane-panel {
+      position: relative;
+      padding: 28px 28px 32px;
+      background:
+        linear-gradient(160deg, rgba(157, 107, 255, 0.07) 0%, transparent 40%),
+        linear-gradient(340deg, rgba(91, 157, 255, 0.06) 0%, transparent 45%),
+        rgba(12, 8, 24, 0.82);
+      border: 1px solid rgba(245, 174, 203, 0.14);
+      box-shadow: var(--shadow), inset 0 1px 0 rgba(255, 255, 255, 0.04);
+      overflow: hidden;
+    }
+
+    .arcane-panel::before {
+      content: "";
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--blue), var(--purple), var(--pink), var(--purple), var(--blue));
+    }
+
+    .arcane-panel .corner {
+      position: absolute;
+      width: 18px;
+      height: 18px;
+      border-color: rgba(157, 107, 255, 0.45);
+      border-style: solid;
+      pointer-events: none;
+    }
+
+    .arcane-panel .corner.tl { top: 10px; left: 10px; border-width: 1px 0 0 1px; }
+    .arcane-panel .corner.tr { top: 10px; right: 10px; border-width: 1px 1px 0 0; }
+    .arcane-panel .corner.bl { bottom: 10px; left: 10px; border-width: 0 0 1px 1px; }
+    .arcane-panel .corner.br { bottom: 10px; right: 10px; border-width: 0 1px 1px 0; }
+
+    .panel-quote {
+      margin: 0 0 18px;
+      padding: 14px 18px;
+      font-family: "Nanum Myeongjo", serif;
+      font-size: 15px;
+      font-style: italic;
+      color: var(--pink-soft);
+      border-left: 3px solid var(--purple);
+      background: rgba(157, 107, 255, 0.06);
+    }
+
+    .panel-body p {
+      margin: 0 0 14px;
+      color: rgba(243, 238, 248, 0.88);
+      font-size: 15px;
+    }
+
+    .panel-body p:last-child { margin-bottom: 0; }
+
+    .warn-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin: 16px 0 0;
+      padding: 10px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--pink);
+      background: rgba(245, 174, 203, 0.08);
+      border: 1px solid rgba(245, 174, 203, 0.25);
+    }
+
+    .warn-tag::before {
+      content: "✦";
+      color: var(--purple);
+      font-size: 10px;
+    }
+
+    .rule-strip {
+      margin: 18px 0;
+      padding: 14px 18px;
+      text-align: center;
+      font-family: "Nanum Myeongjo", serif;
+      font-size: 14px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--blue);
+      border: 1px solid rgba(91, 157, 255, 0.3);
+      background: repeating-linear-gradient(
+        90deg,
+        rgba(91, 157, 255, 0.04) 0 8px,
+        rgba(157, 107, 255, 0.04) 8px 16px
+      );
+      box-shadow: inset 0 0 24px rgba(91, 157, 255, 0.06);
+    }
+
+    /* greenhouse visual placeholder */
+    .greenhouse-frame {
+      margin: 22px 0;
+      aspect-ratio: 16 / 7;
+      position: relative;
+      overflow: hidden;
+      border: 1px solid rgba(245, 174, 203, 0.2);
+      background:
+        linear-gradient(180deg, rgba(91, 157, 255, 0.12) 0%, rgba(157, 107, 255, 0.08) 50%, rgba(245, 174, 203, 0.06) 100%),
+        repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 48px),
+        repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 48px);
+    }
+
+    .greenhouse-frame::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, transparent 55%, rgba(7, 5, 18, 0.75) 100%);
+    }
+
+    .greenhouse-frame .label {
+      position: absolute;
+      left: 20px;
+      bottom: 16px;
+      font-size: 11px;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      color: var(--pink-soft);
+      z-index: 1;
+    }
+
+    .greenhouse-frame .placeholder-text {
+      position: absolute;
+      inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      color: var(--muted);
+      z-index: 0;
+    }
+
+    /* system preview grid */
+    .preview-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 22px;
+    }
+
+    @media (max-width: 720px) {
+      .preview-grid { grid-template-columns: 1fr; }
+      .realm-nav-inner { flex-direction: column; padding: 12px; }
+      .realm-mark { border-right: none; border-bottom: 1px solid rgba(245,174,203,0.2); padding-bottom: 10px; margin: 0 0 6px; }
+      .realm-links a::before { content: none; }
+    }
+
+    .preview-card {
+      padding: 16px;
+      text-align: center;
+      background: rgba(15, 10, 30, 0.9);
+      border: 1px solid rgba(157, 107, 255, 0.2);
+      transition: border-color 0.25s, box-shadow 0.25s;
+    }
+
+    .preview-card:hover {
+      border-color: var(--pink);
+      box-shadow: 0 0 28px var(--pink-glow);
+    }
+
+    .preview-card .icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 10px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      background: linear-gradient(135deg, rgba(245,174,203,0.15), rgba(157,107,255,0.15));
+      border: 1px solid rgba(91, 157, 255, 0.25);
+    }
+
+    .preview-card strong {
+      display: block;
+      font-size: 13px;
+      color: var(--purple);
+      margin-bottom: 4px;
+    }
+
+    .preview-card span {
+      font-size: 11px;
+      color: var(--muted);
+    }
+
+    /* rebirth footer block */
+    .rebirth {
+      margin: 64px 0 48px;
+      padding: 36px 28px;
+      text-align: center;
+      position: relative;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(245, 174, 203, 0.12), transparent 60%),
+        rgba(12, 8, 24, 0.9);
+      border: 1px solid rgba(157, 107, 255, 0.25);
+    }
+
+    .rebirth .petals {
+      position: absolute;
+      inset: 0;
+      overflow: hidden;
+      pointer-events: none;
+      opacity: 0.35;
+    }
+
+    .rebirth .petals span {
+      position: absolute;
+      width: 8px;
+      height: 8px;
+      border-radius: 50% 0 50% 50%;
+      background: var(--pink);
+      animation: fall 8s linear infinite;
+    }
+
+    .rebirth .petals span:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .rebirth .petals span:nth-child(2) { left: 30%; animation-delay: 2s; }
+    .rebirth .petals span:nth-child(3) { left: 55%; animation-delay: 4s; }
+    .rebirth .petals span:nth-child(4) { left: 75%; animation-delay: 1s; }
+    .rebirth .petals span:nth-child(5) { left: 90%; animation-delay: 3s; }
+
+    @keyframes fall {
+      0% { top: -10px; opacity: 0; transform: rotate(0deg); }
+      10% { opacity: 1; }
+      100% { top: 100%; opacity: 0; transform: rotate(360deg); }
+    }
+
+    .rebirth h3 {
+      margin: 0 0 12px;
+      font-family: "Nanum Myeongjo", serif;
+      font-size: 22px;
+      color: var(--pink-soft);
+    }
+
+    .rebirth p {
+      max-width: 640px;
+      margin: 0 auto 16px;
+      font-size: 14px;
+      color: var(--muted);
+    }
+
+    .mode-badge {
+      display: inline-block;
+      margin-top: 8px;
+      padding: 8px 18px;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--blue);
+      border: 1px solid rgba(91, 157, 255, 0.35);
+      background: rgba(91, 157, 255, 0.08);
+    }
+
+    .start-choices {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+      margin-top: 28px;
+    }
+
+    @media (max-width: 640px) {
+      .start-choices { grid-template-columns: 1fr; }
+    }
+
+    .start-card {
+      padding: 20px;
+      text-align: left;
+      border: 1px solid rgba(157, 107, 255, 0.22);
+      background: rgba(15, 10, 30, 0.7);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .start-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 12px 36px var(--purple-glow);
+    }
+
+    .start-card.soft { border-top: 2px solid var(--pink); }
+    .start-card.hard { border-top: 2px solid var(--purple-deep); }
+
+    .start-card em {
+      display: block;
+      font-style: normal;
+      font-size: 11px;
+      letter-spacing: 0.14em;
+      color: var(--blue);
+      margin-bottom: 6px;
+    }
+
+    .start-card strong {
+      display: block;
+      font-family: "Nanum Myeongjo", serif;
+      font-size: 17px;
+      margin-bottom: 8px;
+    }
+
+    .start-card p {
+      margin: 0;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    footer {
+      padding: 24px 0 40px;
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 0.12em;
+      color: rgba(168, 155, 184, 0.6);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="realm-nav" aria-label="퀸즈 세계관 탐색">
+    <div class="wrap">
+      <div class="realm-nav-inner">
+        <div class="realm-mark">
+          <div class="sigil" aria-hidden="true">
+            <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="20" cy="20" r="18" stroke="url(#g1)" stroke-width="1"/>
+              <path d="M20 4 L24 16 L36 20 L24 24 L20 36 L16 24 L4 20 L16 16 Z" stroke="url(#g2)" stroke-width="0.8" fill="rgba(157,107,255,0.08)"/>
+              <circle cx="20" cy="20" r="4" fill="url(#g3)"/>
+              <defs>
+                <linearGradient id="g1" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#f5aecb"/><stop offset=".5" stop-color="#9d6bff"/><stop offset="1" stop-color="#5b9dff"/></linearGradient>
+                <linearGradient id="g2" x1="4" y1="4" x2="36" y2="36"><stop stop-color="#ffc4dd"/><stop offset="1" stop-color="#2563eb"/></linearGradient>
+                <radialGradient id="g3"><stop stop-color="#f5aecb"/><stop offset="1" stop-color="#6d28d9"/></radialGradient>
+              </defs>
+            </svg>
+          </div>
+          <span>QUEENS</span>
+        </div>
+        <div class="realm-links">
+          <a href="#city" class="is-here">퀸즈</a>
+          <a href="#map">지도</a>
+          <a href="#lerose">르 로즈</a>
+          <a href="#blackjack">블랙잭</a>
+          <a href="#circus">델리리움</a>
+          <a href="#rebirth">환생</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <main class="wrap">
+
+    <header class="hero" id="city">
+      <div class="hero-gate">
+        <div class="hero-florals" aria-hidden="true">
+          <!-- 온실 하단: 가로로 뒤엉킨 장미 덤불 -->
+          <svg class="briar-skirt" viewBox="0 0 800 100" preserveAspectRatio="none" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0 94 Q120 82 200 88 T400 86 T600 90 T800 84 L800 100 L0 100 Z" fill="url(#soilG)" opacity="0.35"/>
+            <g opacity="0.85">
+              <path d="M0 88 C60 76 120 82 180 74 C240 66 300 78 360 70 C420 62 480 76 540 68 C600 60 660 74 720 66 C760 62 800 68 800 72" stroke="url(#stemG)" stroke-width="2" fill="none" stroke-linecap="round"/>
+              <path d="M0 80 C80 88 140 72 220 78 C300 84 380 70 460 76 C540 82 620 68 700 74 C740 78 780 72 800 76" stroke="url(#stemG)" stroke-width="1.5" fill="none" opacity="0.7"/>
+              <path d="M20 92 C100 84 160 90 240 82 C320 74 400 88 480 80 C560 72 640 86 720 78 C760 74 790 80 800 82" stroke="url(#stemG)" stroke-width="1.2" fill="none" opacity="0.55"/>
+              <path d="M40 86 C120 92 200 78 280 84 C360 90 440 76 520 82 C600 88 680 74 760 80" stroke="url(#stemG)" stroke-width="1" fill="none" opacity="0.45"/>
+              <path d="M60 78 C140 70 220 82 300 74 C380 66 460 80 540 72 C620 64 700 78 780 70" stroke="url(#stemG)" stroke-width="0.9" fill="none" opacity="0.35"/>
+            </g>
+            <path d="M90 82 C86 76 94 70 100 72 C106 74 104 80 98 82 Z M250 78 C246 72 254 66 260 68 C266 70 264 76 258 78 Z M420 84 C416 78 424 72 430 74 C436 76 434 82 428 84 Z M580 76 C576 70 584 64 590 66 C596 68 594 74 588 76 Z M710 80 C706 74 714 68 720 70 C726 72 724 78 718 80 Z" fill="url(#leafG)" opacity="0.55"/>
+            <g class="rose-bloom b1" transform="translate(118,74)">
+              <ellipse cx="0" cy="-7" rx="6" ry="9" fill="url(#petalG)" transform="rotate(0)"/><ellipse cx="0" cy="-7" rx="6" ry="9" fill="url(#petalG)" transform="rotate(60)"/><ellipse cx="0" cy="-7" rx="6" ry="9" fill="url(#petalG)" transform="rotate(120)"/><ellipse cx="0" cy="-7" rx="6" ry="9" fill="url(#petalG)" transform="rotate(180)"/><ellipse cx="0" cy="-7" rx="6" ry="9" fill="url(#petalG)" transform="rotate(240)"/><ellipse cx="0" cy="-7" rx="5" ry="7" fill="url(#petalG2)" transform="rotate(30)"/><ellipse cx="0" cy="-7" rx="5" ry="7" fill="url(#petalG2)" transform="rotate(90)"/><circle cx="0" cy="0" r="4" fill="url(#coreG)"/>
+            </g>
+            <g class="rose-bloom b2" transform="translate(318,76)">
+              <ellipse cx="0" cy="-6" rx="5" ry="8" fill="url(#petalG)" transform="rotate(10)"/><ellipse cx="0" cy="-6" rx="5" ry="8" fill="url(#petalG)" transform="rotate(70)"/><ellipse cx="0" cy="-6" rx="5" ry="8" fill="url(#petalG)" transform="rotate(130)"/><ellipse cx="0" cy="-6" rx="5" ry="8" fill="url(#petalG)" transform="rotate(190)"/><ellipse cx="0" cy="-6" rx="4" ry="6" fill="url(#petalG2)" transform="rotate(40)"/><circle cx="0" cy="0" r="3.5" fill="url(#coreG)"/>
+            </g>
+            <g class="rose-bloom b3" transform="translate(502,72)">
+              <ellipse cx="0" cy="-7" rx="6" ry="9" fill="url(#petalG)" transform="rotate(-8)"/><ellipse cx="0" cy="-7" rx="6" ry="9" fill="url(#petalG)" transform="rotate(52)"/><ellipse cx="0" cy="-7" rx="6" ry="9" fill="url(#petalG)" transform="rotate(112)"/><ellipse cx="0" cy="-7" rx="6" ry="9" fill="url(#petalG)" transform="rotate(172)"/><ellipse cx="0" cy="-7" rx="5" ry="7" fill="url(#petalG2)" transform="rotate(22)"/><circle cx="0" cy="0" r="4" fill="url(#coreG)"/>
+            </g>
+            <g class="rose-bloom b4" transform="translate(668,78)">
+              <ellipse cx="0" cy="-5" rx="4.5" ry="7" fill="url(#petalG)" transform="rotate(5)"/><ellipse cx="0" cy="-5" rx="4.5" ry="7" fill="url(#petalG)" transform="rotate(65)"/><ellipse cx="0" cy="-5" rx="4.5" ry="7" fill="url(#petalG)" transform="rotate(125)"/><circle cx="0" cy="0" r="3" fill="url(#coreG)"/>
+            </g>
+            <g transform="translate(42,80)"><ellipse cx="0" cy="-3" rx="3" ry="4.5" fill="url(#petalG2)" transform="rotate(0)"/><ellipse cx="0" cy="-3" rx="3" ry="4.5" fill="url(#petalG2)" transform="rotate(72)"/><circle cx="0" cy="0" r="2" fill="url(#coreG)" opacity="0.75"/></g>
+            <g transform="translate(220,82)"><ellipse cx="0" cy="-3" rx="3" ry="4.5" fill="url(#petalG2)" transform="rotate(15)"/><ellipse cx="0" cy="-3" rx="3" ry="4.5" fill="url(#petalG2)" transform="rotate(87)"/><circle cx="0" cy="0" r="2" fill="url(#coreG)" opacity="0.7"/></g>
+            <g transform="translate(400,84)"><ellipse cx="0" cy="-2.5" rx="2.5" ry="4" fill="url(#petalG2)" transform="rotate(0)"/><circle cx="0" cy="0" r="1.8" fill="url(#coreG)" opacity="0.65"/></g>
+            <g transform="translate(560,80)"><ellipse cx="0" cy="-3" rx="3" ry="4.5" fill="url(#petalG2)" transform="rotate(20)"/><ellipse cx="0" cy="-3" rx="3" ry="4.5" fill="url(#petalG2)" transform="rotate(92)"/><circle cx="0" cy="0" r="2" fill="url(#coreG)" opacity="0.7"/></g>
+            <g transform="translate(748,82)"><ellipse cx="0" cy="-2.5" rx="2.5" ry="4" fill="url(#petalG2)" transform="rotate(10)"/><circle cx="0" cy="0" r="1.8" fill="url(#coreG)" opacity="0.6"/></g>
+            <defs>
+              <linearGradient id="soilG" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#1a1030"/><stop offset="1" stop-color="#0a0618"/></linearGradient>
+              <linearGradient id="stemG" x1="0" y1="0" x2="1" y2="0"><stop stop-color="#3d6b5c"/><stop offset=".4" stop-color="#5b9dff"/><stop offset="1" stop-color="#6d28d9"/></linearGradient>
+              <linearGradient id="leafG" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#3d6b5c"/><stop offset="1" stop-color="#2563eb"/></linearGradient>
+              <linearGradient id="petalG" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#ffe8f2"/><stop offset="1" stop-color="#9d6bff"/></linearGradient>
+              <linearGradient id="petalG2" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#f5aecb"/><stop offset="1" stop-color="#c084fc"/></linearGradient>
+              <radialGradient id="coreG"><stop stop-color="#ffc4dd"/><stop offset="1" stop-color="#6d28d9"/></radialGradient>
+            </defs>
+          </svg>
+        </div>
+
+        <div class="hero-type">
+          <em>City-State of Magic</em>
+          <h1>퀸즈</h1>
+          <span class="hero-sub">Queens Road · Le Rose</span>
+        </div>
+      </div>
+
+      <div class="canal-wrap" aria-hidden="true">
+        <div class="canal-glow"></div>
+        <div class="canal">
+          <div class="canal-flow"></div>
+          <div class="canal-shine"></div>
+        </div>
+        <div class="canal-mist"></div>
+      </div>
+
+      <p class="eyebrow" style="margin-top:28px">Hologram Sigils · Glass Greenhouse</p>
+
+      <blockquote class="hero-quote">
+        해 질 녘의 퀸즈로드에 서면, 수로를 따라 흐르는 마나에서<br>
+        푸른 안개가 짙어지며 발목을 감싸온다.
+      </blockquote>
+
+      <p class="hero-desc">
+        현대적인 과학 기술과 고풍스러운 고전 양식 건축물이 아슬아슬하게 공존하는 곳.
+        <strong>퀸즈</strong>는 과학과 마법이 완벽한 조화를 이룬 도시 국가다.
+        화려한 네온사인 대신 허공에 떠오른 <strong>홀로그램 마법진</strong>이 거리를 밝히고,
+        서커스와 최고급 호텔의 밤을 즐긴다.<br><br>
+        하지만 이 눈부신 마법 도시의 뒷골목에는, 안개보다 더 짙고 달콤한 욕망의 냄새가 배어 있다.
+      </p>
+    </header>
+
+    <!-- city map preview -->
+    <section class="section" id="map">
+      <div class="section-head">
+        <span class="section-num">◎</span>
+        <h2>퀸즈 도시 지도<small>Queens City Map</small></h2>
+      </div>
+      <iframe src="map.html" title="퀸즈 도시 지도" style="width:100%;height:min(720px,85vh);border:1px solid rgba(245,174,203,.2);background:#070512;"></iframe>
+      <p style="margin:14px 0 0;"><a href="map.html" target="_blank" style="color:var(--pink-soft);font-size:12px;font-weight:700;">지도만 새 창으로 열기</a></p>
+    </section>
+
+    <section class="section" id="lerose">
+      <div class="section-head">
+        <span class="section-num">I</span>
+        <h2>향락과 비밀의 화원<small>Le Rose</small></h2>
+      </div>
+
+      <div class="arcane-panel">
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
+
+        <p class="panel-quote">"퀸즈에서 가장 아름다운, 사람들의 가장 강렬한 욕망이 피어나는 화원."</p>
+
+        <div class="greenhouse-frame">
+          <span class="label">Glass Greenhouse · Preview</span>
+          <span class="placeholder-text">[ 히어로 / 온실 일러스트 SVG 자리 ]</span>
+        </div>
+
+        <div class="panel-body">
+          <p>가장 번화한 퀸즈로드의 깊은 뒷골목, 무성한 등나무 아래 하얀 벽돌로 지어진 화려한 꽃집이 하나 자리 잡고 있습니다. 문을 열고 들어서면 코끝을 마비시킬 듯 달콤하고 짙은 생화 향기가 덮쳐오며, 푸른 잎과 덩굴이 얽힌 유리 온실로 이어집니다.</p>
+          <p class="warn-tag">꽃집 문앞에 놓인 꽃다발들에 홀려 함부로 손을 뻗지 말 것 — 모든 돈과 마나를 잃은 손님들의 헌화입니다.</p>
+          <p>생명력이 만개하는 화원의 뒷문은 비밀 카지노 <strong style="color:var(--purple)">블랙잭 퀸즈</strong>로 통하는 입구입니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Blackjack Queens -->
+    <section class="section" id="blackjack">
+      <div class="section-head">
+        <span class="section-num">II</span>
+        <h2>블랙잭 퀸즈<small>Blackjack Queens</small></h2>
+      </div>
+
+      <div class="arcane-panel">
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
+
+        <div class="rule-strip">마법의 부정 사용은 엄금 · 오직 딜러의 판정에 절대 복종할 것</div>
+
+        <div class="panel-body">
+          <p>도시의 지배자인 <strong style="color:var(--purple)">대마녀</strong>는 이 거대한 카지노 전체를 하나의 채집 통으로 삼아, 벼랑 끝에 몰린 인간들이 뿜어내는 강렬한 욕망과 액체 마나를 은밀히 흡수하고 있습니다.</p>
+          <p>입구를 지키는 단정한 앞치마 차림의 꽃집 주인이 보내는 서늘한 눈빛은, 굳게 닫힌 뒷문 너머에 결코 평범하지 않은 심연이 도사리고 있음을 조용히 경고합니다.</p>
+          <p>메인 블랙잭 테이블에는 <strong style="color:var(--pink-soft)">아르카나</strong> — 퀸즈의 지배자가 VIP 플레이어로 당신과 함께 판에 앉아 있습니다. 짙은 꽃향기만이 두 플레이어 사이의 아슬아슬한 판을 조용히 지켜봅니다.</p>
+        </div>
+
+        <div class="preview-grid">
+          <div class="preview-card">
+            <div class="icon">♠</div>
+            <strong>카드 스프레드</strong>
+            <span>SVG · theme=card</span>
+          </div>
+          <div class="preview-card">
+            <div class="icon">◈</div>
+            <strong>전광판</strong>
+            <span>SVG · theme=marquee</span>
+          </div>
+          <div class="preview-card">
+            <div class="icon">☽</div>
+            <strong>타로 버프</strong>
+            <span>SVG · theme=tarot</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Grand Delirium -->
+    <section class="section" id="circus">
+      <div class="section-head">
+        <span class="section-num">III</span>
+        <h2>그랑 델리리움<small>Grand Delirium</small></h2>
+      </div>
+
+      <div class="arcane-panel">
+        <span class="corner tl"></span><span class="corner tr"></span>
+        <span class="corner bl"></span><span class="corner br"></span>
+
+        <div class="panel-body">
+          <p>빚을 갚기 위해 육체를 팔아넘긴 파산자들이 흘러가는 종착지이자 향락의 중심지. 극단 <strong style="color:var(--blue)">벨라돈나</strong>가 지배하는 이곳에서는 위험천만한 아크로바틱과 마수들의 묘기 등 자극적인 쇼가 매일 밤 열립니다.</p>
+          <p>메인 무대에는 사방이 관객석으로 둘러싸인 투명한 수조가 설치되어 있습니다. 관람객들이 카지노 칩을 팁으로 던질 때마다 수조에 <strong style="color:var(--blue)">액체 마나</strong>가 차올라, 무희들은 필사적으로 춤을 춥니다.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Rebirth + Start -->
+    <section class="rebirth" id="rebirth">
+      <div class="petals" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+      </div>
+
+      <h3>지독한 꽃향기와 영원한 굴레</h3>
+      <p>
+        "모든 것을 잃었는가? 그렇다면 다시 일어나라.<br>
+        짙은 꽃향기가 당신을 반길 테니."
+      </p>
+      <p>
+        마나를 잃은 채 차가운 꽃집 입구에서 다시 눈을 뜨는 기이한 환생.
+        당신의 베팅으로 수로의 마나가 역류하고, 전광판에 새겨진 이름으로 도시 전체가 들썩일 때까지 —
+        이 치명적이고 매혹적인 도박의 굴레는 결코 멈추지 않습니다.
+      </p>
+      <span class="mode-badge">!로그라이크 모드 · 로어북 호출</span>
+
+      <div class="start-choices">
+        <div class="start-card soft">
+          <em>일반 · 관광객</em>
+          <strong>처음 온 이방인</strong>
+          <p>넉넉한 초기 칩, 친절한 겉모습의 꽃집 주인. 도시 분위기를 안정적으로 즐기는 롤플레잉.</p>
+        </div>
+        <div class="start-card hard">
+          <em>하드 · 파산 직전</em>
+          <strong>벼랑 끝의 도박꾼</strong>
+          <p>칩은 거의 없고, 소지품·마나를 거는 특별 룰이 코앞. 배율은 기형적으로 높게 터집니다.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="wrap">
+    QUEENS · City-State of Magic
+  </footer>
+
+</body>
+</html>

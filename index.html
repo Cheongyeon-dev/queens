@@ -634,14 +634,18 @@
     /* greenhouse visual placeholder */
     .greenhouse-frame {
       margin: 22px 0;
-      aspect-ratio: 16 / 7;
       position: relative;
       overflow: hidden;
       border: 1px solid rgba(245, 174, 203, 0.2);
-      background:
-        linear-gradient(180deg, rgba(91, 157, 255, 0.12) 0%, rgba(157, 107, 255, 0.08) 50%, rgba(245, 174, 203, 0.06) 100%),
-        repeating-linear-gradient(90deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 48px),
-        repeating-linear-gradient(0deg, rgba(255,255,255,0.02) 0 1px, transparent 1px 48px);
+      border-radius: 2px;
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.45);
+    }
+
+    .greenhouse-frame img {
+      display: block;
+      width: 100%;
+      height: auto;
+      vertical-align: top;
     }
 
     .greenhouse-frame::before {
@@ -982,8 +986,8 @@
         <p class="panel-quote">"퀸즈에서 가장 아름다운, 사람들의 가장 강렬한 욕망이 피어나는 화원."</p>
 
         <div class="greenhouse-frame">
-          <span class="label">Glass Greenhouse · Preview</span>
-          <span class="placeholder-text">[ 히어로 / 온실 일러스트 SVG 자리 ]</span>
+          <img src="assets/le-rose-greenhouse-hero.png" alt="르 로즈 · 유리 온실 거리" loading="lazy" />
+          <span class="label">Glass Greenhouse · Le Rose</span>
         </div>
 
         <div class="panel-body">

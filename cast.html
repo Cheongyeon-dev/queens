@@ -1,0 +1,298 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>퀸즈 · 등장인물</title>
+  <style>
+    :root {
+      --bg-deep: #070512;
+      --ink: #f3eef8;
+      --muted: #a89bb8;
+      --pink: #f5aecb;
+      --pink-soft: #ffc4dd;
+      --purple: #9d6bff;
+      --blue: #5b9dff;
+      --glass: rgba(18, 12, 32, 0.88);
+      --line: rgba(245, 174, 203, 0.18);
+    }
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Pretendard", "Noto Sans KR", sans-serif;
+      line-height: 1.75;
+      word-break: keep-all;
+      background:
+        radial-gradient(ellipse 70% 40% at 50% 0%, rgba(157, 107, 255, 0.18), transparent),
+        linear-gradient(180deg, var(--bg-deep), #0a0618);
+      min-height: 100vh;
+    }
+    a { color: var(--pink-soft); text-decoration: none; font-weight: 700; }
+    a:hover { text-shadow: 0 0 12px rgba(245, 174, 203, 0.35); }
+    .wrap { width: min(720px, calc(100% - 32px)); margin: 0 auto; padding: 24px 0 56px; }
+    .top {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 8px;
+    }
+    .top h1 {
+      margin: 0;
+      font-family: "Nanum Myeongjo", "Batang", serif;
+      font-size: clamp(22px, 4vw, 28px);
+      color: var(--pink-soft);
+    }
+    .top h1 small {
+      display: block;
+      margin-top: 4px;
+      font-family: "Pretendard", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: var(--blue);
+    }
+    .lead { margin: 0 0 20px; font-size: 13px; color: var(--muted); }
+    .faction-nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      padding: 12px 0 16px;
+      margin-bottom: 8px;
+      background: linear-gradient(180deg, rgba(7, 5, 18, 0.96) 70%, transparent);
+      backdrop-filter: blur(10px);
+    }
+    .faction-nav a {
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      border: 1px solid rgba(157, 107, 255, 0.25);
+      background: rgba(12, 8, 24, 0.75);
+      border-radius: 999px;
+      transition: color 0.2s, border-color 0.2s;
+    }
+    .faction-nav a:hover { color: var(--pink-soft); border-color: rgba(245, 174, 203, 0.35); text-shadow: none; }
+    .faction-block { margin-bottom: 40px; scroll-margin-top: 72px; }
+    .faction-block h2 {
+      margin: 0 0 6px;
+      font-family: "Nanum Myeongjo", serif;
+      font-size: 18px;
+      color: var(--pink);
+    }
+    .faction-block .note { margin: 0 0 16px; font-size: 12px; color: #6b7280; }
+    .cast-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px 14px;
+    }
+    @media (min-width: 560px) {
+      .cast-grid { gap: 18px 16px; }
+    }
+    .cast-card { margin: 0; }
+    .cast-photo {
+      aspect-ratio: 2 / 3;
+      border: 1px solid rgba(245, 174, 203, 0.22);
+      border-radius: 4px;
+      overflow: hidden;
+      background: linear-gradient(165deg, rgba(91, 157, 255, 0.14), rgba(157, 107, 255, 0.08) 45%, rgba(12, 8, 24, 0.96));
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .cast-photo span {
+      font-size: 10px;
+      letter-spacing: 0.14em;
+      color: #6b7280;
+    }
+    .cast-photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .cast-meta { padding: 10px 2px 4px; }
+    .cast-meta strong {
+      display: block;
+      font-family: "Nanum Myeongjo", serif;
+      font-size: 16px;
+      color: var(--pink-soft);
+    }
+    .cast-meta em {
+      display: block;
+      margin-top: 2px;
+      font-style: normal;
+      font-size: 11px;
+      color: var(--blue);
+    }
+    .cast-meta p {
+      margin: 6px 0 0;
+      font-size: 12px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+    footer {
+      padding-top: 16px;
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: rgba(168, 155, 184, 0.55);
+    }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="top">
+      <h1>등장인물<small>Cast · by Faction</small></h1>
+      <a href="index.html">← 대문으로</a>
+    </div>
+    <p class="lead">포토카드 PNG → <code style="color:var(--pink-soft);font-size:12px;">퀸즈/assets/cast/</code> · 편집기 저장명 그대로 (<code style="font-size:11px;">queens_이름칸.png</code>)</p>
+
+    <nav class="faction-nav" id="faction-nav" aria-label="세력 바로가기"></nav>
+    <div id="cast-sections"></div>
+
+    <footer>QUEENS · CAST</footer>
+  </div>
+
+  <script>
+    var CAST_FACTIONS = [
+      { id: "academy", title: "아르카나 아카데미", short: "아카데미", note: "테이블 등장(AR·RN)은 손님 · 소속은 아카데미", chars: [
+        { code: "CM", name: "카미유", en: "Camille", role: "학장 · 마도공학" },
+        { code: "AR", name: "아르카나", en: "Arcana", role: "교수 · 타로 · 대마녀 · 흑막", cardFile: "queens_아르카나.png" },
+        { code: "BR", name: "블레어", en: "Blair", role: "교수 · 점성술 · 마검술" },
+        { code: "MI", name: "미하엘", en: "Michael", role: "기숙사 사감" },
+        { code: "YU", name: "유리엔", en: "Yurien", role: "학생회장 · 3학년" },
+        { code: "RX", name: "록산느", en: "Roxanne", role: "4학년" },
+        { code: "GI", name: "지젤", en: "Giselle", role: "2학년" },
+        { code: "SD", name: "서도윤", en: "Seo Doyoon", role: "유학생" },
+        { code: "RN", name: "르네", en: "Rene", role: "학생 · 테이블 단골(손님)", cardFile: "queens_르네.png" },
+        { code: "CT", name: "캐서린", en: "Catherine", role: "AU · 유학생" },
+        { code: "SH", name: "채서하", en: "Chae Seoha", role: "AU · 유학생" },
+      ]},
+      { id: "lerose", title: "르 로즈", short: "르 로즈", chars: [
+        { code: "RS", name: "로제타", en: "Rosetta", role: "꽃집 주인", cardFile: "queens_Rosetta_로제타.png" },
+      ]},
+      { id: "lounge", title: "블랙잭 퀸즈 · 라 라핀 루즈", short: "라운지", chars: [
+        { code: "LX", name: "렉시", en: "Lexie", role: "매니저 · 바니걸", cardFile: "queens_Lexi_렉시.png" },
+        { code: "TX", name: "트릭시", en: "Trixie", role: "서빙 · 바니걸", cardFile: "queens_Trixie_트릭시.png" },
+        { code: "AN", name: "아네스", en: "Agnes", role: "바텐더", cardFile: "queens_Agn_s_아네스.png" },
+      ]},
+      { id: "casino", title: "블랙잭 퀸즈 · 카지노", short: "카지노", chars: [
+        { code: "VA", name: "발레리", en: "Valerie", role: "핏 보스" },
+        { code: "LE", name: "레아", en: "Leah", role: "마녀 기자" },
+        { code: "DH", name: "신도화", en: "Shin Dohwa", role: "뮤지컬 배우 · 바 손님" },
+      ]},
+      { id: "table", title: "메인 테이블 · 블랙잭", short: "메인 테이블", chars: [
+        { code: "BK", name: "백설아", en: "Baek Seola", role: "딜러" },
+        { code: "HY", name: "설하영", en: "Seol Hayoung", role: "관광객 손님" },
+      ]},
+      { id: "vip", title: "VIP 포커", short: "VIP", chars: [
+        { code: "MU", name: "뮤리엘", en: "Muriel", role: "극작가", cardFile: "queens_Muireal_뮤리엘.png" },
+        { code: "BL", name: "블랑슈", en: "Blanche", role: "오페라 가수", cardFile: "queens_Blanche_블랑슈.png" },
+        { code: "CE", name: "클레망", en: "Clement", role: "도슨트", cardFile: "queens_Cl_men_클레망.png" },
+        { code: "LN", name: "셀린", en: "Celine", role: "오페라하우스 오너", cardFile: "queens_C_line_셀린_.png" },
+      ]},
+      { id: "circus", title: "그랑 델리리움", short: "델리리움", chars: [
+        { code: "BE", name: "벨라돈나", en: "Belladonna", role: "극단주", cardFile: "queens_Belladonna_벨라돈나.png" },
+        { code: "CR", name: "샤를로트", en: "Charlotte", role: "곡예사", cardFile: "queens_Charlotte_샤를로트.png" },
+        { code: "VI", name: "비올레타", en: "Violetta", role: "곡예사", cardFile: "queens_Violette_비올레트.png" },
+        { code: "CA", name: "카르멘", en: "Carmen", role: "마수사육사", cardFile: "queens_Carmen_카르멘.png" },
+      ]},
+      { id: "city", title: "도시 · 엑스트라", short: "도시", chars: [
+        { code: "RO", name: "로잘리", en: "Rosalie", role: "대마녀의 수하인" },
+        { code: "AM", name: "아르망", en: "Armand", role: "경비대장 · 집행관" },
+        { code: "LA", name: "로랑", en: "Laurent", role: "호텔 지배인" },
+        { code: "LU", name: "루시", en: "Lucy", role: "점술가" },
+        { code: "VC", name: "뱅상", en: "Vincent", role: "정보상 · 사채업자" },
+      ]},
+    ];
+
+    var CAST_ASSET_BASE = "assets/cast/";
+
+    /** profile-card-editor 와 동일: queens_{이름칸}.png */
+    function editorSafeName(value) {
+      return String(value || "").replace(/[^\w가-힣.-]+/g, "_");
+    }
+
+    function cardFileCandidates(c) {
+      var list = [];
+      if (c.cardFile) list.push(c.cardFile);
+      if (c.en && c.name) list.push("queens_" + editorSafeName(c.en + "_" + c.name) + ".png");
+      if (c.name) list.push("queens_" + editorSafeName(c.name) + ".png");
+      var seen = {};
+      return list.filter(function (file) {
+        if (seen[file]) return false;
+        seen[file] = true;
+        return true;
+      });
+    }
+
+    function photoHtml(c) {
+      var files = cardFileCandidates(c);
+      var attr = files.length
+        ? ' data-card-files="' + files.join("|").replace(/"/g, "&quot;") + '"'
+        : "";
+      return '<div class="cast-photo"' + attr + '><span class="cast-ph">' + c.code + " · 0</span></div>";
+    }
+
+    function bindCastPhotos(root) {
+      root.querySelectorAll(".cast-photo[data-card-files]").forEach(function (box) {
+        var files = box.getAttribute("data-card-files").split("|");
+        var ph = box.querySelector(".cast-ph");
+        var idx = 0;
+        function tryNext() {
+          if (idx >= files.length) return;
+          var img = new Image();
+          img.alt = "";
+          img.onload = function () {
+            if (ph) ph.remove();
+            box.appendChild(img);
+          };
+          img.onerror = function () {
+            idx += 1;
+            tryNext();
+          };
+          img.src = CAST_ASSET_BASE + files[idx];
+        }
+        tryNext();
+      });
+    }
+
+    function cardHtml(c) {
+      return '<article class="cast-card">'
+        + photoHtml(c)
+        + '<div class="cast-meta"><strong>' + c.name + '</strong>'
+        + '<em>' + c.code + ' · ' + c.en + '</em>'
+        + '<p>' + c.role + '</p></div></article>';
+    }
+
+    var navEl = document.getElementById("faction-nav");
+    var sectionsEl = document.getElementById("cast-sections");
+    var navHtml = "";
+    var bodyHtml = "";
+
+    for (var i = 0; i < CAST_FACTIONS.length; i++) {
+      var f = CAST_FACTIONS[i];
+      navHtml += '<a href="#faction-' + f.id + '">' + f.short + '</a>';
+      bodyHtml += '<section class="faction-block" id="faction-' + f.id + '">';
+      bodyHtml += '<h2>' + f.title + '</h2>';
+      if (f.note) bodyHtml += '<p class="note">' + f.note + '</p>';
+      bodyHtml += '<div class="cast-grid">';
+      for (var j = 0; j < f.chars.length; j++) bodyHtml += cardHtml(f.chars[j]);
+      bodyHtml += '</div></section>';
+    }
+
+    navEl.innerHTML = navHtml;
+    sectionsEl.innerHTML = bodyHtml;
+    bindCastPhotos(document);
+  </script>
+</body>
+</html>

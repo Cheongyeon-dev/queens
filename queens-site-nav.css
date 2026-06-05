@@ -1,0 +1,130 @@
+/* 퀸즈 GitHub Pages · 공통 상단 네비 */
+.realm-nav {
+  position: sticky;
+  top: 0;
+  z-index: 30;
+  padding: 14px 0 10px;
+  background: linear-gradient(180deg, rgba(7, 5, 18, 0.94) 0%, rgba(7, 5, 18, 0.78) 85%, transparent 100%);
+  backdrop-filter: blur(12px);
+}
+
+.realm-nav .wrap {
+  position: relative;
+  z-index: 1;
+  width: min(1080px, calc(100% - 32px));
+  margin: 0 auto;
+}
+
+.realm-nav-inner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 10px 8px;
+  border: 1px solid rgba(245, 174, 203, 0.18);
+  background:
+    linear-gradient(135deg, rgba(157, 107, 255, 0.08), rgba(91, 157, 255, 0.05)),
+    rgba(18, 12, 32, 0.72);
+  box-shadow:
+    0 0 0 1px rgba(157, 107, 255, 0.12),
+    inset 0 1px 0 rgba(255, 255, 255, 0.06),
+    0 12px 40px rgba(0, 0, 0, 0.35);
+  clip-path: polygon(
+    12px 0, calc(100% - 12px) 0, 100% 12px, 100% calc(100% - 12px),
+    calc(100% - 12px) 100%, 12px 100%, 0 calc(100% - 12px), 0 12px
+  );
+}
+
+.realm-mark {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 0 18px 0 14px;
+  border-right: 1px solid rgba(245, 174, 203, 0.2);
+  margin-right: 4px;
+  flex-shrink: 0;
+}
+
+.realm-mark a {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: inherit;
+}
+
+.sigil {
+  width: 34px;
+  height: 34px;
+  flex-shrink: 0;
+}
+
+.sigil svg {
+  width: 100%;
+  height: 100%;
+  animation: queens-pulse-ring 4s ease-in-out infinite;
+}
+
+@keyframes queens-pulse-ring {
+  0%, 100% { opacity: 0.35; transform: scale(1); }
+  50% { opacity: 0.65; transform: scale(1.03); }
+}
+
+.realm-mark span {
+  font-family: "Nanum Myeongjo", "Batang", serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  background: linear-gradient(90deg, #ffc4dd, #9d6bff, #5b9dff);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.realm-links {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: stretch;
+  gap: 0;
+}
+
+.realm-links a {
+  position: relative;
+  padding: 10px 16px;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: #a89bb8;
+  text-decoration: none;
+  transition: color 0.25s, text-shadow 0.25s;
+}
+
+.realm-links a::before {
+  content: "◆";
+  display: inline-block;
+  margin-right: 8px;
+  font-size: 7px;
+  vertical-align: middle;
+  color: #9d6bff;
+  opacity: 0.5;
+}
+
+.realm-links a:first-child::before { content: none; margin: 0; }
+
+.realm-links a:hover,
+.realm-links a:focus {
+  color: #ffc4dd;
+  text-shadow: 0 0 16px rgba(245, 174, 203, 0.35);
+}
+
+.realm-links a.is-here {
+  color: #5b9dff;
+  text-shadow: 0 0 14px rgba(91, 157, 255, 0.28);
+}
+
+@media (max-width: 720px) {
+  .realm-nav-inner { flex-direction: column; padding: 12px; }
+  .realm-mark { border-right: none; border-bottom: 1px solid rgba(245, 174, 203, 0.2); padding-bottom: 10px; margin: 0 0 6px; }
+  .realm-links a::before { content: none; }
+}

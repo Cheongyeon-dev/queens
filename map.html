@@ -56,7 +56,16 @@
     .tag.show { color: var(--blue); background: rgba(91,157,255,.1); border: 1px solid rgba(91,157,255,.28); }
     .tag.shop { color: #f5aecb; background: rgba(245,174,203,.08); border: 1px solid rgba(245,174,203,.25); }
     .tag.social { color: #c4b5fd; background: rgba(196,181,253,.08); border: 1px solid rgba(196,181,253,.2); }
+    html.is-embed .realm-nav,
+    html.is-embed .page-head { display: none; }
+    html.is-embed body { min-height: auto; background: #070512; }
+    html.is-embed .wrap { padding-top: 8px; }
   </style>
+  <script>
+    if (new URLSearchParams(location.search).get("embed") === "1") {
+      document.documentElement.classList.add("is-embed");
+    }
+  </script>
 </head>
 <body>
 

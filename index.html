@@ -224,6 +224,33 @@
       text-shadow: 0 0 14px var(--blue-glow);
     }
 
+    .lore-nav {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 8px;
+      margin: 32px auto 0;
+      max-width: 520px;
+    }
+
+    .lore-nav a {
+      padding: 6px 12px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      border: 1px solid rgba(157, 107, 255, 0.25);
+      background: rgba(12, 8, 24, 0.75);
+      border-radius: 999px;
+      text-decoration: none;
+      transition: color 0.25s, border-color 0.25s;
+    }
+
+    .lore-nav a:hover {
+      color: var(--pink-soft);
+      border-color: rgba(245, 174, 203, 0.35);
+    }
+
     /* ── Hero: typography + code-only florals ── */
     .hero {
       padding: 36px 0 40px;
@@ -715,8 +742,28 @@
 
     @media (max-width: 720px) {
       .preview-grid { grid-template-columns: 1fr; }
-      .realm-nav-inner { flex-direction: column; padding: 12px; }
-      .realm-mark { border-right: none; border-bottom: 1px solid rgba(245,174,203,0.2); padding-bottom: 10px; margin: 0 0 6px; }
+      .realm-nav-inner {
+        flex-direction: row;
+        padding: 8px 6px;
+        justify-content: space-between;
+      }
+      .realm-mark {
+        border-right: 1px solid rgba(245,174,203,0.2);
+        border-bottom: none;
+        padding: 0 10px 0 8px;
+        margin: 0;
+      }
+      .realm-mark span { display: none; }
+      .realm-links {
+        flex: 1;
+        flex-wrap: nowrap;
+        justify-content: flex-end;
+      }
+      .realm-links a {
+        padding: 8px 7px;
+        font-size: 11px;
+        letter-spacing: 0.02em;
+      }
       .realm-links a::before { content: none; }
     }
 
@@ -910,11 +957,6 @@
           <a href="map.html">지도</a>
           <a href="cast.html">등장인물</a>
           <a href="reference.html">룰북</a>
-          <a href="#lerose">르 로즈</a>
-          <a href="#blackjack">블랙잭</a>
-          <a href="#circus">델리리움</a>
-          <a href="#academy">아카데미</a>
-          <a href="#rebirth">환생</a>
         </div>
       </div>
     </div>
@@ -994,6 +1036,14 @@
         서커스와 최고급 호텔의 밤을 즐긴다.<br><br>
         하지만 이 눈부신 마법 도시의 뒷골목에는, 안개보다 더 짙고 달콤한 욕망의 냄새가 배어 있다.
       </p>
+
+      <nav class="lore-nav" aria-label="세계관 바로가기">
+        <a href="#lerose">르 로즈</a>
+        <a href="#blackjack">블랙잭</a>
+        <a href="#circus">델리리움</a>
+        <a href="#academy">아카데미</a>
+        <a href="#rebirth">환생</a>
+      </nav>
     </header>
 
     <!-- city map preview -->

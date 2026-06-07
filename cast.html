@@ -270,10 +270,17 @@
 
     var CAST_ASSET_BASE = "assets/cast/";
 
-    /** {code}01 only — 표정·상황 에셋 추후 확장 */
+    /** {code}01 only — raw 폴더 기준 (에셋 작업용) */
     var CAST_BASIC_ASSET = {
       CM: 1, BR: 1, MI: 1, HO: 1, HN: 1, HG: 1, YS: 1,
       AM: 1, OB: 1, MY: 1, LA: 1, LU: 1, VC: 1,
+    };
+
+    /** cast 페이지 라벨 — 여성 NPC 엑스트라만. 남캐·교수·사감 등 공략/상황 에셋 비대상 제외 */
+    var CAST_ASSET_LABEL_SKIP = {
+      VC: 1, YS: 1, HO: 1, HN: 1, HG: 1,
+      AM: 1, LA: 1, CM: 1, BR: 1,
+      MI: 1,
     };
 
     var CAST_ASSET_PENDING_LABEL = "상황 에셋 미지원·추후 업데이트 예정";
@@ -328,7 +335,7 @@
     }
 
     function assetPendingHtml(c) {
-      if (!CAST_BASIC_ASSET[c.code]) return "";
+      if (!CAST_BASIC_ASSET[c.code] || CAST_ASSET_LABEL_SKIP[c.code]) return "";
       return '<span class="cast-asset-pending">' + CAST_ASSET_PENDING_LABEL + "</span>";
     }
 

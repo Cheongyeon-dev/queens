@@ -53,7 +53,7 @@
       letter-spacing: 0.14em;
       color: var(--blue);
     }
-    .ref-main { width: min(640px, 100%); margin: 0 auto; }
+    .ref-main { width: min(720px, 100%); margin: 0 auto; }
     .ref-fold {
       margin-bottom: 10px;
       border: 1px solid var(--line);
@@ -180,11 +180,33 @@
       font-weight: 700;
       white-space: nowrap;
     }
-    .ref-table.arcana td:first-child {
-      width: 2.8em;
+    .ref-table.arcana-wide {
+      table-layout: fixed;
+    }
+    .ref-table.arcana-wide th,
+    .ref-table.arcana-wide td {
+      padding: 5px 8px;
+      font-size: 13px;
+    }
+    .ref-table.arcana-wide th:nth-child(1),
+    .ref-table.arcana-wide th:nth-child(3),
+    .ref-table.arcana-wide td.arc-num {
+      width: 11%;
       color: var(--purple);
       font-weight: 700;
       white-space: nowrap;
+    }
+    .ref-table.arcana-wide th:nth-child(2),
+    .ref-table.arcana-wide th:nth-child(4),
+    .ref-table.arcana-wide td.arc-name {
+      width: 39%;
+      color: var(--ink);
+    }
+    .ref-table.arcana-wide td.arc-name-l {
+      border-right: 1px solid rgba(157, 107, 255, 0.22);
+    }
+    .ref-table.arcana-wide th:nth-child(2) {
+      border-right: 1px solid rgba(157, 107, 255, 0.22);
     }
     .ref-table .rank-num {
       width: 2em;
@@ -417,31 +439,22 @@
           <p>메이저·마이너 아르카나 <strong>순서</strong>가 마법사의 <strong>위상·권력</strong>. 작위는 <strong style="color:var(--purple)">아르카나(대마녀)</strong>가 수여. 아르카나·마나가 없던 사람도 수여 순간 <strong>그 카드 상징의 마법</strong>을 쓸 수 있습니다.</p>
 
           <h3>메이저 아르카나 (22장 · 0→21 높을수록 위상)</h3>
-          <table class="ref-table arcana">
-            <thead><tr><th>№</th><th>카드</th></tr></thead>
+          <table class="ref-table arcana-wide">
+            <thead>
+              <tr><th>№</th><th>카드</th><th>№</th><th>카드</th></tr>
+            </thead>
             <tbody>
-              <tr><td>0</td><td>광대</td></tr>
-              <tr><td>I</td><td>마법사</td></tr>
-              <tr><td>II</td><td>여사제</td></tr>
-              <tr><td>III</td><td>여황제</td></tr>
-              <tr><td>IV</td><td>황제</td></tr>
-              <tr><td>V</td><td>교황</td></tr>
-              <tr><td>VI</td><td>연인</td></tr>
-              <tr><td>VII</td><td>전차</td></tr>
-              <tr><td>VIII</td><td>힘</td></tr>
-              <tr><td>IX</td><td>은둔자</td></tr>
-              <tr><td>X</td><td>운명의 수레바퀴</td></tr>
-              <tr><td>XI</td><td>정의</td></tr>
-              <tr><td>XII</td><td>매달린 남자</td></tr>
-              <tr><td>XIII</td><td>죽음</td></tr>
-              <tr><td>XIV</td><td>절제</td></tr>
-              <tr><td>XV</td><td>악마</td></tr>
-              <tr><td>XVI</td><td>탑</td></tr>
-              <tr><td>XVII</td><td>별</td></tr>
-              <tr><td>XVIII</td><td>달</td></tr>
-              <tr><td>XIX</td><td>태양</td></tr>
-              <tr><td>XX</td><td>심판</td></tr>
-              <tr><td>XXI</td><td>세계</td></tr>
+              <tr><td class="arc-num">0</td><td class="arc-name arc-name-l">광대</td><td class="arc-num">XI</td><td class="arc-name">정의</td></tr>
+              <tr><td class="arc-num">I</td><td class="arc-name arc-name-l">마법사</td><td class="arc-num">XII</td><td class="arc-name">매달린 남자</td></tr>
+              <tr><td class="arc-num">II</td><td class="arc-name arc-name-l">여사제</td><td class="arc-num">XIII</td><td class="arc-name">죽음</td></tr>
+              <tr><td class="arc-num">III</td><td class="arc-name arc-name-l">여황제</td><td class="arc-num">XIV</td><td class="arc-name">절제</td></tr>
+              <tr><td class="arc-num">IV</td><td class="arc-name arc-name-l">황제</td><td class="arc-num">XV</td><td class="arc-name">악마</td></tr>
+              <tr><td class="arc-num">V</td><td class="arc-name arc-name-l">교황</td><td class="arc-num">XVI</td><td class="arc-name">탑</td></tr>
+              <tr><td class="arc-num">VI</td><td class="arc-name arc-name-l">연인</td><td class="arc-num">XVII</td><td class="arc-name">별</td></tr>
+              <tr><td class="arc-num">VII</td><td class="arc-name arc-name-l">전차</td><td class="arc-num">XVIII</td><td class="arc-name">달</td></tr>
+              <tr><td class="arc-num">VIII</td><td class="arc-name arc-name-l">힘</td><td class="arc-num">XIX</td><td class="arc-name">태양</td></tr>
+              <tr><td class="arc-num">IX</td><td class="arc-name arc-name-l">은둔자</td><td class="arc-num">XX</td><td class="arc-name">심판</td></tr>
+              <tr><td class="arc-num">X</td><td class="arc-name arc-name-l">운명의 수레바퀴</td><td class="arc-num">XXI</td><td class="arc-name">세계</td></tr>
             </tbody>
           </table>
 

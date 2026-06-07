@@ -113,11 +113,12 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 12px;
-      margin-bottom: 4px;
+      margin-bottom: 12px;
     }
     @media (max-width: 480px) {
       .bj-visual-row { grid-template-columns: 1fr; }
     }
+    .bj-demo-wide { margin-bottom: 4px; }
     .bj-demo {
       padding: 12px 10px 10px;
       text-align: center;
@@ -201,6 +202,15 @@
       font-weight: 800;
       font-size: 12px;
       white-space: nowrap;
+    }
+    .local-rule-head {
+      margin: 16px 0 8px;
+      padding: 8px 10px;
+      font-family: "Nanum Myeongjo", serif;
+      font-size: 14px;
+      color: var(--pink-soft);
+      border-left: 3px solid var(--purple);
+      background: rgba(157, 107, 255, 0.08);
     }
     .ai-callout {
       margin: 14px 0 0;
@@ -331,14 +341,23 @@
             </div>
           </div>
 
+          <div class="bj-demo bj-demo-wide">
+            <p class="bj-cap">블랙잭 · 첫 2장 21</p>
+            <div class="bj-hand" aria-hidden="true">
+              <svg class="bj-card" viewBox="0 0 52 72"><rect x="1" y="1" width="50" height="70" rx="4" fill="#1a1030" stroke="#ffc4dd" stroke-width="1.4"/><text x="8" y="18" fill="#f3eef8" font-size="14" font-weight="700">A</text><text x="26" y="42" fill="#ffc4dd" font-size="20" text-anchor="middle">♠</text></svg>
+              <svg class="bj-card" viewBox="0 0 52 72"><rect x="1" y="1" width="50" height="70" rx="4" fill="#1a1030" stroke="#f5aecb" stroke-width="1.4"/><text x="8" y="18" fill="#f3eef8" font-size="14" font-weight="700">K</text><text x="26" y="42" fill="#f5aecb" font-size="20" text-anchor="middle">♥</text></svg>
+            </div>
+            <p class="bj-sum">합 21 · BLACKJACK</p>
+            <p class="bj-rule">첫 2장이 <strong>A + 10·J·Q·K</strong>이면 <strong>히트 없이 즉시 승부</strong> · 보통 바로 승리 (상대도 블랙잭이면 무승부)</p>
+          </div>
+
           <h3>카드 값</h3>
           <table class="ref-table compact">
             <thead><tr><th>카드</th><th>점수</th></tr></thead>
             <tbody>
               <tr><td>2 ~ 10</td><td>숫자 그대로</td></tr>
               <tr><td>J · Q · K</td><td>10</td></tr>
-              <tr><td>A (에이스)</td><td>1 또는 11</td></tr>
-              <tr><td>첫 2장 A + 10·J·Q·K</td><td><strong>블랙잭</strong></td></tr>
+              <tr><td>A (에이스)</td><td>상황에 따라 <strong>1점</strong> 또는 <strong>11점</strong> — 합이 21을 넘지 않게 유리한 쪽 (예: A+8=<strong>19</strong>, A+8+5=<strong>14</strong>로 A는 1)</td></tr>
             </tbody>
           </table>
 
@@ -346,17 +365,18 @@
           <table class="ref-table ref-steps">
             <tbody>
               <tr><td>상대</td><td>주로 손님 <strong>1대1</strong> · 없으면 <strong>딜러</strong></td></tr>
-              <tr><td>베팅</td><td>소지품·의복 등 (퀸즈). 전재 상실 시 마나·영혼으로 최후의 한 판</td></tr>
-              <tr><td>배분</td><td>양쪽 <strong>2장</strong>씩</td></tr>
+              <tr><td>배분</td><td>양쪽 <strong>2장</strong>씩 · 블랙잭이면 여기서 승부 종료</td></tr>
               <tr><td>히트</td><td>카드 <strong>한 장 더</strong> · 버스트 또는 스탠드까지 반복</td></tr>
               <tr><td>스탠드</td><td>더 받지 않고 합 <strong>확정</strong></td></tr>
               <tr><td>승부</td><td>버스트 없이 <strong>21에 더 가까운 합</strong> · 11↓ 히트 · 17↑ 스탠드 · 12~16 선택</td></tr>
             </tbody>
           </table>
 
-          <h3>퀸즈 로컬 룰</h3>
+          <p class="local-rule-head">로컬 룰 — 퀸즈 블랙잭</p>
           <table class="ref-table compact">
             <tbody>
+              <tr><td>베팅</td><td>칩 대신 <strong>소지품·의복·마나</strong> 등을 걸 수 있음</td></tr>
+              <tr><td>파산</td><td>모든 걸 잃었을 때 <strong>마나·영혼</strong>으로 최후의 한 판</td></tr>
               <tr><td>시작</td><td><strong>상호 동의</strong> 후에만</td></tr>
               <tr><td>중도</td><td><strong>그만둘 수 없음</strong></td></tr>
               <tr><td>종료</td><td>한쪽이 <strong>옷 포함 모든 소지품</strong>을 잃을 때까지</td></tr>

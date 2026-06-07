@@ -250,26 +250,43 @@
       <section class="ref-block" id="blackjack">
         <h2>♠ 블랙잭</h2>
         <div class="panel">
-          <h3>한 줄 요약</h3>
-          <p>카드 합이 <strong>21에 가깝되 21을 넘지 않는 쪽</strong>이 이깁니다. 21을 초과하면 <strong>버스트(Bust)</strong>로 즉시 패배합니다.</p>
+          <h3>승패의 원칙</h3>
+          <p>손패 카드의 합이 <strong>21에 가깝되 21을 넘지 않는 쪽</strong>이 승리합니다. 21을 초과하면 <strong>버스트(Bust)</strong>로 즉시 패배합니다.</p>
 
-          <h3>누가 · 몇 명</h3>
+          <h3>대국 · 상대</h3>
           <p>주로 <strong>다른 손님과 1대1</strong>로 한 판을 치릅니다. 함께할 상대가 없을 때는 <strong>딜러</strong>와 맞붙을 수 있습니다.</p>
-
-          <h3>진행 순서</h3>
-          <ol>
-            <li><strong>베팅</strong> — 퀸즈에서는 칩 대신 <strong>소지품·의복·마나</strong> 등을 걸 수 있습니다.</li>
-            <li><strong>카드 배분</strong> — 나와 상대(또는 딜러)에게 카드가 돌아갑니다.</li>
-            <li><strong>턴</strong> — 양쪽이 <strong>히트(한 장 더)</strong> 또는 <strong>스탠드(그만)</strong>를 선택합니다. 딜러와 맞붙을 때는 딜러도 정해진 규칙(보통 17까지 히트)에 따라 진행합니다.</li>
-            <li><strong>승패</strong> — 버스트 없이 남은 쪽 중 21에 더 가까운 쪽이 승리. <strong>블랙잭(에이+10 그림)</strong>은 특별히 강합니다.</li>
-          </ol>
 
           <h3>카드 값</h3>
           <ul>
             <li><strong>2 ~ 10</strong> — 숫자 그대로</li>
             <li><strong>J · Q · K</strong> — 10</li>
-            <li><strong>A(에이스)</strong> — 1 또는 11 (유리한 쪽으로 계산)</li>
+            <li><strong>A(에이스)</strong> — 1 또는 11 (21을 넘지 않는 한, 유리한 쪽으로 계산)</li>
           </ul>
+          <p>예 — 7 + K = 17 · A + 8 = 19 (또는 9). 첫 두 장이 <strong>A + 10·J·Q·K</strong>이면 <strong>블랙잭</strong>으로 특별히 강합니다.</p>
+
+          <h3>진행 순서</h3>
+          <ol>
+            <li><strong>베팅</strong> — 걸 것을 정합니다. 퀸즈에서는 칩 대신 <strong>소지품·의복·마나</strong> 등을 걸 수 있습니다.</li>
+            <li><strong>배분</strong> — 양쪽에게 <strong>카드 두 장</strong>씩 돌아갑니다. 합을 확인합니다.</li>
+            <li><strong>턴 · 히트 · 스탠드</strong>
+              <ul>
+                <li><strong>히트(Hit)</strong> — 카드를 <strong>한 장 더</strong> 받습니다. 합을 다시 확인합니다.</li>
+                <li><strong>스탠드(Stand)</strong> — 더 받지 않고 <strong>현재 합으로 확정</strong>합니다.</li>
+              </ul>
+              버스트가 나거나 스탠드할 때까지 히트를 반복할 수 있습니다.
+            </li>
+            <li><strong>상대 턴</strong> — 한쪽이 스탠드(또는 버스트)하면 상대가 같은 방식으로 진행합니다. 딜러와 맞붙을 때는 딜러가 정해진 규칙(보통 합 17 미만은 히트, 17 이상은 스탠드)에 따릅니다.</li>
+            <li><strong>승부</strong> — 버스트 없이 끝난 쪽끼리 <strong>21에 더 가까운 합</strong>이 승리. 합이 같으면 무승부(푸시)인 경우도 있습니다.</li>
+          </ol>
+
+          <h3>히트 · 스탠드</h3>
+          <p>대략적인 판단 기준입니다. 숫자 연산은 딜러·AI가 처리합니다.</p>
+          <ul>
+            <li>합 <strong>11 이하</strong> — 보통 히트</li>
+            <li>합 <strong>17 이상</strong> — 보통 스탠드</li>
+            <li>합 <strong>12 ~ 16</strong> — 히트 또는 스탠드 중 선택</li>
+          </ul>
+          <p>지문으로 <strong>베팅 · 히트 · 스탠드</strong>만 전달해도 판은 진행됩니다.</p>
 
           <h3>퀸즈 로컬 룰</h3>
           <ul>

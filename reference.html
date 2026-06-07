@@ -22,7 +22,8 @@
       margin: 0;
       color: var(--ink);
       font-family: "Pretendard", "Noto Sans KR", sans-serif;
-      line-height: 1.75;
+      font-size: 15px;
+      line-height: 1.65;
       word-break: keep-all;
       background:
         radial-gradient(ellipse 70% 40% at 50% 0%, rgba(157, 107, 255, 0.18), transparent),
@@ -33,7 +34,7 @@
     a:hover { text-decoration: underline; }
     .wrap { width: min(1080px, calc(100% - 32px)); margin: 0 auto; padding: 0 0 56px; }
     .page-head {
-      margin: 32px 0 20px;
+      margin: 32px 0 16px;
       padding-bottom: 14px;
       border-bottom: 1px solid rgba(157, 107, 255, 0.2);
     }
@@ -52,41 +53,47 @@
       letter-spacing: 0.14em;
       color: var(--blue);
     }
-    .ref-main { width: min(720px, 100%); margin: 0 auto; }
-    .ref-nav {
-      position: sticky;
-      top: 62px;
-      z-index: 20;
+    .ref-main { width: min(640px, 100%); margin: 0 auto; }
+    .ref-jump-wrap {
       display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      padding: 12px 0 16px;
-      margin-bottom: 8px;
-      background: linear-gradient(180deg, rgba(7, 5, 18, 0.96) 70%, transparent);
-      backdrop-filter: blur(10px);
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
     }
-    .ref-nav a {
-      padding: 6px 12px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--muted);
-      border: 1px solid rgba(157, 107, 255, 0.25);
-      background: rgba(12, 8, 24, 0.75);
-      border-radius: 999px;
-      text-decoration: none;
+    .ref-jump-wrap label {
+      flex-shrink: 0;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.1em;
+      color: var(--blue);
     }
-    .ref-nav a:hover { color: var(--pink-soft); border-color: rgba(245, 174, 203, 0.35); }
-    .ref-block { margin-bottom: 40px; scroll-margin-top: 120px; }
+    .ref-jump {
+      flex: 1;
+      max-width: 320px;
+      padding: 10px 14px;
+      font-family: inherit;
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--ink);
+      border: 1px solid rgba(157, 107, 255, 0.35);
+      background: rgba(18, 12, 32, 0.9);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+    .ref-jump:focus {
+      outline: none;
+      border-color: var(--pink);
+      box-shadow: 0 0 0 2px rgba(245, 174, 203, 0.2);
+    }
+    .ref-block { margin-bottom: 36px; scroll-margin-top: 80px; }
     .ref-block h2 {
-      margin: 0 0 12px;
+      margin: 0 0 10px;
       font-family: "Nanum Myeongjo", serif;
-      font-size: 18px;
+      font-size: clamp(17px, 3.5vw, 19px);
       color: var(--pink);
     }
     .panel {
-      position: relative;
-      padding: 22px 20px 20px;
+      padding: 18px 16px 16px;
       border: 1px solid var(--line);
       background:
         linear-gradient(135deg, rgba(157, 107, 255, 0.06), rgba(91, 157, 255, 0.04)),
@@ -94,29 +101,110 @@
       box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
     }
     .panel h3 {
-      margin: 20px 0 8px;
+      margin: 16px 0 8px;
       font-family: "Nanum Myeongjo", serif;
-      font-size: 15px;
+      font-size: 14px;
       color: var(--purple);
     }
     .panel h3:first-child { margin-top: 0; }
-    .panel p, .panel li { margin: 0 0 10px; font-size: 14px; color: var(--muted); }
-    .panel ul, .panel ol { margin: 0 0 12px; padding-left: 1.2em; }
+    .panel p { margin: 0 0 8px; font-size: 14px; color: var(--muted); }
     .panel strong { color: var(--ink); }
-    .rule-strip {
-      margin: -22px -20px 16px;
-      padding: 10px 16px;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.06em;
+    .bj-visual-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 4px;
+    }
+    @media (max-width: 480px) {
+      .bj-visual-row { grid-template-columns: 1fr; }
+    }
+    .bj-demo {
+      padding: 12px 10px 10px;
       text-align: center;
+      border: 1px solid rgba(157, 107, 255, 0.22);
+      background: rgba(7, 5, 18, 0.55);
+    }
+    .bj-demo .bj-hand {
+      display: flex;
+      justify-content: center;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+    .bj-demo .bj-cap {
+      margin: 0 0 4px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.08em;
+      color: var(--blue);
+    }
+    .bj-demo .bj-sum {
+      margin: 0;
+      font-family: "Nanum Myeongjo", serif;
+      font-size: 15px;
       color: var(--pink-soft);
-      background: rgba(157, 107, 255, 0.12);
-      border-bottom: 1px solid rgba(157, 107, 255, 0.25);
+    }
+    .bj-demo .bj-sum.is-bust { color: #f87171; }
+    .bj-demo .bj-rule {
+      margin: 6px 0 0;
+      font-size: 12px;
+      line-height: 1.45;
+      color: var(--muted);
+    }
+    .bj-card {
+      width: 52px;
+      height: 72px;
+      flex-shrink: 0;
+    }
+    .ref-table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+      margin: 0 0 4px;
+    }
+    .ref-table th,
+    .ref-table td {
+      padding: 7px 10px;
+      border-bottom: 1px solid rgba(157, 107, 255, 0.15);
+      text-align: left;
+      vertical-align: middle;
+    }
+    .ref-table th {
+      font-size: 11px;
+      letter-spacing: 0.06em;
+      color: var(--blue);
+      font-weight: 800;
+      background: rgba(157, 107, 255, 0.06);
+    }
+    .ref-table.compact td:first-child,
+    .ref-table.compact th:first-child {
+      width: 28%;
+      color: var(--purple);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .ref-table.arcana td:first-child {
+      width: 2.8em;
+      color: var(--purple);
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .ref-table .rank-num {
+      width: 2em;
+      color: var(--pink-soft);
+      font-weight: 800;
+    }
+    .ref-table tbody td { color: var(--muted); }
+    .ref-table tbody td:nth-child(2) { color: var(--ink); }
+    .ref-steps td:first-child {
+      width: 5.5em;
+      color: var(--pink-soft);
+      font-weight: 800;
+      font-size: 12px;
+      white-space: nowrap;
     }
     .ai-callout {
-      margin: 18px 0 0;
-      padding: 14px 16px;
+      margin: 14px 0 0;
+      padding: 12px 14px;
       border: 1px solid rgba(245, 174, 203, 0.45);
       border-left: 4px solid var(--pink);
       background: rgba(245, 174, 203, 0.08);
@@ -125,66 +213,34 @@
     .ai-callout p {
       margin: 0;
       font-size: 14px;
-      line-height: 1.65;
+      line-height: 1.55;
       color: var(--pink-soft) !important;
       font-weight: 600;
     }
-    .ai-callout em {
-      font-style: normal;
-      color: #fff;
-    }
-    .ref-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13px;
-      margin: 10px 0 4px;
-    }
-    .ref-table th,
-    .ref-table td {
-      padding: 8px 10px;
-      border-bottom: 1px solid rgba(157, 107, 255, 0.15);
-      text-align: left;
-      vertical-align: top;
-    }
-    .ref-table th {
-      font-size: 11px;
-      letter-spacing: 0.08em;
-      color: var(--blue);
-      font-weight: 800;
-    }
-    .ref-table td:first-child {
-      width: 2.5em;
-      color: var(--purple);
-      font-weight: 700;
-      white-space: nowrap;
-    }
-    .ref-table .rank-num { color: var(--pink-soft); font-weight: 800; }
+    .ai-callout em { font-style: normal; color: #fff; }
     .minor-grid {
       display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 10px 14px;
-      margin-top: 10px;
-    }
-    @media (min-width: 520px) {
-      .minor-grid { grid-template-columns: repeat(4, 1fr); }
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+      margin-top: 6px;
     }
     .minor-suit {
-      padding: 10px;
+      padding: 8px 10px;
       border: 1px solid rgba(157, 107, 255, 0.2);
       background: rgba(7, 5, 18, 0.5);
-      font-size: 12px;
-      line-height: 1.5;
+      font-size: 13px;
+      line-height: 1.45;
       color: var(--muted);
     }
     .minor-suit strong {
       display: block;
-      margin-bottom: 4px;
+      margin-bottom: 2px;
       font-size: 13px;
       color: var(--pink-soft);
     }
     .vacant-slot {
-      margin-top: 20px;
-      padding: 16px;
+      margin-top: 14px;
+      padding: 12px;
       border: 1px dashed rgba(168, 155, 184, 0.35);
       background: rgba(7, 5, 18, 0.4);
       text-align: center;
@@ -241,62 +297,74 @@
     </header>
 
     <div class="ref-main">
-      <nav class="ref-nav" aria-label="룰북 바로가기">
-        <a href="#blackjack">블랙잭</a>
-        <a href="#poker">포커 · 홀덤</a>
-        <a href="#arcana">아르카나 · 타로</a>
-      </nav>
+      <div class="ref-jump-wrap">
+        <label for="ref-jump">목차</label>
+        <select id="ref-jump" class="ref-jump" aria-label="룰북 목차">
+          <option value="#blackjack">♠ 블랙잭</option>
+          <option value="#poker">♦ 포커 · 홀덤</option>
+          <option value="#arcana">☽ 아르카나 · 타로</option>
+        </select>
+      </div>
 
       <section class="ref-block" id="blackjack">
         <h2>♠ 블랙잭</h2>
         <div class="panel">
-          <h3>승패의 원칙</h3>
-          <p>손패 카드의 합이 <strong>21에 가깝되 21을 넘지 않는 쪽</strong>이 승리합니다. 21을 초과하면 <strong>버스트(Bust)</strong>로 즉시 패배합니다.</p>
-
-          <h3>대국 · 상대</h3>
-          <p>주로 <strong>다른 손님과 1대1</strong>로 한 판을 치릅니다. 함께할 상대가 없을 때는 <strong>딜러</strong>와 맞붙을 수 있습니다.</p>
+          <div class="bj-visual-row">
+            <div class="bj-demo">
+              <p class="bj-cap">시작 · 카드 2장</p>
+              <div class="bj-hand" aria-hidden="true">
+                <svg class="bj-card" viewBox="0 0 52 72"><rect x="1" y="1" width="50" height="70" rx="4" fill="#1a1030" stroke="#9d6bff" stroke-width="1.2"/><text x="8" y="18" fill="#f3eef8" font-size="14" font-weight="700">7</text><text x="26" y="42" fill="#c4b5fd" font-size="20" text-anchor="middle">♠</text></svg>
+                <svg class="bj-card" viewBox="0 0 52 72"><rect x="1" y="1" width="50" height="70" rx="4" fill="#1a1030" stroke="#f5aecb" stroke-width="1.2"/><text x="8" y="18" fill="#f3eef8" font-size="14" font-weight="700">K</text><text x="26" y="42" fill="#f5aecb" font-size="20" text-anchor="middle">♥</text></svg>
+              </div>
+              <p class="bj-sum">합 17</p>
+              <p class="bj-rule"><strong>21에 가깝되 넘지 않으면</strong> 유리</p>
+            </div>
+            <div class="bj-demo">
+              <p class="bj-cap">버스트 · 21 초과</p>
+              <div class="bj-hand" aria-hidden="true">
+                <svg class="bj-card" viewBox="0 0 52 72"><rect x="1" y="1" width="50" height="70" rx="4" fill="#1a1030" stroke="#5b9dff" stroke-width="1.2"/><text x="6" y="18" fill="#f3eef8" font-size="13" font-weight="700">10</text><text x="26" y="42" fill="#93c5fd" font-size="20" text-anchor="middle">♦</text></svg>
+                <svg class="bj-card" viewBox="0 0 52 72"><rect x="1" y="1" width="50" height="70" rx="4" fill="#1a1030" stroke="#9d6bff" stroke-width="1.2"/><text x="8" y="18" fill="#f3eef8" font-size="14" font-weight="700">9</text><text x="26" y="42" fill="#c4b5fd" font-size="20" text-anchor="middle">♣</text></svg>
+                <svg class="bj-card" viewBox="0 0 52 72"><rect x="1" y="1" width="50" height="70" rx="4" fill="#2a1520" stroke="#f87171" stroke-width="1.2"/><text x="8" y="18" fill="#f3eef8" font-size="14" font-weight="700">5</text><text x="26" y="42" fill="#fca5a5" font-size="20" text-anchor="middle">♠</text></svg>
+              </div>
+              <p class="bj-sum is-bust">합 24 · BUST</p>
+              <p class="bj-rule"><strong>21을 넘기면</strong> 즉시 패배</p>
+            </div>
+          </div>
 
           <h3>카드 값</h3>
-          <ul>
-            <li><strong>2 ~ 10</strong> — 숫자 그대로</li>
-            <li><strong>J · Q · K</strong> — 10</li>
-            <li><strong>A(에이스)</strong> — 1 또는 11 (21을 넘지 않는 한, 유리한 쪽으로 계산)</li>
-          </ul>
-          <p>예 — 7 + K = 17 · A + 8 = 19 (또는 9). 첫 두 장이 <strong>A + 10·J·Q·K</strong>이면 <strong>블랙잭</strong>으로 특별히 강합니다.</p>
+          <table class="ref-table compact">
+            <thead><tr><th>카드</th><th>점수</th></tr></thead>
+            <tbody>
+              <tr><td>2 ~ 10</td><td>숫자 그대로</td></tr>
+              <tr><td>J · Q · K</td><td>10</td></tr>
+              <tr><td>A (에이스)</td><td>1 또는 11</td></tr>
+              <tr><td>첫 2장 A + 10·J·Q·K</td><td><strong>블랙잭</strong></td></tr>
+            </tbody>
+          </table>
 
-          <h3>진행 순서</h3>
-          <ol>
-            <li><strong>베팅</strong> — 걸 것을 정합니다. 퀸즈에서는 칩 대신 <strong>소지품·의복·마나</strong> 등을 걸 수 있습니다.</li>
-            <li><strong>배분</strong> — 양쪽에게 <strong>카드 두 장</strong>씩 돌아갑니다. 합을 확인합니다.</li>
-            <li><strong>턴 · 히트 · 스탠드</strong>
-              <ul>
-                <li><strong>히트(Hit)</strong> — 카드를 <strong>한 장 더</strong> 받습니다. 합을 다시 확인합니다.</li>
-                <li><strong>스탠드(Stand)</strong> — 더 받지 않고 <strong>현재 합으로 확정</strong>합니다.</li>
-              </ul>
-              버스트가 나거나 스탠드할 때까지 히트를 반복할 수 있습니다.
-            </li>
-            <li><strong>상대 턴</strong> — 한쪽이 스탠드(또는 버스트)하면 상대가 같은 방식으로 진행합니다. 딜러와 맞붙을 때는 딜러가 정해진 규칙(보통 합 17 미만은 히트, 17 이상은 스탠드)에 따릅니다.</li>
-            <li><strong>승부</strong> — 버스트 없이 끝난 쪽끼리 <strong>21에 더 가까운 합</strong>이 승리. 합이 같으면 무승부(푸시)인 경우도 있습니다.</li>
-          </ol>
-
-          <h3>히트 · 스탠드</h3>
-          <p>대략적인 판단 기준입니다. 숫자 연산은 딜러·AI가 처리합니다.</p>
-          <ul>
-            <li>합 <strong>11 이하</strong> — 보통 히트</li>
-            <li>합 <strong>17 이상</strong> — 보통 스탠드</li>
-            <li>합 <strong>12 ~ 16</strong> — 히트 또는 스탠드 중 선택</li>
-          </ul>
-          <p>지문으로 <strong>베팅 · 히트 · 스탠드</strong>만 전달해도 판은 진행됩니다.</p>
+          <h3>진행 · 히트 · 스탠드</h3>
+          <table class="ref-table ref-steps">
+            <tbody>
+              <tr><td>상대</td><td>주로 손님 <strong>1대1</strong> · 없으면 <strong>딜러</strong></td></tr>
+              <tr><td>베팅</td><td>소지품·의복 등 (퀸즈). 전재 상실 시 마나·영혼으로 최후의 한 판</td></tr>
+              <tr><td>배분</td><td>양쪽 <strong>2장</strong>씩</td></tr>
+              <tr><td>히트</td><td>카드 <strong>한 장 더</strong> · 버스트 또는 스탠드까지 반복</td></tr>
+              <tr><td>스탠드</td><td>더 받지 않고 합 <strong>확정</strong></td></tr>
+              <tr><td>승부</td><td>버스트 없이 <strong>21에 더 가까운 합</strong> · 11↓ 히트 · 17↑ 스탠드 · 12~16 선택</td></tr>
+            </tbody>
+          </table>
 
           <h3>퀸즈 로컬 룰</h3>
-          <ul>
-            <li>판은 <strong>상호 동의</strong>가 있을 때만 시작합니다.</li>
-            <li>한번 시작하면 <strong>중간에 그만둘 수 없습니다.</strong></li>
-            <li><strong>한쪽이 옷을 포함한 모든 소지품을 잃을 때까지</strong> 판은 계속됩니다.</li>
-          </ul>
+          <table class="ref-table compact">
+            <tbody>
+              <tr><td>시작</td><td><strong>상호 동의</strong> 후에만</td></tr>
+              <tr><td>중도</td><td><strong>그만둘 수 없음</strong></td></tr>
+              <tr><td>종료</td><td>한쪽이 <strong>옷 포함 모든 소지품</strong>을 잃을 때까지</td></tr>
+            </tbody>
+          </table>
 
           <div class="ai-callout">
-            <p><em>베팅이나 히트·스탠드 같은 지문만 입력하면 AI가 알아서 진행·연산합니다.</em> 숫자를 외울 필요 없이 롤플레잉을 즐기셔도 됩니다.</p>
+            <p><em>베팅 · 히트 · 스탠드</em> 지문만 입력해도 AI가 진행·연산합니다.</p>
           </div>
         </div>
       </section>
@@ -304,32 +372,27 @@
       <section class="ref-block" id="poker">
         <h2>♦ 포커 · 텍사스 홀덤</h2>
         <div class="panel">
-          <h3>한 줄 요약</h3>
-          <p>각자 <strong>홀카드 2장</strong> + 테이블 <strong>공통 카드 5장</strong>으로 <strong>가장 높은 5장 조합</strong>을 만듭니다. 라운드마다 베팅하며, 마지막까지 남거나 상대를 모두 포기시키면 승리합니다.</p>
+          <p>홀카드 <strong>2장</strong> + 테이블 공통 <strong>5장</strong>으로 최고의 <strong>5장 조합</strong>. 베팅 라운드를 거치며, 끝까지 남거나 상대를 모두 포기시키면 승리.</p>
 
-          <h3>족보 (강한 순)</h3>
+          <h3>족보</h3>
           <table class="ref-table">
-            <thead>
-              <tr><th>#</th><th>족보</th><th>설명</th></tr>
-            </thead>
+            <thead><tr><th>#</th><th>족보</th><th>설명</th></tr></thead>
             <tbody>
               <tr><td class="rank-num">1</td><td>로얄 플러시</td><td>같은 무늬 A · K · Q · J · 10</td></tr>
               <tr><td class="rank-num">2</td><td>스트레이트 플러시</td><td>같은 무늬 연속 다섯 장</td></tr>
               <tr><td class="rank-num">3</td><td>포카드</td><td>같은 숫자 네 장</td></tr>
               <tr><td class="rank-num">4</td><td>풀하우스</td><td>트리플 + 원페어</td></tr>
-              <tr><td class="rank-num">5</td><td>플러시</td><td>같은 무늬 다섯 장 (연속 아님)</td></tr>
+              <tr><td class="rank-num">5</td><td>플러시</td><td>같은 무늬 다섯 장</td></tr>
               <tr><td class="rank-num">6</td><td>스트레이트</td><td>무늬 무관 연속 다섯 장</td></tr>
               <tr><td class="rank-num">7</td><td>트리플</td><td>같은 숫자 세 장</td></tr>
               <tr><td class="rank-num">8</td><td>투페어</td><td>원페어 두 조</td></tr>
               <tr><td class="rank-num">9</td><td>원페어</td><td>같은 숫자 두 장</td></tr>
-              <tr><td class="rank-num">10</td><td>하이카드</td><td>위 조합 없음 — 가장 큰 카드로 승부</td></tr>
+              <tr><td class="rank-num">10</td><td>하이카드</td><td>위 조합 없음</td></tr>
             </tbody>
           </table>
-
           <p>족보가 헷갈리면 <strong>딜러에게 설명을 요청</strong>해도 됩니다.</p>
-
           <div class="ai-callout">
-            <p><em>베팅이나 턴을 넘긴다는 지문만 입력하면 AI가 알아서 진행·연산하니,</em> 족보를 꼭 숙지하지 않으셔도 롤플레잉을 즐길 수 있습니다.</p>
+            <p><em>베팅이나 턴을 넘긴다는 지문만</em> 입력해도 AI가 진행·연산합니다.</p>
           </div>
         </div>
       </section>
@@ -337,33 +400,39 @@
       <section class="ref-block" id="arcana">
         <h2>☽ 아르카나 · 타로 계급</h2>
         <div class="panel">
-          <h3>퀸즈에서의 아르카나</h3>
-          <p>퀸즈에서는 타로 카드의 <strong>메이저·마이너 아르카나 순서</strong>에 따라, 마법사로서의 <strong>위상과 권력</strong>이 매겨집니다. 작위와 권능은 모두 <strong style="color:var(--purple)">아르카나(대마녀)</strong>가 수여합니다.</p>
-          <p>지금까지 <strong>아르카나·마나가 전혀 없던 사람</strong>도, 아르카나를 수여받는 순간 <strong>그 카드의 상징과 관련된 마법</strong>을 쓸 수 있게 됩니다.</p>
+          <p>메이저·마이너 아르카나 <strong>순서</strong>가 마법사의 <strong>위상·권력</strong>. 작위는 <strong style="color:var(--purple)">아르카나(대마녀)</strong>가 수여. 아르카나·마나가 없던 사람도 수여 순간 <strong>그 카드 상징의 마법</strong>을 쓸 수 있습니다.</p>
 
-          <h3>메이저 아르카나 (22장)</h3>
-          <p>번호가 <strong>높을수록 위상이 높다</strong>는 타로 고증을 따릅니다. (0번 광대부터 21번 세계까지)</p>
-          <table class="ref-table">
-            <thead>
-              <tr><th>№</th><th>카드</th><th>№</th><th>카드</th></tr>
-            </thead>
+          <h3>메이저 아르카나 (22장 · 0→21 높을수록 위상)</h3>
+          <table class="ref-table arcana">
+            <thead><tr><th>№</th><th>카드</th></tr></thead>
             <tbody>
-              <tr><td>0</td><td>광대</td><td>XI</td><td>정의</td></tr>
-              <tr><td>I</td><td>마법사</td><td>XII</td><td>매달린 남자</td></tr>
-              <tr><td>II</td><td>여사제</td><td>XIII</td><td>죽음</td></tr>
-              <tr><td>III</td><td>여황제</td><td>XIV</td><td>절제</td></tr>
-              <tr><td>IV</td><td>황제</td><td>XV</td><td>악마</td></tr>
-              <tr><td>V</td><td>교황</td><td>XVI</td><td>탑</td></tr>
-              <tr><td>VI</td><td>연인</td><td>XVII</td><td>별</td></tr>
-              <tr><td>VII</td><td>전차</td><td>XVIII</td><td>달</td></tr>
-              <tr><td>VIII</td><td>힘</td><td>XIX</td><td>태양</td></tr>
-              <tr><td>IX</td><td>은둔자</td><td>XX</td><td>심판</td></tr>
-              <tr><td>X</td><td>운명의 수레바퀴</td><td>XXI</td><td>세계</td></tr>
+              <tr><td>0</td><td>광대</td></tr>
+              <tr><td>I</td><td>마법사</td></tr>
+              <tr><td>II</td><td>여사제</td></tr>
+              <tr><td>III</td><td>여황제</td></tr>
+              <tr><td>IV</td><td>황제</td></tr>
+              <tr><td>V</td><td>교황</td></tr>
+              <tr><td>VI</td><td>연인</td></tr>
+              <tr><td>VII</td><td>전차</td></tr>
+              <tr><td>VIII</td><td>힘</td></tr>
+              <tr><td>IX</td><td>은둔자</td></tr>
+              <tr><td>X</td><td>운명의 수레바퀴</td></tr>
+              <tr><td>XI</td><td>정의</td></tr>
+              <tr><td>XII</td><td>매달린 남자</td></tr>
+              <tr><td>XIII</td><td>죽음</td></tr>
+              <tr><td>XIV</td><td>절제</td></tr>
+              <tr><td>XV</td><td>악마</td></tr>
+              <tr><td>XVI</td><td>탑</td></tr>
+              <tr><td>XVII</td><td>별</td></tr>
+              <tr><td>XVIII</td><td>달</td></tr>
+              <tr><td>XIX</td><td>태양</td></tr>
+              <tr><td>XX</td><td>심판</td></tr>
+              <tr><td>XXI</td><td>세계</td></tr>
             </tbody>
           </table>
 
           <h3>마이너 아르카나 (56장 · 4문양)</h3>
-          <p>각 문양 <strong>에이스(1) → 10 → 시종 → 기사 → 여왕 → 왕</strong> 순으로 높아집니다. 숫자· court 카드 모두 <strong>같은 문양 안에서는 번호·직급이 높을수록 위상이 높다</strong>고 보면 됩니다.</p>
+          <p>에이스(1) → 10 → 시종 → 기사 → 여왕 → 왕. 같은 문양 안에서 번호·직급이 높을수록 위상이 높습니다.</p>
           <div class="minor-grid">
             <div class="minor-suit"><strong>완드 · Wands</strong>불 · 의지 · 창조</div>
             <div class="minor-suit"><strong>컵 · Cups</strong>물 · 감정 · 관계</div>
@@ -372,7 +441,7 @@
           </div>
 
           <div class="vacant-slot" id="arcana-vacant">
-            <p><strong style="color:var(--muted)">작위 · 공석 목록</strong><br />추후 이곳에 비어 있는 계급(작위)을 정리해 추가합니다.</p>
+            <p><strong style="color:var(--muted)">작위 · 공석 목록</strong><br />추후 추가</p>
           </div>
         </div>
       </section>
@@ -380,6 +449,22 @@
 
     <footer>QUEENS · City-State of Magic</footer>
   </div>
+
+  <script>
+    (function () {
+      var sel = document.getElementById("ref-jump");
+      var sections = ["blackjack", "poker", "arcana"];
+      function syncSelect() {
+        var id = (location.hash || "#blackjack").slice(1);
+        if (sections.indexOf(id) >= 0) sel.value = "#" + id;
+      }
+      sel.addEventListener("change", function () {
+        if (sel.value) location.hash = sel.value;
+      });
+      window.addEventListener("hashchange", syncSelect);
+      syncSelect();
+    })();
+  </script>
 
 </body>
 </html>

@@ -54,51 +54,48 @@
       color: var(--blue);
     }
     .ref-main { width: min(640px, 100%); margin: 0 auto; }
-    .ref-jump-wrap {
-      display: flex;
-      align-items: center;
-      gap: 10px;
-      margin-bottom: 24px;
-    }
-    .ref-jump-wrap label {
-      flex-shrink: 0;
-      font-size: 12px;
-      font-weight: 800;
-      letter-spacing: 0.1em;
-      color: var(--blue);
-    }
-    .ref-jump {
-      flex: 1;
-      max-width: 320px;
-      padding: 10px 14px;
-      font-family: inherit;
-      font-size: 14px;
-      font-weight: 600;
-      color: var(--ink);
-      border: 1px solid rgba(157, 107, 255, 0.35);
-      background: rgba(18, 12, 32, 0.9);
-      border-radius: 4px;
-      cursor: pointer;
-    }
-    .ref-jump:focus {
-      outline: none;
-      border-color: var(--pink);
-      box-shadow: 0 0 0 2px rgba(245, 174, 203, 0.2);
-    }
-    .ref-block { margin-bottom: 36px; scroll-margin-top: 80px; }
-    .ref-block h2 {
-      margin: 0 0 10px;
-      font-family: "Nanum Myeongjo", serif;
-      font-size: clamp(17px, 3.5vw, 19px);
-      color: var(--pink);
-    }
-    .panel {
-      padding: 18px 16px 16px;
+    .ref-fold {
+      margin-bottom: 10px;
       border: 1px solid var(--line);
       background:
         linear-gradient(135deg, rgba(157, 107, 255, 0.06), rgba(91, 157, 255, 0.04)),
         rgba(12, 8, 24, 0.88);
-      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.35);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+      scroll-margin-top: 72px;
+    }
+    .ref-fold summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      font-family: "Nanum Myeongjo", serif;
+      font-size: clamp(16px, 3.5vw, 18px);
+      font-weight: 700;
+      color: var(--pink-soft);
+      background: linear-gradient(90deg, rgba(157, 107, 255, 0.12), rgba(91, 157, 255, 0.04));
+      user-select: none;
+    }
+    .ref-fold summary::-webkit-details-marker { display: none; }
+    .ref-fold summary::marker { content: ""; }
+    .ref-fold summary::after {
+      content: "▾";
+      float: right;
+      margin-left: 8px;
+      font-size: 13px;
+      color: var(--blue);
+      transition: transform 0.2s;
+    }
+    .ref-fold:not([open]) summary::after { transform: rotate(-90deg); }
+    .ref-fold[open] summary {
+      border-bottom: 1px solid rgba(157, 107, 255, 0.2);
+    }
+    .ref-fold-body {
+      padding: 16px 16px 18px;
+    }
+    .panel {
+      padding: 0;
+      border: none;
+      background: transparent;
+      box-shadow: none;
     }
     .panel h3 {
       margin: 16px 0 8px;
@@ -307,17 +304,10 @@
     </header>
 
     <div class="ref-main">
-      <div class="ref-jump-wrap">
-        <label for="ref-jump">목차</label>
-        <select id="ref-jump" class="ref-jump" aria-label="룰북 목차">
-          <option value="#blackjack">♠ 블랙잭</option>
-          <option value="#poker">♦ 포커 · 홀덤</option>
-          <option value="#arcana">☽ 아르카나 · 타로</option>
-        </select>
-      </div>
 
-      <section class="ref-block" id="blackjack">
-        <h2>♠ 블랙잭</h2>
+      <details class="ref-fold" id="blackjack" open>
+        <summary>♠ 블랙잭</summary>
+        <div class="ref-fold-body">
         <div class="panel">
           <div class="bj-visual-row">
             <div class="bj-demo">
@@ -387,10 +377,12 @@
             <p><em>베팅 · 히트 · 스탠드</em> 지문만 입력해도 AI가 진행·연산합니다.</p>
           </div>
         </div>
-      </section>
+        </div>
+      </details>
 
-      <section class="ref-block" id="poker">
-        <h2>♦ 포커 · 텍사스 홀덤</h2>
+      <details class="ref-fold" id="poker">
+        <summary>♦ 포커 · 텍사스 홀덤</summary>
+        <div class="ref-fold-body">
         <div class="panel">
           <p>홀카드 <strong>2장</strong> + 테이블 공통 <strong>5장</strong>으로 최고의 <strong>5장 조합</strong>. 베팅 라운드를 거치며, 끝까지 남거나 상대를 모두 포기시키면 승리.</p>
 
@@ -415,10 +407,12 @@
             <p><em>베팅이나 턴을 넘긴다는 지문만</em> 입력해도 AI가 진행·연산합니다.</p>
           </div>
         </div>
-      </section>
+        </div>
+      </details>
 
-      <section class="ref-block" id="arcana">
-        <h2>☽ 아르카나 · 타로 계급</h2>
+      <details class="ref-fold" id="arcana">
+        <summary>☽ 아르카나 · 타로 계급</summary>
+        <div class="ref-fold-body">
         <div class="panel">
           <p>메이저·마이너 아르카나 <strong>순서</strong>가 마법사의 <strong>위상·권력</strong>. 작위는 <strong style="color:var(--purple)">아르카나(대마녀)</strong>가 수여. 아르카나·마나가 없던 사람도 수여 순간 <strong>그 카드 상징의 마법</strong>을 쓸 수 있습니다.</p>
 
@@ -464,7 +458,8 @@
             <p><strong style="color:var(--muted)">작위 · 공석 목록</strong><br />추후 추가</p>
           </div>
         </div>
-      </section>
+        </div>
+      </details>
     </div>
 
     <footer>QUEENS · City-State of Magic</footer>
@@ -472,17 +467,25 @@
 
   <script>
     (function () {
-      var sel = document.getElementById("ref-jump");
-      var sections = ["blackjack", "poker", "arcana"];
-      function syncSelect() {
-        var id = (location.hash || "#blackjack").slice(1);
-        if (sections.indexOf(id) >= 0) sel.value = "#" + id;
+      var ids = ["blackjack", "poker", "arcana"];
+      function applyHash() {
+        var id = location.hash.slice(1);
+        if (ids.indexOf(id) < 0) id = "";
+        ids.forEach(function (key) {
+          var el = document.getElementById(key);
+          if (!el) return;
+          if (id) el.open = key === id;
+          else if (key === "blackjack") el.open = true;
+        });
+        if (id) {
+          var target = document.getElementById(id);
+          if (target) requestAnimationFrame(function () {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+          });
+        }
       }
-      sel.addEventListener("change", function () {
-        if (sel.value) location.hash = sel.value;
-      });
-      window.addEventListener("hashchange", syncSelect);
-      syncSelect();
+      window.addEventListener("hashchange", applyHash);
+      applyHash();
     })();
   </script>
 

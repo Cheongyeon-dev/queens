@@ -142,6 +142,7 @@
       color: var(--pink-soft);
     }
     .bj-demo .bj-sum.is-bust { color: #f87171; }
+    .bj-demo .bj-sum.is-open { color: var(--pink-soft); }
     .bj-demo .bj-rule {
       margin: 6px 0 0;
       font-size: 12px;
@@ -153,6 +154,74 @@
       height: 72px;
       flex-shrink: 0;
     }
+    .bj-hud-preview {
+      margin: 10px 0 8px;
+      padding: 12px 14px;
+      border: 1px solid rgba(157, 107, 255, 0.28);
+      background: rgba(7, 5, 18, 0.65);
+      max-width: 380px;
+    }
+    .bj-hud-preview .bj-hud-cap {
+      margin: 0 0 10px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-align: center;
+      color: var(--muted);
+    }
+    .bj-hud-row {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 10px;
+    }
+    .bj-hud-row:last-child { margin-bottom: 0; }
+    .bj-hud-lbl {
+      width: 44px;
+      flex-shrink: 0;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+    .bj-hud-cards {
+      display: flex;
+      gap: 5px;
+      flex-shrink: 0;
+    }
+    .bj-hud-cards .bj-card { width: 44px; height: 62px; }
+    .bj-hud-stat {
+      margin-left: auto;
+      font-family: "Nanum Myeongjo", serif;
+      font-size: 13px;
+      color: var(--pink-soft);
+      white-space: nowrap;
+    }
+    .bj-hud-stat.is-open { color: var(--pink-soft); }
+    .bj-hud-stat.is-sum { color: #d4f7ff; }
+    .bj-hud-stat small {
+      display: block;
+      font-family: "Pretendard", sans-serif;
+      font-size: 9px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      margin-bottom: 2px;
+    }
+    .bj-hud-div {
+      height: 1px;
+      margin: 4px 0 10px;
+      background: rgba(157, 107, 255, 0.2);
+    }
+    .bj-ui-notes {
+      margin: 8px 0 0;
+      padding-left: 1.1em;
+      font-size: 13px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+    .bj-ui-notes li { margin-bottom: 6px; }
+    .bj-ui-notes li:last-child { margin-bottom: 0; }
     .ref-table {
       width: 100%;
       border-collapse: collapse;
@@ -338,7 +407,7 @@
                 <svg class="bj-card" viewBox="0 0 52 72"><rect x="1" y="1" width="50" height="70" rx="4" fill="#1a1030" stroke="#9d6bff" stroke-width="1.2"/><text x="8" y="18" fill="#f3eef8" font-size="14" font-weight="700">7</text><text x="26" y="42" fill="#c4b5fd" font-size="20" text-anchor="middle">♠</text></svg>
                 <svg class="bj-card" viewBox="0 0 52 72"><rect x="1" y="1" width="50" height="70" rx="4" fill="#1a1030" stroke="#f5aecb" stroke-width="1.2"/><text x="8" y="18" fill="#f3eef8" font-size="14" font-weight="700">K</text><text x="26" y="42" fill="#f5aecb" font-size="20" text-anchor="middle">♥</text></svg>
               </div>
-              <p class="bj-sum">합 17</p>
+              <p class="bj-sum">합계 17</p>
               <p class="bj-rule"><strong>21에 가깝되 넘지 않으면</strong> 유리</p>
             </div>
             <div class="bj-demo">
@@ -348,7 +417,7 @@
                 <svg class="bj-card" viewBox="0 0 52 72"><rect x="1" y="1" width="50" height="70" rx="4" fill="#1a1030" stroke="#9d6bff" stroke-width="1.2"/><text x="8" y="18" fill="#f3eef8" font-size="14" font-weight="700">9</text><text x="26" y="42" fill="#c4b5fd" font-size="20" text-anchor="middle">♣</text></svg>
                 <svg class="bj-card" viewBox="0 0 52 72"><rect x="1" y="1" width="50" height="70" rx="4" fill="#2a1520" stroke="#f87171" stroke-width="1.2"/><text x="8" y="18" fill="#f3eef8" font-size="14" font-weight="700">5</text><text x="26" y="42" fill="#fca5a5" font-size="20" text-anchor="middle">♠</text></svg>
               </div>
-              <p class="bj-sum is-bust">합 24 · BUST</p>
+              <p class="bj-sum is-bust">합계 24 · BUST</p>
               <p class="bj-rule"><strong>21을 넘기면</strong> 즉시 패배</p>
             </div>
           </div>
@@ -359,7 +428,7 @@
               <svg class="bj-card" viewBox="0 0 52 72"><rect x="1" y="1" width="50" height="70" rx="4" fill="#1a1030" stroke="#ffc4dd" stroke-width="1.4"/><text x="8" y="18" fill="#f3eef8" font-size="14" font-weight="700">A</text><text x="26" y="42" fill="#ffc4dd" font-size="20" text-anchor="middle">♠</text></svg>
               <svg class="bj-card" viewBox="0 0 52 72"><rect x="1" y="1" width="50" height="70" rx="4" fill="#1a1030" stroke="#f5aecb" stroke-width="1.4"/><text x="8" y="18" fill="#f3eef8" font-size="14" font-weight="700">K</text><text x="26" y="42" fill="#f5aecb" font-size="20" text-anchor="middle">♥</text></svg>
             </div>
-            <p class="bj-sum">합 21 · BLACKJACK</p>
+            <p class="bj-sum">합계 21 · BLACKJACK</p>
             <p class="bj-rule">첫 2장이 <strong>A + 10·J·Q·K</strong>이면 <strong>히트 없이 즉시 승부</strong> · 보통 바로 승리 (상대도 블랙잭이면 무승부)</p>
           </div>
 
@@ -378,11 +447,40 @@
             <tbody>
               <tr><td>상대</td><td>주로 손님 <strong>1대1</strong> · 없으면 <strong>딜러</strong></td></tr>
               <tr><td>배분</td><td>양쪽 <strong>2장</strong>씩 · 블랙잭이면 여기서 승부 종료</td></tr>
+              <tr><td>나누기</td><td>카드를 <strong>한 장씩</strong> 번갈아 배분 · 상대 <strong>뒤집힌 1장</strong>은 <strong>스탠드 후</strong> 공개 · 공개 뒤 합으로 승부</td></tr>
               <tr><td>히트</td><td>카드 <strong>한 장 더</strong> · 버스트 또는 스탠드까지 반복</td></tr>
               <tr><td>스탠드</td><td>더 받지 않고 합 <strong>확정</strong></td></tr>
               <tr><td>승부</td><td>버스트 없이 <strong>21에 더 가까운 합</strong> · 11↓ 히트 · 17↑ 스탠드 · 12~16 선택</td></tr>
             </tbody>
           </table>
+
+          <h3>패 표 · UI</h3>
+          <p>채팅에 붙는 <strong>패 표</strong> 미리보기입니다. <strong>게임 규칙과 별도</strong>로, <strong>당신 화면에 보이는 정보만</strong> 그립니다.</p>
+          <div class="bj-hud-preview" aria-label="패 표 UI 미리보기">
+            <p class="bj-hud-cap">패 표 · 진행 중 예시</p>
+            <div class="bj-hud-row">
+              <span class="bj-hud-lbl">상대패</span>
+              <div class="bj-hud-cards" aria-hidden="true">
+                <svg class="bj-card" viewBox="0 0 52 72"><rect x="1" y="1" width="50" height="70" rx="4" fill="#1a1030" stroke="#c4b5fd" stroke-width="1.2"/><text x="8" y="18" fill="#f3eef8" font-size="14" font-weight="700">K</text><text x="26" y="42" fill="#c4b5fd" font-size="18" text-anchor="middle">♠</text></svg>
+                <svg class="bj-card" viewBox="0 0 52 72"><defs><linearGradient id="bjHudBack" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#1e1238"/><stop offset="1" stop-color="#120a22"/></linearGradient></defs><rect x="1" y="1" width="50" height="70" rx="4" fill="url(#bjHudBack)" stroke="#9d6bff" stroke-width="1.2"/><rect x="6" y="6" width="40" height="60" rx="3" fill="none" stroke="rgba(245,174,203,0.35)" stroke-width="0.8"/><path d="M26 28 L28 34 L34 34 L29 38 L31 44 L26 40 L21 44 L23 38 L18 34 L24 34 Z" fill="rgba(245,174,203,0.3)" stroke="rgba(245,174,203,0.45)" stroke-width="0.5"/></svg>
+              </div>
+              <div class="bj-hud-stat is-open"><small>오픈</small>10</div>
+            </div>
+            <div class="bj-hud-div"></div>
+            <div class="bj-hud-row">
+              <span class="bj-hud-lbl">내패</span>
+              <div class="bj-hud-cards" aria-hidden="true">
+                <svg class="bj-card" viewBox="0 0 52 72"><rect x="1" y="1" width="50" height="70" rx="4" fill="#1a1030" stroke="#9d6bff" stroke-width="1.2"/><text x="8" y="18" fill="#f3eef8" font-size="14" font-weight="700">7</text><text x="26" y="42" fill="#c4b5fd" font-size="18" text-anchor="middle">♠</text></svg>
+                <svg class="bj-card" viewBox="0 0 52 72"><rect x="1" y="1" width="50" height="70" rx="4" fill="#1a1030" stroke="#f5aecb" stroke-width="1.2"/><text x="8" y="18" fill="#f3eef8" font-size="14" font-weight="700">K</text><text x="26" y="42" fill="#f5aecb" font-size="18" text-anchor="middle">♥</text></svg>
+              </div>
+              <div class="bj-hud-stat is-sum"><small>합계</small>17</div>
+            </div>
+          </div>
+          <ul class="bj-ui-notes">
+            <li><strong>내패</strong> — 패 표에 <strong>내가 받은 카드</strong>가 그대로 표시 · <strong>합계</strong></li>
+            <li><strong>상대패</strong> — <strong>앞면으로 공개된 카드</strong> + <strong>뒤집힌 카드(모양만)</strong> · 진행 중 <strong>오픈</strong>(공개된 카드만 합산)</li>
+            <li><strong>스탠드 후</strong> — 상대 뒤집힌 카드가 공개되면 패 표도 <strong>합계</strong>로 바뀜</li>
+          </ul>
 
           <p class="local-rule-head">로컬 룰 — 퀸즈 블랙잭</p>
           <table class="ref-table compact">

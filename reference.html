@@ -450,22 +450,16 @@
               <tr><td>히트</td><td>카드 1장 추가 · 버스트 또는 스탠드까지</td></tr>
               <tr><td>스탠드</td><td>더 받지 않음</td></tr>
               <tr><td>공개 · 승부</td><td>양쪽 종료 → 상대 뒤집힌 카드 공개 → <strong>21에 가까운 합</strong> (버스트 제외) · 11↓ 히트 · 17↑ 스탠드 · 12~16 선택</td></tr>
+              <tr><td>상태창</td><td><strong>내패</strong>·합계 · <strong>상대</strong> 공개·<strong>오픈</strong> (뒤집힌 카드 모름)</td></tr>
             </tbody>
           </table>
-
-          <h3>진행 방식</h3>
-          <table class="ref-table compact">
-            <tbody>
-              <tr><td>상태창</td><td><strong>내패</strong>·합계 확인 · <strong>상대</strong>는 공개 카드·<strong>오픈</strong>만 (뒤집힌 카드·숨긴 패 모름 · NPC 엿보기 아님)</td></tr>
-            </tbody>
-          </table>
-          <div class="bj-hud-preview" aria-label="진행 중 상태창 미리보기">
+          <div class="bj-hud-preview" aria-label="진행 중 상태창">
             <p class="bj-hud-cap">진행 중</p>
             <div class="bj-hud-row">
               <span class="bj-hud-lbl">상대패</span>
               <div class="bj-hud-cards" aria-hidden="true">
                 <svg class="bj-card" viewBox="0 0 52 72"><rect x="1" y="1" width="50" height="70" rx="4" fill="#1a1030" stroke="#c4b5fd" stroke-width="1.2"/><text x="8" y="18" fill="#f3eef8" font-size="14" font-weight="700">K</text><text x="26" y="42" fill="#c4b5fd" font-size="18" text-anchor="middle">♠</text></svg>
-                <svg class="bj-card" viewBox="0 0 52 72"><defs><linearGradient id="bjHudBack" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#1e1238"/><stop offset="1" stop-color="#120a22"/></linearGradient></defs><rect x="1" y="1" width="50" height="70" rx="4" fill="url(#bjHudBack)" stroke="#9d6bff" stroke-width="1.2"/><rect x="6" y="6" width="40" height="60" rx="3" fill="none" stroke="rgba(245,174,203,0.35)" stroke-width="0.8"/><path d="M26 28 L28 34 L34 34 L29 38 L31 44 L26 40 L21 44 L23 38 L18 34 L24 34 Z" fill="rgba(245,174,203,0.3)" stroke="rgba(245,174,203,0.45)" stroke-width="0.5"/></svg>
+                <svg class="bj-card" viewBox="0 0 52 72"><defs><linearGradient id="bjHudBack" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#1e1238"/><stop offset="1" stop-color="#120a22"/></linearGradient><pattern id="bjHudPat" width="8" height="8" patternUnits="userSpaceOnUse"><path d="M0 8 L8 0 M-2 2 L2 -2 M6 10 L10 6" stroke="rgba(157,107,255,0.22)" stroke-width="0.6"/></pattern></defs><rect x="1" y="1" width="50" height="70" rx="4" fill="url(#bjHudBack)" stroke="#9d6bff" stroke-width="1.2"/><rect x="6" y="6" width="38" height="60" rx="3" fill="url(#bjHudPat)" stroke="rgba(245,174,203,0.3)" stroke-width="0.8"/></svg>
               </div>
               <div class="bj-hud-stat is-open"><small>오픈</small>10</div>
             </div>

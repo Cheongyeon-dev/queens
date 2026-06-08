@@ -359,6 +359,34 @@
       font-size: 13px;
       color: rgba(168, 155, 184, 0.75);
     }
+    .lore-intro { margin: 0 0 18px; }
+    .lore-intro + .lore-intro {
+      margin-top: 16px;
+      padding-top: 16px;
+      border-top: 1px solid rgba(157, 107, 255, 0.15);
+    }
+    .lore-intro h3 {
+      margin: 0 0 8px;
+      font-family: "Nanum Myeongjo", serif;
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--pink-soft);
+      line-height: 1.45;
+    }
+    .lore-intro h3 span {
+      font-family: "Pretendard", "Noto Sans KR", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--blue);
+    }
+    .lore-intro p {
+      margin: 0 0 8px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--muted);
+    }
+    .lore-intro p:last-child { margin-bottom: 0; }
+    .lore-intro strong { color: var(--ink); font-weight: 700; }
     footer {
       padding-top: 16px;
       text-align: center;
@@ -534,7 +562,16 @@
         <summary>☽ 아르카나 · 타로 계급</summary>
         <div class="ref-fold-body">
         <div class="panel">
-          <p>메이저·마이너 아르카나 <strong>순서</strong>가 마법사의 <strong>위상·권력</strong>. 작위는 <strong style="color:var(--purple)">아르카나(대마녀)</strong>가 수여. 아르카나·마나가 없던 사람도 수여 순간 <strong>그 카드 상징의 마법</strong>을 쓸 수 있습니다.</p>
+          <div class="lore-intro">
+            <h3>♦ 보석의 개수 <span>(명성 및 재력의 척도)</span></h3>
+            <p>프로필 포토카드 하단에 기재된 보석은 해당 캐릭터가 퀸즈 내에서 지닌 <strong>사회적 지위</strong>와 <strong>자산의 규모</strong>를 직관적으로 나타내는 표시입니다.</p>
+          </div>
+          <div class="lore-intro">
+            <h3>♦ 아르카나 <span>(마법 계급 및 작위)</span></h3>
+            <p>타로 카드를 모티브로 한 <strong>마이너 · 메이저 아르카나</strong>는 퀸즈의 지배자인 <strong>대마녀 아르카나</strong>가 재능 있는 아카데미 학생이나, 마음에 드는 자들에게 직접 부여하는 고유 마법이자 계급입니다.</p>
+            <p>마이너보다는 <strong>메이저</strong>가, 그리고 카드의 <strong>숫자가 높을수록</strong> 그 위상과 힘이 강력하며 귀족에 준하는 대우를 받습니다. 대마녀의 절대적인 권능에서 비롯된 힘이기에, <strong>작위를 박탈당하면</strong> 퀸즈 내에서 모든 마법 능력을 상실함과 동시에 명성 또한 바닥으로 추락하게 됩니다.</p>
+            <p>아르카나 · 마나가 전혀 없던 사람도 작위를 수여받는 순간, <strong>해당 카드 상징과 관련된 마법</strong>을 사용할 수 있게 됩니다.</p>
+          </div>
 
           <h3>메이저 아르카나 (22장 · 0→21 높을수록 위상)</h3>
           <table class="ref-table arcana-wide">

@@ -157,6 +157,40 @@
       letter-spacing: 0.1em;
       color: rgba(168, 155, 184, 0.55);
     }
+    .cast-lore {
+      margin-bottom: 24px;
+      padding: 16px 16px 14px;
+      border: 1px solid rgba(157, 107, 255, 0.22);
+      background: rgba(12, 8, 24, 0.65);
+    }
+    .lore-intro { margin: 0 0 16px; }
+    .lore-intro + .lore-intro {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid rgba(157, 107, 255, 0.15);
+    }
+    .lore-intro h3 {
+      margin: 0 0 8px;
+      font-family: "Nanum Myeongjo", serif;
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--pink-soft);
+      line-height: 1.45;
+    }
+    .lore-intro h3 span {
+      font-family: "Pretendard", "Noto Sans KR", sans-serif;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--blue);
+    }
+    .lore-intro p {
+      margin: 0 0 8px;
+      font-size: 15px;
+      line-height: 1.65;
+      color: var(--muted);
+    }
+    .lore-intro p:last-child { margin-bottom: 0; }
+    .lore-intro strong { color: var(--ink); font-weight: 700; }
   </style>
 </head>
 <body>
@@ -197,6 +231,18 @@
     </header>
 
     <div class="cast-main">
+    <section class="cast-lore" aria-label="프로필 · 아르카나 안내">
+      <div class="lore-intro">
+        <h3>♦ 보석의 개수 <span>(명성 및 재력의 척도)</span></h3>
+        <p>프로필 포토카드 하단에 기재된 보석은 해당 캐릭터가 퀸즈 내에서 지닌 <strong>사회적 지위</strong>와 <strong>자산의 규모</strong>를 직관적으로 나타내는 표시입니다.</p>
+      </div>
+      <div class="lore-intro">
+        <h3>♦ 아르카나 <span>(마법 계급 및 작위)</span></h3>
+        <p>타로 카드를 모티브로 한 <strong>마이너 · 메이저 아르카나</strong>는 퀸즈의 지배자인 <strong>대마녀 아르카나</strong>가 재능 있는 아카데미 학생이나, 마음에 드는 자들에게 직접 부여하는 고유 마법이자 계급입니다.</p>
+        <p>마이너보다는 <strong>메이저</strong>가, 그리고 카드의 <strong>숫자가 높을수록</strong> 그 위상과 힘이 강력하며 귀족에 준하는 대우를 받습니다. 대마녀의 절대적인 권능에서 비롯된 힘이기에, <strong>작위를 박탈당하면</strong> 퀸즈 내에서 모든 마법 능력을 상실함과 동시에 명성 또한 바닥으로 추락하게 됩니다.</p>
+        <p>아르카나 · 마나가 전혀 없던 사람도 작위를 수여받는 순간, <strong>해당 카드 상징과 관련된 마법</strong>을 사용할 수 있게 됩니다.</p>
+      </div>
+    </section>
     <nav class="faction-nav" id="faction-nav" aria-label="세력 바로가기"></nav>
     <div id="cast-sections"></div>
     </div>

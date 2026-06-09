@@ -129,44 +129,32 @@
       object-fit: cover;
     }
     .cast-meta { padding: 12px 2px 6px; }
-    .cast-name-row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 10px 12px;
-      width: 100%;
-    }
     .cast-name-row strong {
-      flex: 0 0 auto;
-      max-width: 40%;
+      display: block;
       font-family: "Nanum Myeongjo", serif;
       font-size: clamp(17px, 4.2vw, 19px);
       color: var(--pink-soft);
       line-height: 1.35;
-    }
-    .cast-asset-pending {
-      flex: 0 1 auto;
-      max-width: 58%;
-      margin: 0;
-      margin-left: auto;
-      padding: 7px 12px;
-      font-size: 18px;
-      line-height: 1.4;
-      letter-spacing: -0.01em;
-      text-align: right;
-      color: #7dd3fc;
-      font-weight: 600;
-      background: rgba(157, 107, 255, 0.12);
-      border: 1px solid rgba(157, 107, 255, 0.26);
-      border-radius: 4px;
-      word-break: keep-all;
     }
     .cast-meta em {
       display: block;
       margin-top: 2px;
       font-style: normal;
       font-size: 14px;
-      color: #7dd3fc;
+      color: #93c5fd;
+      font-weight: 400;
+    }
+    .cast-asset-note {
+      display: block;
+      margin: 8px 0 0;
+      padding-top: 6px;
+      border-top: 1px solid rgba(147, 197, 253, 0.22);
+      font-size: 13px;
+      line-height: 1.4;
+      color: #93c5fd;
+      font-weight: 400;
+      letter-spacing: -0.02em;
+      word-break: keep-all;
     }
     .cast-meta p {
       margin: 8px 0 0;
@@ -417,13 +405,13 @@
       if (factionId === "city") return "";
       var code = c.code;
       if (CAST_YURI_ONLY_CODES[code]) {
-        return '<span class="cast-asset-pending">' + CAST_YURI_ONLY_LABEL + "</span>";
+        return '<span class="cast-asset-note">' + CAST_YURI_ONLY_LABEL + "</span>";
       }
       if (CAST_ASSET_PENDING_CODES[code]) {
-        return '<span class="cast-asset-pending">' + CAST_ASSET_PENDING_LABEL + "</span>";
+        return '<span class="cast-asset-note">' + CAST_ASSET_PENDING_LABEL + "</span>";
       }
       if (CAST_MALE_NO_SITUATION[code]) {
-        return '<span class="cast-asset-pending">' + CAST_NO_SITUATION_LABEL + "</span>";
+        return '<span class="cast-asset-note">' + CAST_NO_SITUATION_LABEL + "</span>";
       }
       return "";
     }
@@ -431,10 +419,10 @@
     function cardHtml(c, factionId) {
       return '<article class="cast-card">'
         + photoHtml(c)
-        + '<div class="cast-meta"><div class="cast-name-row"><strong>' + c.name + "</strong>"
-        + assetPendingHtml(c, factionId) + "</div>"
+        + '<div class="cast-meta"><div class="cast-name-row"><strong>' + c.name + "</strong></div>"
         + '<em>' + c.code + ' · ' + c.en + '</em>'
-        + '<p>' + c.role + '</p></div></article>';
+        + '<p>' + c.role + '</p>'
+        + assetPendingHtml(c, factionId) + "</div></article>";
     }
 
     var navEl = document.getElementById("faction-nav");

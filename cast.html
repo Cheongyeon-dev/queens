@@ -133,25 +133,33 @@
       display: flex;
       align-items: flex-start;
       justify-content: space-between;
-      gap: 6px 8px;
+      gap: 10px 12px;
+      width: 100%;
     }
     .cast-name-row strong {
-      flex: 0 1 auto;
+      flex: 0 0 auto;
+      max-width: 40%;
       font-family: "Nanum Myeongjo", serif;
       font-size: clamp(17px, 4.2vw, 19px);
       color: var(--pink-soft);
       line-height: 1.35;
     }
     .cast-asset-pending {
-      flex: 1 1 0;
-      min-width: 0;
-      margin: 2px 0 0;
-      font-size: 13px;
-      line-height: 1.45;
-      letter-spacing: -0.02em;
+      flex: 0 1 auto;
+      max-width: 58%;
+      margin: 0;
+      margin-left: auto;
+      padding: 5px 8px;
+      font-size: 12px;
+      line-height: 1.4;
+      letter-spacing: -0.01em;
       text-align: right;
-      color: rgba(168, 155, 184, 0.95);
+      color: rgba(200, 190, 210, 0.95);
       font-weight: 500;
+      background: rgba(157, 107, 255, 0.12);
+      border: 1px solid rgba(157, 107, 255, 0.26);
+      border-radius: 4px;
+      word-break: keep-all;
     }
     .cast-meta em {
       display: block;
@@ -255,7 +263,7 @@
       <div class="lore-intro">
         <h3>♦ 아르카나 <span>(마법 계급 및 작위)</span></h3>
         <p>타로 카드를 모티브로 한 <strong>마이너 · 메이저 아르카나</strong>는 퀸즈의 지배자인 <strong>대마녀 아르카나</strong>가 재능 있는 아카데미 학생이나, 마음에 드는 자들에게 직접 부여하는 고유 마법이자 계급입니다.</p>
-        <p>마이너보다는 <strong>메이저</strong>가, 그리고 카드의 <strong>숫자가 높을수록</strong> 그 위상과 힘이 강력하며 귀족에 준하는 대우를 받습니다. 대마녀의 절대적인 권능에서 비롯된 힘이기에, <strong>작위를 박탈당하면</strong> 퀸즈 내에서 모든 마법 능력을 상실함과 동시에 명성 또한 바닥으로 추락하게 됩니다.</p>
+        <p>마이너보다는 <strong>메이저</strong>가, 그리고 카드의 <strong>숫자가 높을수록</strong> 그 위상과 힘이 강력하며 귀족에 준하는 대우를 받습니다. 대마녀의 절대적인 권능에서 비롯된 힘이기에, <strong>작위를 박탈당하면</strong>아르카나 고유 마법을 상실함과 동시에 명성 또한 바닥으로 추락하게 됩니다.</p>
         <p>아르카나 · 마나가 전혀 없던 사람도 작위를 수여받는 순간, <strong>해당 카드 상징과 관련된 마법</strong>을 사용할 수 있게 됩니다.</p>
       </div>
     </section>
@@ -270,7 +278,7 @@
     var CAST_FACTIONS = [
       { id: "academy", title: "아르카나 아카데미", short: "아카데미", note: "테이블 등장(AR·RN)은 손님 · 소속은 아카데미", chars: [
         { code: "CM", name: "카미유", en: "Camille", role: "학장 · 마도공학" },
-        { code: "AR", name: "아르카나", en: "Arcana", role: "교수 · 타로 · 대마녀 · 블랙잭 메인 테이블", cardFile: "queens_아르카나.png" },
+        { code: "AR", name: "아르카나", en: "Arcana", role: "교수 · 타로 · 아르카나 마법 · 블랙잭 메인 테이블", cardFile: "queens_아르카나.png" },
         { code: "MI", name: "미하엘", en: "Michael", role: "본관 기숙사 사감 · 아카데미 경비대장", cardFile: "queens_Michael_미하엘.png" },
         { code: "EM", name: "엠마", en: "Emma", role: "별관 기숙사 사감", cardFile: "queens_Emma_엠마.png" },
         { code: "BR", name: "블레어", en: "Blair", role: "교수 · 점성술 · 마검술" },
@@ -320,9 +328,9 @@
       ]},
       { id: "city", title: "도시 · 엑스트라", short: "도시", chars: [
         { code: "RO", name: "로잘리", en: "Rosalie", role: "대마녀의 수하인 · 정원사 · 아르카나 여사제", cardFile: "queens_Rosalie_로잘리.png" },
+        { code: "MY", name: "마리즈", en: "Maryse", role: "수로 관리인", cardFile: "queens_Maryse_마리즈.png" },
         { code: "AM", name: "아르망", en: "Armand", role: "경비대장 · 집행관", cardFile: "queens_Armand_아르망.png" },
         { code: "OB", name: "오베리아", en: "Oberia", role: "퀸즈로드 경비대원 · 마법부 순경", cardFile: "queens_Oberia_오베리아.png" },
-        { code: "MY", name: "마리즈", en: "Maryse", role: "수로 관리인", cardFile: "queens_Maryse_마리즈.png" },
         { code: "LA", name: "로랑", en: "Laurent", role: "호텔 지배인", cardFile: "queens_Laurent_로랑.png" },
         { code: "LU", name: "루시", en: "Lucy", role: "점술가" },
         { code: "LE", name: "레아", en: "Leah", role: "마녀 기자" },
@@ -423,8 +431,8 @@
     function cardHtml(c, factionId) {
       return '<article class="cast-card">'
         + photoHtml(c)
-        + '<div class="cast-meta"><strong class="cast-name">' + c.name + "</strong>"
-        + assetPendingHtml(c, factionId)
+        + '<div class="cast-meta"><div class="cast-name-row"><strong>' + c.name + "</strong>"
+        + assetPendingHtml(c, factionId) + "</div>"
         + '<em>' + c.code + ' · ' + c.en + '</em>'
         + '<p>' + c.role + '</p></div></article>';
     }

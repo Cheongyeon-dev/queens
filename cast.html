@@ -129,32 +129,24 @@
       object-fit: cover;
     }
     .cast-meta { padding: 12px 2px 6px; }
-    .cast-name-row {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      gap: 6px 8px;
-    }
-    .cast-name-row strong {
-      flex: 0 1 auto;
+    .cast-name {
+      display: block;
       font-family: "Nanum Myeongjo", serif;
       font-size: clamp(17px, 4.2vw, 19px);
       color: var(--pink-soft);
       line-height: 1.35;
     }
     .cast-asset-pending {
-      flex: 1 1 0;
-      min-width: 0;
-      margin: 2px 0 0;
-      font-size: 11px;
-      line-height: 1.45;
-      letter-spacing: -0.02em;
-      text-align: right;
-      color: rgba(168, 155, 184, 0.95);
+      display: block;
+      margin: 8px 0 6px;
+      padding: 6px 10px;
+      font-size: 13px;
+      line-height: 1.5;
+      color: rgba(200, 190, 210, 0.95);
       font-weight: 500;
-    }
-    @media (min-width: 560px) {
-      .cast-asset-pending { font-size: 12px; }
+      background: rgba(157, 107, 255, 0.1);
+      border: 1px solid rgba(157, 107, 255, 0.22);
+      border-radius: 4px;
     }
     .cast-meta em {
       display: block;
@@ -279,16 +271,16 @@
         { code: "BR", name: "블레어", en: "Blair", role: "교수 · 점성술 · 마검술" },
         { code: "YU", name: "유리엔", en: "Yurien", role: "학생회장 · 4학년", cardFile: "queens_Yurien_유리엔.png" },
         { code: "HG", name: "휴고", en: "Hugo", role: "4학년 · 학생회", cardFile: "queens_Hugo_휴고.png" },
+        { code: "RX", name: "록산느", en: "Roxanne", role: "4학년 · 전 학생회장", cardFile: "queens_Roxanne_록산느.png" },
         { code: "SL", name: "셀레스테", en: "Celeste", role: "3학년 · 메이저 3대 가문 '태양' 영애", cardFile: "queens_Celeste_셀레스테.png" },
         { code: "YS", name: "유세프", en: "Youssef", role: "3학년 · 포커페이스", cardFile: "queens_Youssef_유세프.png" },
-        { code: "RX", name: "록산느", en: "Roxanne", role: "4학년 · 전 학생회장", cardFile: "queens_Roxanne_록산느.png" },
-        { code: "GI", name: "지젤", en: "Giselle", role: "2학년", cardFile: "queens_Giselle_지젤.png" },
-        { code: "SD", name: "서도윤", en: "Seo Doyoon", role: "유학생 · 1학년", cardFile: "queens_서도윤.png" },
         { code: "CT", name: "캐서린", en: "Catherine", role: "AU · 유학생 · 3학년", cardFile: "queens_Catherine_캐서린.png" },
+        { code: "GI", name: "지젤", en: "Giselle", role: "2학년", cardFile: "queens_Giselle_지젤.png" },
         { code: "SH", name: "채서하", en: "Chae Seoha", role: "AU · 유학생 · 2학년", cardFile: "queens_채서하.png" },
+        { code: "RN", name: "르네", en: "Rene", role: "2학년 · 블랙잭 퀸즈 단골", cardFile: "queens_르네.png" },
+        { code: "SD", name: "서도윤", en: "Seo Doyoon", role: "유학생 · 1학년", cardFile: "queens_서도윤.png" },
         { code: "HO", name: "이성후", en: "Lee Seonghu", role: "1학년 · 유학생 · 쌍둥이(형)", cardFile: "queens_이성후.png" },
         { code: "HN", name: "이성한", en: "Lee Seonghan", role: "1학년 · 유학생 · 쌍둥이(동생)", cardFile: "queens_이성한.png" },
-        { code: "RN", name: "르네", en: "Rene", role: "2학년 · 블랙잭 퀸즈 단골", cardFile: "queens_르네.png" },
       ]},
       { id: "lerose", title: "르 로즈", short: "르 로즈", chars: [
         { code: "RS", name: "로제타", en: "Rosetta", role: "꽃집 주인 · 아르카나 여사제", cardFile: "queens_Rosetta_로제타.png" },
@@ -302,7 +294,6 @@
       ]},
       { id: "casino", title: "블랙잭 퀸즈 · 카지노", short: "카지노", chars: [
         { code: "VA", name: "발레리", en: "Valerie", role: "카지노 핏 보스 · 아르카나 여사제", cardFile: "queens_Valerie_발레리.png" },
-        { code: "LE", name: "레아", en: "Leah", role: "마녀 기자" },
         { code: "DH", name: "신도화", en: "Shin Dohwa", role: "방문객 · 뮤지컬 배우 · 오페라 가수 · 라운지 바", cardFile: "queens_신도화.png" },
       ]},
       { id: "table", title: "메인 테이블 · 블랙잭", short: "메인 테이블", chars: [
@@ -323,13 +314,14 @@
         { code: "CA", name: "카르멘", en: "Carmen", role: "마수사육사", cardFile: "queens_Carmen_카르멘.png" },
       ]},
       { id: "city", title: "도시 · 엑스트라", short: "도시", chars: [
+        { code: "RO", name: "로잘리", en: "Rosalie", role: "대마녀의 수하인 · 정원사 · 아르카나 여사제", cardFile: "queens_Rosalie_로잘리.png" },
         { code: "AM", name: "아르망", en: "Armand", role: "경비대장 · 집행관", cardFile: "queens_Armand_아르망.png" },
         { code: "OB", name: "오베리아", en: "Oberia", role: "퀸즈로드 경비대원 · 마법부 순경", cardFile: "queens_Oberia_오베리아.png" },
         { code: "MY", name: "마리즈", en: "Maryse", role: "수로 관리인", cardFile: "queens_Maryse_마리즈.png" },
         { code: "LA", name: "로랑", en: "Laurent", role: "호텔 지배인", cardFile: "queens_Laurent_로랑.png" },
         { code: "LU", name: "루시", en: "Lucy", role: "점술가" },
+        { code: "LE", name: "레아", en: "Leah", role: "마녀 기자" },
         { code: "VC", name: "뱅상", en: "Vincent", role: "정보상 · 사채업자", cardFile: "queens_Vincent_뱅상.png" },
-        { code: "RO", name: "로잘리", en: "Rosalie", role: "대마녀의 수하인 · 정원사 · 아르카나 여사제", cardFile: "queens_Rosalie_로잘리.png" },
       ]},
     ];
 
@@ -352,6 +344,12 @@
 
     var CAST_NO_SITUATION_LABEL = "상황 에셋 미지원";
     var CAST_ASSET_PENDING_LABEL = "상황 에셋 미지원·추후 업데이트 예정";
+    var CAST_YURI_ONLY_LABEL = "여캐플 전용";
+
+    /** 여캐플(F01·F02) 전용 — 코드로만 지정 */
+    var CAST_YURI_ONLY_CODES = {
+      RS: 1,
+    };
 
     /** profile-card-editor 와 동일: queens_{이름칸}.png */
     function editorSafeName(value) {
@@ -405,6 +403,9 @@
     function assetPendingHtml(c, factionId) {
       if (factionId === "city") return "";
       var code = c.code;
+      if (CAST_YURI_ONLY_CODES[code]) {
+        return '<span class="cast-asset-pending">' + CAST_YURI_ONLY_LABEL + "</span>";
+      }
       if (CAST_ASSET_PENDING_CODES[code]) {
         return '<span class="cast-asset-pending">' + CAST_ASSET_PENDING_LABEL + "</span>";
       }
@@ -417,8 +418,8 @@
     function cardHtml(c, factionId) {
       return '<article class="cast-card">'
         + photoHtml(c)
-        + '<div class="cast-meta"><div class="cast-name-row"><strong>' + c.name + "</strong>"
-        + assetPendingHtml(c, factionId) + "</div>"
+        + '<div class="cast-meta"><strong class="cast-name">' + c.name + "</strong>"
+        + assetPendingHtml(c, factionId)
         + '<em>' + c.code + ' · ' + c.en + '</em>'
         + '<p>' + c.role + '</p></div></article>';
     }

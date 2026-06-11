@@ -321,12 +321,16 @@
         { code: "OB", name: "오베리아", en: "Oberia", role: "퀸즈로드 경비대원 · 마법부 순경", cardFile: "queens_Oberia_오베리아.png" },
         { code: "LA", name: "로랑", en: "Laurent", role: "호텔 지배인", cardFile: "queens_Laurent_로랑.png" },
         { code: "LU", name: "루시", en: "Lucy", role: "점술가" },
-        { code: "LE", name: "레아", en: "Leah", role: "마녀 기자" },
         { code: "VC", name: "뱅상", en: "Vincent", role: "정보상 · 사채업자", cardFile: "queens_Vincent_뱅상.png" },
       ]},
     ];
 
     var CAST_ASSET_BASE = "assets/cast/";
+
+    /** 공개 cast 그리드 제외 · 업데이트용 신캐 (CAST_FACTIONS 미노출) */
+    var CAST_UPCOMING = [
+      { code: "LE", name: "레아", en: "Leah", role: "마녀 기자", note: "업데이트용 신캐" },
+    ];
 
     /** {code}01 only · init-raw-folders EXTRAS (이름으로 판단하지 않음) */
     var CAST_EXTRA_CODES = {

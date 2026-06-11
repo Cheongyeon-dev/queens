@@ -805,6 +805,114 @@
       color: var(--muted);
     }
 
+    /* 호출 · SVG · 드롭다운 안내 */
+    .gate-tools { margin: 48px 0 0; scroll-margin-top: 88px; }
+
+    .gate-tools-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 16px;
+    }
+
+    .gate-tools-head h2 {
+      margin: 0;
+      font-family: "Nanum Myeongjo", serif;
+      font-size: clamp(20px, 4vw, 24px);
+      color: var(--pink-soft);
+    }
+
+    .gate-tools-head a {
+      padding: 8px 14px;
+      font-size: 12px;
+      font-weight: 800;
+      color: var(--pink-soft);
+      border: 1px solid rgba(245, 174, 203, 0.35);
+      background: rgba(157, 107, 255, 0.1);
+    }
+
+    .gate-fold {
+      margin: 12px 0;
+      border: 1px solid rgba(157, 107, 255, 0.22);
+      background: rgba(12, 8, 24, 0.88);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+    }
+
+    .gate-fold summary {
+      cursor: pointer;
+      list-style: none;
+      padding: 14px 16px;
+      font-size: 15px;
+      font-weight: 800;
+      color: var(--pink-soft);
+      background: linear-gradient(90deg, rgba(157, 107, 255, 0.14), rgba(91, 157, 255, 0.06));
+      border-left: 4px solid var(--purple);
+    }
+
+    .gate-fold summary::-webkit-details-marker { display: none; }
+
+    .gate-fold-body {
+      padding: 18px 20px 20px;
+      border-top: 1px solid rgba(157, 107, 255, 0.15);
+      font-size: 14px;
+      line-height: 1.75;
+      color: var(--muted);
+    }
+
+    .gate-fold-body p { margin: 0 0 14px; }
+    .gate-fold-body p:last-child { margin-bottom: 0; }
+
+    .gate-fold-body strong { color: var(--ink); font-weight: 700; }
+
+    .gate-fold-body code {
+      padding: 1px 6px;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--blue);
+      background: rgba(91, 157, 255, 0.1);
+      border: 1px solid rgba(91, 157, 255, 0.22);
+    }
+
+    .ui-preview-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 14px;
+      margin-top: 8px;
+    }
+
+    @media (max-width: 720px) {
+      .ui-preview-grid { grid-template-columns: 1fr; }
+    }
+
+    .ui-preview {
+      padding: 12px;
+      border: 1px solid rgba(157, 107, 255, 0.22);
+      background: rgba(7, 5, 18, 0.75);
+    }
+
+    .ui-preview h3 {
+      margin: 0 0 8px;
+      font-size: 14px;
+      color: var(--purple);
+    }
+
+    .ui-preview img {
+      display: block;
+      width: 100%;
+      height: auto;
+      border: 1px solid rgba(91, 157, 255, 0.2);
+    }
+
+    .ui-preview p {
+      margin: 8px 0 0;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .gate-meta { margin: 40px 0 0; scroll-margin-top: 88px; }
+
     /* rebirth footer block */
     .rebirth {
       margin: 64px 0 48px;
@@ -1042,6 +1150,8 @@
         <a href="#blackjack">블랙잭</a>
         <a href="#circus">델리리움</a>
         <a href="#academy">아카데미</a>
+        <a href="#calls">호출</a>
+        <a href="#ui">SVG</a>
         <a href="#rebirth">환생</a>
       </nav>
     </header>
@@ -1098,25 +1208,7 @@
           <p>도시의 지배자인 <strong style="color:var(--purple)">대마녀</strong>는 이 거대한 카지노 전체를 하나의 채집 통으로 삼아, 벼랑 끝에 몰린 인간들이 뿜어내는 강렬한 욕망과 액체 마나를 은밀히 흡수하고 있습니다.</p>
           <p>입구를 지키는 단정한 앞치마 차림의 꽃집 주인이 보내는 서늘한 눈빛은, 굳게 닫힌 뒷문 너머에 결코 평범하지 않은 심연이 도사리고 있음을 조용히 경고합니다.</p>
           <p>메인 블랙잭 테이블에는 <strong style="color:var(--pink-soft)">아르카나</strong> — 퀸즈의 지배자가 VIP 플레이어로 당신과 함께 판에 앉아 있습니다. 짙은 꽃향기만이 두 플레이어 사이의 아슬아슬한 판을 조용히 지켜봅니다.</p>
-          <p style="margin:16px 0 0;"><a href="reference.html#blackjack" style="color:var(--pink-soft);font-size:13px;font-weight:800;">→ 블랙잭 · 포커 룰과 족보 보기</a></p>
-        </div>
-
-        <div class="preview-grid">
-          <div class="preview-card">
-            <div class="icon">♠</div>
-            <strong>카드 스프레드</strong>
-            <span>SVG · theme=card</span>
-          </div>
-          <div class="preview-card">
-            <div class="icon">◈</div>
-            <strong>전광판</strong>
-            <span>SVG · theme=marquee</span>
-          </div>
-          <div class="preview-card">
-            <div class="icon">☽</div>
-            <strong>타로 버프</strong>
-            <span>SVG · theme=tarot</span>
-          </div>
+          <p style="margin:16px 0 0;"><a href="reference.html#blackjack" style="color:var(--pink-soft);font-size:13px;font-weight:800;">→ 블랙잭 · 포커 룰과 족보 보기</a> · <a href="#ui" style="color:var(--blue);font-size:13px;font-weight:800;">→ SVG 미리보기</a></p>
         </div>
       </div>
     </section>
@@ -1217,6 +1309,76 @@
           <p>칩은 거의 없고, 소지품·마나를 거는 특별 룰이 코앞. 배율은 기형적으로 높게 터집니다.</p>
         </div>
       </div>
+    </section>
+
+    <!-- 호출 · SVG -->
+    <section class="gate-tools section" id="calls">
+      <div class="gate-tools-head">
+        <h2>호출 기능 안내<small style="display:block;margin-top:4px;font-family:Pretendard,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.12em;color:var(--blue);">Lorebook · Commands</small></h2>
+        <a href="reference.html">룰북 · 아르카나</a>
+      </div>
+
+      <details class="gate-fold" open>
+        <summary>호출 기능 안내</summary>
+        <div class="gate-fold-body">
+          <p><strong>여캐플 모드</strong> · <code>!여캐플</code> <code>!백합</code><br>입력 시 여여 묘사 강화 · 상태창 <code>🌸</code> · 지원: AR·BK·BE·RS·BL·DH·SH·CT·YU</p>
+          <p><strong>챕터: 용궁</strong> · <code>!용궁</code><br>용왕 치료를 위해 용궁으로 이동하는 스토리 시작 · <code>시작 웹툰 존재</code></p>
+          <p><strong>블랙잭</strong> · <code>!블랙잭</code><br>테이블 참여 · 패 상태창 <code>theme=blackjack</code> SVG</p>
+          <p><strong>포커</strong> · <code>!포커</code><br>VIP 홀덤 · <code>theme=poker</code> SVG</p>
+          <p><strong>체스</strong> · <code>!체스</code><br>RP 체스판 · <code>theme=chess</code> SVG</p>
+          <p><strong>커뮤니티</strong> · <code>!커뮤</code><br>상태창 <code>🌐</code> · 게시판 표 (더미 · 상세는 로어북)</p>
+        </div>
+      </details>
+    </section>
+
+    <section class="gate-tools section" id="ui">
+      <div class="gate-tools-head">
+        <h2>시스템 UI 미리보기<small style="display:block;margin-top:4px;font-family:Pretendard,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.12em;color:var(--blue);">SVG · bi.pharang.workers.dev</small></h2>
+        <a href="https://bi.pharang.workers.dev/?hub=queens" target="_blank" rel="noopener">Worker 허브</a>
+      </div>
+
+      <div class="ui-preview-grid">
+        <article class="ui-preview">
+          <h3>♠ 블랙잭</h3>
+          <img src="https://bi.pharang.workers.dev/?theme=blackjack&amp;p1=6D,10C&amp;pl1=%EB%82%B4%ED%8C%A8&amp;p2=AS,%3F&amp;pl2=%EC%83%81%EB%8C%80%ED%8C%A8" alt="블랙잭 SVG" loading="lazy" />
+          <p><code>theme=blackjack</code> · p1/p2 · hole=%3F</p>
+        </article>
+        <article class="ui-preview">
+          <h3>♦ VIP 포커</h3>
+          <img src="https://bi.pharang.workers.dev/?theme=poker&amp;board=AH,KS,9D,4C,2H&amp;hole=AD,KD&amp;pot=8600&amp;bet=600&amp;action=%EC%B2%B4%ED%81%AC&amp;deck=28" alt="포커 SVG" loading="lazy" />
+          <p><code>theme=poker</code> · board/hole/pot</p>
+        </article>
+        <article class="ui-preview">
+          <h3>♟ RP 체스</h3>
+          <img src="https://bi.pharang.workers.dev/?theme=chess&amp;fen=rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR" alt="체스 SVG" loading="lazy" />
+          <p><code>theme=chess</code> · fen= · 흑=<code>&amp;view=black</code></p>
+        </article>
+        <article class="ui-preview">
+          <h3>☽ 타로 스프레드</h3>
+          <img src="https://bi.pharang.workers.dev/?theme=tarot&amp;c1=0&amp;c2=13&amp;c3=17" alt="타로 SVG" loading="lazy" />
+          <p><code>theme=tarot</code> · c1/c2/c3</p>
+        </article>
+      </div>
+    </section>
+
+    <section class="gate-meta" id="meta">
+      <details class="gate-fold">
+        <summary>에셋 코드</summary>
+        <div class="gate-fold-body">
+          <p><strong>이미지 출력</strong><br><code>![](https://bi.pharang.workers.dev/i/{코드}/{상황})</code></p>
+          <p><strong>예시</strong> · BK/0 · AR/A01 · BE/N01 · 상황 코드 전체는 룰북·cast 참고</p>
+          <p><a href="cast.html" style="color:var(--pink-soft);font-weight:800;">→ 등장인물 · 지원 라벨</a> · <a href="reference.html" style="color:var(--blue);font-weight:800;">→ 룰북</a></p>
+        </div>
+      </details>
+
+      <details class="gate-fold">
+        <summary>업데이트 내역</summary>
+        <div class="gate-fold-body">
+          <p><strong style="color:var(--pink-soft);">2026-06-10</strong><br>홈 · 호출 기능 안내 · SVG UI 미리보기 섹션 추가</p>
+          <p><strong style="color:var(--pink-soft);">2026-06-10</strong><br>cast · LE 레아 공개 목록 제외 (업데이트용 신캐)</p>
+          <p><strong style="color:var(--pink-soft);">2026-06</strong><br>룰북 · 아르카나 공석 작위 · vacant 칩 UI</p>
+        </div>
+      </details>
     </section>
 
   </main>

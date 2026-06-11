@@ -347,17 +347,57 @@
       font-size: 13px;
       color: var(--pink-soft);
     }
-    .vacant-slot {
+    .arcana-cast {
       margin-top: 14px;
-      padding: 12px;
+      padding: 10px;
       border: 1px dashed rgba(168, 155, 184, 0.35);
       background: rgba(7, 5, 18, 0.4);
-      text-align: center;
     }
-    .vacant-slot p {
-      margin: 0;
-      font-size: 13px;
-      color: rgba(168, 155, 184, 0.75);
+    .arcana-cast > h3 { margin-top: 0; }
+    .arc-cast-suit {
+      margin: 10px 0 5px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.06em;
+      color: var(--blue);
+    }
+    .arcana-cast > .arc-cast-suit:first-of-type { margin-top: 4px; }
+    .arc-cast-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 5px;
+    }
+    .arc-tile {
+      padding: 5px 7px;
+      border: 1px solid rgba(157, 107, 255, 0.22);
+      background: rgba(7, 5, 18, 0.55);
+      line-height: 1.35;
+    }
+    .arc-tile.is-held {
+      border-color: rgba(245, 174, 203, 0.38);
+      background: rgba(245, 174, 203, 0.06);
+    }
+    .arc-tile.is-vacant {
+      border-style: dashed;
+      border-color: rgba(168, 155, 184, 0.28);
+      background: rgba(7, 5, 18, 0.32);
+    }
+    .arc-tile-rank {
+      font-size: 11px;
+      font-weight: 800;
+      color: var(--purple);
+    }
+    .arc-tile-holders {
+      margin-top: 1px;
+      font-size: 11px;
+      color: var(--pink-soft);
+      word-break: break-all;
+    }
+    .arc-tile.is-vacant .arc-tile-holders {
+      color: rgba(168, 155, 184, 0.62);
+    }
+    @media (max-width: 420px) {
+      .arc-cast-grid { grid-template-columns: 1fr; }
     }
     .lore-intro { margin: 0 0 18px; }
     .lore-intro + .lore-intro {
@@ -602,8 +642,18 @@
             <div class="minor-suit"><strong>펜타클 · Pentacles</strong>땅 · 재물 · 현실</div>
           </div>
 
-          <div class="vacant-slot" id="arcana-vacant">
-            <p><strong style="color:var(--muted)">작위 · 공석 목록</strong><br />추후 추가</p>
+          <div class="arcana-cast" id="arcana-vacant">
+            <h3>작위 · 보유 / 공석</h3>
+            <div class="arc-cast-suit">메이저</div>
+            <div class="arc-cast-grid" id="arc-major-grid"></div>
+            <div class="arc-cast-suit">마이너 · 완드</div>
+            <div class="arc-cast-grid" id="arc-minor-wands"></div>
+            <div class="arc-cast-suit">마이너 · 컵</div>
+            <div class="arc-cast-grid" id="arc-minor-cups"></div>
+            <div class="arc-cast-suit">마이너 · 소드</div>
+            <div class="arc-cast-grid" id="arc-minor-swords"></div>
+            <div class="arc-cast-suit">마이너 · 펜타클</div>
+            <div class="arc-cast-grid" id="arc-minor-pentacles"></div>
           </div>
         </div>
         </div>
@@ -634,6 +684,115 @@
       }
       window.addEventListener("hashchange", applyHash);
       applyHash();
+    })();
+
+    (function () {
+      var RANK_KO = {
+        Ace: "에이스",
+        Page: "시종",
+        Knight: "기사",
+        Queen: "여왕",
+        King: "왕"
+      };
+      var MAJOR = [
+        { n: "0", name: "광대", holders: [] },
+        { n: "I", name: "마법사", holders: [] },
+        { n: "II", name: "여사제", holders: ["카미유", "블레어", "미하엘", "로제타", "아르망", "마리즈", "발레리", "백설아", "로잘리"] },
+        { n: "III", name: "여황제", holders: [] },
+        { n: "IV", name: "황제", holders: [] },
+        { n: "V", name: "교황", holders: [] },
+        { n: "VI", name: "연인", holders: ["블랑슈"] },
+        { n: "VII", name: "전차", holders: [] },
+        { n: "VIII", name: "힘", holders: ["루시"] },
+        { n: "IX", name: "은둔자", holders: ["클레망"] },
+        { n: "X", name: "운명의 수레바퀴", holders: ["벨라돈나"] },
+        { n: "XI", name: "정의", holders: [] },
+        { n: "XII", name: "매달린 남자", holders: [] },
+        { n: "XIII", name: "죽음", holders: [] },
+        { n: "XIV", name: "절제", holders: [] },
+        { n: "XV", name: "악마", holders: ["릴리스"] },
+        { n: "XVI", name: "탑", holders: [] },
+        { n: "XVII", name: "별", holders: [] },
+        { n: "XVIII", name: "달", holders: ["뮤리엘"] },
+        { n: "XIX", name: "태양", holders: ["셀레스테"] },
+        { n: "XX", name: "심판", holders: [] },
+        { n: "XXI", name: "세계", holders: ["아르카나"] }
+      ];
+      var MINOR = {
+        wands: {
+          suit: "완드",
+          el: "arc-minor-wands",
+          cards: [
+            ["Ace", "비올레트"], ["2", "뱅상"], ["3", null], ["4", "채서하"],
+            ["5", null], ["6", null], ["7", null], ["8", null], ["9", null], ["10", null],
+            ["Page", null], ["Knight", null], ["Queen", "샤를로트"], ["King", null]
+          ]
+        },
+        cups: {
+          suit: "컵",
+          el: "arc-minor-cups",
+          cards: [
+            ["Ace", null], ["2", null], ["3", "애나"], ["4", null], ["5", null], ["6", null],
+            ["7", "트릭시"], ["8", null], ["9", null], ["10", null],
+            ["Page", "엠마"], ["Knight", null], ["Queen", "렉시"], ["King", "루이"]
+          ]
+        },
+        swords: {
+          suit: "소드",
+          el: "arc-minor-swords",
+          cards: [
+            ["Ace", null], ["2", "오베리아"], ["3", null], ["4", null], ["5", null],
+            ["6", null], ["7", null], ["8", null], ["9", "카르멘"], ["10", null],
+            ["Page", null], ["Knight", "유리엔"], ["Queen", "캐서린"], ["King", null]
+          ]
+        },
+        pentacles: {
+          suit: "펜타클",
+          el: "arc-minor-pentacles",
+          cards: [
+            ["Ace", null], ["2", null], ["3", "르네"], ["4", null], ["5", "휴고"],
+            ["6", null], ["7", null], ["8", null], ["9", null], ["10", null],
+            ["Page", null], ["Knight", null], ["Queen", "셀린"], ["King", null]
+          ]
+        }
+      };
+
+      function rankLabel(suit, rank) {
+        var r = RANK_KO[rank] || rank;
+        return suit + " · " + r;
+      }
+
+      function makeTile(rankText, holders) {
+        var held = holders && holders.length;
+        var tile = document.createElement("div");
+        tile.className = "arc-tile " + (held ? "is-held" : "is-vacant");
+        var rankEl = document.createElement("div");
+        rankEl.className = "arc-tile-rank";
+        rankEl.textContent = rankText;
+        var holderEl = document.createElement("div");
+        holderEl.className = "arc-tile-holders";
+        holderEl.textContent = held ? holders.join(" · ") : "공석";
+        tile.appendChild(rankEl);
+        tile.appendChild(holderEl);
+        return tile;
+      }
+
+      function fillGrid(id, tiles) {
+        var root = document.getElementById(id);
+        if (!root) return;
+        tiles.forEach(function (tile) { root.appendChild(tile); });
+      }
+
+      fillGrid("arc-major-grid", MAJOR.map(function (m) {
+        return makeTile(m.n + " · " + m.name, m.holders);
+      }));
+
+      Object.keys(MINOR).forEach(function (key) {
+        var block = MINOR[key];
+        fillGrid(block.el, block.cards.map(function (pair) {
+          return makeTile(rankLabel(block.suit, pair[0]), pair[1] ? [pair[1]] : []);
+        }));
+      });
     })();
   </script>
 

@@ -347,57 +347,48 @@
       font-size: 13px;
       color: var(--pink-soft);
     }
-    .arcana-cast {
+    .arcana-vacant {
       margin-top: 14px;
-      padding: 10px;
+      padding: 12px 14px;
       border: 1px dashed rgba(168, 155, 184, 0.35);
       background: rgba(7, 5, 18, 0.4);
     }
-    .arcana-cast > h3 { margin-top: 0; }
-    .arc-cast-suit {
-      margin: 10px 0 5px;
-      font-size: 11px;
+    .arcana-vacant > h3 { margin: 0 0 10px; }
+    .arc-vacant-group { margin-bottom: 12px; }
+    .arc-vacant-group:last-child { margin-bottom: 0; }
+    .arc-vacant-head {
+      margin-bottom: 7px;
+      font-size: 13px;
       font-weight: 800;
-      letter-spacing: 0.06em;
+      letter-spacing: 0.04em;
       color: var(--blue);
     }
-    .arcana-cast > .arc-cast-suit:first-of-type { margin-top: 4px; }
-    .arc-cast-grid {
+    .arc-vacant-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+    }
+    .arc-vacant-chip {
+      padding: 7px 12px;
+      border: 1px dashed rgba(168, 155, 184, 0.42);
+      background: rgba(7, 5, 18, 0.55);
+      font-size: 15px;
+      font-weight: 700;
+      line-height: 1.25;
+      color: var(--ink);
+    }
+    .arc-vacant-chip .chip-num {
+      margin-right: 5px;
+      color: var(--purple);
+      font-weight: 800;
+    }
+    .arc-vacant-minor {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 5px;
+      gap: 10px 14px;
     }
-    .arc-tile {
-      padding: 5px 7px;
-      border: 1px solid rgba(157, 107, 255, 0.22);
-      background: rgba(7, 5, 18, 0.55);
-      line-height: 1.35;
-    }
-    .arc-tile.is-held {
-      border-color: rgba(245, 174, 203, 0.38);
-      background: rgba(245, 174, 203, 0.06);
-    }
-    .arc-tile.is-vacant {
-      border-style: dashed;
-      border-color: rgba(168, 155, 184, 0.28);
-      background: rgba(7, 5, 18, 0.32);
-    }
-    .arc-tile-rank {
-      font-size: 11px;
-      font-weight: 800;
-      color: var(--purple);
-    }
-    .arc-tile-holders {
-      margin-top: 1px;
-      font-size: 11px;
-      color: var(--pink-soft);
-      word-break: break-all;
-    }
-    .arc-tile.is-vacant .arc-tile-holders {
-      color: rgba(168, 155, 184, 0.62);
-    }
-    @media (max-width: 420px) {
-      .arc-cast-grid { grid-template-columns: 1fr; }
+    @media (max-width: 520px) {
+      .arc-vacant-minor { grid-template-columns: 1fr; }
     }
     .lore-intro { margin: 0 0 18px; }
     .lore-intro + .lore-intro {
@@ -642,18 +633,30 @@
             <div class="minor-suit"><strong>펜타클 · Pentacles</strong>땅 · 재물 · 현실</div>
           </div>
 
-          <div class="arcana-cast" id="arcana-vacant">
-            <h3>작위 · 보유 / 공석</h3>
-            <div class="arc-cast-suit">메이저</div>
-            <div class="arc-cast-grid" id="arc-major-grid"></div>
-            <div class="arc-cast-suit">마이너 · 완드</div>
-            <div class="arc-cast-grid" id="arc-minor-wands"></div>
-            <div class="arc-cast-suit">마이너 · 컵</div>
-            <div class="arc-cast-grid" id="arc-minor-cups"></div>
-            <div class="arc-cast-suit">마이너 · 소드</div>
-            <div class="arc-cast-grid" id="arc-minor-swords"></div>
-            <div class="arc-cast-suit">마이너 · 펜타클</div>
-            <div class="arc-cast-grid" id="arc-minor-pentacles"></div>
+          <div class="arcana-vacant" id="arcana-vacant">
+            <h3>공석 작위</h3>
+            <div class="arc-vacant-group">
+              <div class="arc-vacant-head">메이저</div>
+              <div class="arc-vacant-chips" id="arc-vacant-major"></div>
+            </div>
+            <div class="arc-vacant-minor">
+              <div class="arc-vacant-group">
+                <div class="arc-vacant-head">완드</div>
+                <div class="arc-vacant-chips" id="arc-vacant-wands"></div>
+              </div>
+              <div class="arc-vacant-group">
+                <div class="arc-vacant-head">컵</div>
+                <div class="arc-vacant-chips" id="arc-vacant-cups"></div>
+              </div>
+              <div class="arc-vacant-group">
+                <div class="arc-vacant-head">소드</div>
+                <div class="arc-vacant-chips" id="arc-vacant-swords"></div>
+              </div>
+              <div class="arc-vacant-group">
+                <div class="arc-vacant-head">펜타클</div>
+                <div class="arc-vacant-chips" id="arc-vacant-pentacles"></div>
+              </div>
+            </div>
           </div>
         </div>
         </div>
@@ -757,40 +760,40 @@
         }
       };
 
-      function rankLabel(suit, rank) {
-        var r = RANK_KO[rank] || rank;
-        return suit + " · " + r;
+      function rankLabel(rank) {
+        return RANK_KO[rank] || rank;
       }
 
-      function makeTile(rankText, holders) {
-        var held = holders && holders.length;
-        var tile = document.createElement("div");
-        tile.className = "arc-tile " + (held ? "is-held" : "is-vacant");
-        var rankEl = document.createElement("div");
-        rankEl.className = "arc-tile-rank";
-        rankEl.textContent = rankText;
-        var holderEl = document.createElement("div");
-        holderEl.className = "arc-tile-holders";
-        holderEl.textContent = held ? holders.join(" · ") : "공석";
-        tile.appendChild(rankEl);
-        tile.appendChild(holderEl);
-        return tile;
+      function makeMajorChip(entry) {
+        var chip = document.createElement("span");
+        chip.className = "arc-vacant-chip";
+        chip.innerHTML = '<span class="chip-num">' + entry.n + "</span>" + entry.name;
+        return chip;
       }
 
-      function fillGrid(id, tiles) {
+      function makeMinorChip(label) {
+        var chip = document.createElement("span");
+        chip.className = "arc-vacant-chip";
+        chip.textContent = label;
+        return chip;
+      }
+
+      function fillChips(id, chips) {
         var root = document.getElementById(id);
         if (!root) return;
-        tiles.forEach(function (tile) { root.appendChild(tile); });
+        chips.forEach(function (chip) { root.appendChild(chip); });
       }
 
-      fillGrid("arc-major-grid", MAJOR.map(function (m) {
-        return makeTile(m.n + " · " + m.name, m.holders);
-      }));
+      fillChips("arc-vacant-major", MAJOR.filter(function (m) {
+        return !m.holders.length;
+      }).map(makeMajorChip));
 
       Object.keys(MINOR).forEach(function (key) {
         var block = MINOR[key];
-        fillGrid(block.el, block.cards.map(function (pair) {
-          return makeTile(rankLabel(block.suit, pair[0]), pair[1] ? [pair[1]] : []);
+        fillChips("arc-vacant-" + key, block.cards.filter(function (pair) {
+          return !pair[1];
+        }).map(function (pair) {
+          return makeMinorChip(rankLabel(pair[0]));
         }));
       });
     })();

@@ -1,0 +1,432 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>퀸즈 · 에셋 갤러리</title>
+  <link rel="stylesheet" href="queens-site-nav.css" />
+  <style>
+    :root {
+      --bg-deep: #070512;
+      --ink: #f3eef8;
+      --muted: #a89bb8;
+      --pink: #f5aecb;
+      --pink-soft: #ffc4dd;
+      --purple: #9d6bff;
+      --blue: #5b9dff;
+      --line: rgba(245, 174, 203, 0.18);
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      color: var(--ink);
+      font-family: "Pretendard", "Noto Sans KR", sans-serif;
+      font-size: 15px;
+      line-height: 1.65;
+      word-break: keep-all;
+      background:
+        radial-gradient(ellipse 70% 40% at 50% 0%, rgba(157, 107, 255, 0.18), transparent),
+        linear-gradient(180deg, var(--bg-deep), #0a0618);
+      min-height: 100vh;
+    }
+    a { color: var(--pink-soft); text-decoration: none; font-weight: 700; }
+    .wrap { width: min(1080px, calc(100% - 32px)); margin: 0 auto; padding: 0 0 56px; }
+    .page-head {
+      margin: 32px 0 20px;
+      padding-bottom: 14px;
+      border-bottom: 1px solid rgba(157, 107, 255, 0.2);
+    }
+    .page-head h1 {
+      margin: 0;
+      font-family: "Nanum Myeongjo", "Batang", serif;
+      font-size: clamp(22px, 4vw, 30px);
+      color: var(--pink-soft);
+    }
+    .page-head h1 small {
+      display: block;
+      margin-top: 4px;
+      font-family: "Pretendard", sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.14em;
+      color: var(--blue);
+    }
+    .page-head p { margin: 12px 0 0; font-size: 14px; color: var(--muted); }
+    .section-head { margin: 28px 0 14px; }
+    .section-head h2 {
+      margin: 0;
+      font-family: "Nanum Myeongjo", serif;
+      font-size: 18px;
+      color: var(--pink);
+    }
+    .section-head p { margin: 6px 0 0; font-size: 13px; color: var(--muted); }
+    .glass-panel {
+      padding: 16px 18px;
+      border: 1px solid rgba(157, 107, 255, 0.22);
+      background: rgba(12, 8, 24, 0.72);
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.3);
+    }
+    .code-table { display: grid; gap: 0; }
+    .code-row {
+      display: grid;
+      grid-template-columns: 72px 1fr;
+      gap: 12px;
+      padding: 8px 0;
+      border-bottom: 1px solid rgba(157, 107, 255, 0.12);
+      font-size: 14px;
+    }
+    .code-row:last-child { border-bottom: none; }
+    .code-row b { color: var(--purple); letter-spacing: 0.06em; }
+    .code-row span { color: var(--muted); }
+    .rule-strip {
+      margin-bottom: 20px;
+      padding: 10px 14px;
+      font-size: 12px;
+      line-height: 1.5;
+      color: var(--muted);
+      border: 1px solid rgba(245, 174, 203, 0.2);
+      background: rgba(245, 174, 203, 0.06);
+    }
+    .filter-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+    .filter-row select {
+      padding: 12px 14px;
+      border-radius: 6px;
+      background: rgba(12, 8, 24, 0.92);
+      color: var(--ink);
+      border: 1px solid rgba(157, 107, 255, 0.28);
+      font-size: 14px;
+      font-weight: 700;
+      flex: 1;
+      min-width: 200px;
+      max-width: 320px;
+    }
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 14px;
+    }
+    .gallery-card {
+      position: relative;
+      cursor: pointer;
+      border: 1px solid rgba(245, 174, 203, 0.18);
+      border-radius: 4px;
+      overflow: hidden;
+      background: rgba(12, 8, 24, 0.85);
+      aspect-ratio: 2 / 3;
+    }
+    .gallery-card img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .gallery-card .card-cap {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      padding: 24px 10px 10px;
+      background: linear-gradient(to top, rgba(0,0,0,0.85), transparent);
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-end;
+      gap: 6px;
+    }
+    .gallery-card strong {
+      color: #fff;
+      font-size: 13px;
+      letter-spacing: 0.04em;
+      text-shadow: 0 2px 4px rgba(0,0,0,0.8);
+    }
+    .gallery-card span {
+      background: rgba(0,0,0,0.55);
+      color: #ffc4dd;
+      padding: 3px 6px;
+      border-radius: 3px;
+      font-size: 10px;
+      font-weight: 800;
+      border: 1px solid rgba(255,255,255,0.15);
+      white-space: nowrap;
+    }
+    .empty-msg { color: var(--muted); font-size: 14px; padding: 24px 0; }
+    #toast {
+      visibility: hidden;
+      min-width: 250px;
+      margin-left: -125px;
+      background: rgba(12, 8, 24, 0.95);
+      color: var(--pink-soft);
+      text-align: center;
+      border-radius: 8px;
+      padding: 16px;
+      position: fixed;
+      z-index: 1000;
+      left: 50%;
+      bottom: 30px;
+      font-size: 14px;
+      font-weight: bold;
+      border: 1px solid rgba(245, 174, 203, 0.3);
+      opacity: 0;
+      transition: opacity 0.3s, bottom 0.3s;
+    }
+    #toast.show { visibility: visible; opacity: 1; bottom: 50px; }
+    footer {
+      padding-top: 16px;
+      text-align: center;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      color: rgba(168, 155, 184, 0.55);
+    }
+  </style>
+</head>
+<body>
+
+  <nav class="realm-nav" aria-label="퀸즈 세계관 탐색">
+    <div class="wrap">
+      <div class="realm-nav-inner">
+        <div class="realm-mark">
+          <a href="index.html#city">
+            <div class="sigil" aria-hidden="true">
+              <svg viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <circle cx="20" cy="20" r="18" stroke="url(#galG1)" stroke-width="1"/>
+                <path d="M20 4 L24 16 L36 20 L24 24 L20 36 L16 24 L4 20 L16 16 Z" stroke="url(#galG2)" stroke-width="0.8" fill="rgba(157,107,255,0.08)"/>
+                <circle cx="20" cy="20" r="4" fill="url(#galG3)"/>
+                <defs>
+                  <linearGradient id="galG1" x1="0" y1="0" x2="40" y2="40"><stop stop-color="#f5aecb"/><stop offset=".5" stop-color="#9d6bff"/><stop offset="1" stop-color="#5b9dff"/></linearGradient>
+                  <linearGradient id="galG2" x1="4" y1="4" x2="36" y2="36"><stop stop-color="#ffc4dd"/><stop offset="1" stop-color="#2563eb"/></linearGradient>
+                  <radialGradient id="galG3"><stop stop-color="#f5aecb"/><stop offset="1" stop-color="#6d28d9"/></radialGradient>
+                </defs>
+              </svg>
+            </div>
+            <span>QUEENS</span>
+          </a>
+        </div>
+        <div class="realm-links">
+          <a href="index.html#city">퀸즈</a>
+          <a href="map.html">지도</a>
+          <a href="cast.html">등장인물</a>
+          <a href="reference.html">룰북</a>
+          <a href="gallery.html" class="is-here">에셋</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <div class="wrap">
+    <header class="page-head">
+      <h1>에셋 갤러리<small>External Image Code · 1차 공개</small></h1>
+      <p>등록된 이미지 코드를 미리보고, 클릭하면 마크다운이 복사됩니다. cast·코드표 기준으로만 표시됩니다.</p>
+    </header>
+
+    <section>
+      <div class="section-head"><h2>출력 양식</h2></div>
+      <article class="glass-panel">
+        <p style="margin:0 0 8px;"><b>입력 형식</b><br>![](https://bi.pharang.workers.dev/i/{캐릭터코드}/{상황코드})</p>
+        <p style="margin:0;"><b>예시</b><br>![](https://bi.pharang.workers.dev/i/BK/0)</p>
+      </article>
+    </section>
+
+    <section>
+      <div class="section-head"><h2>상황 코드 (1차)</h2></div>
+      <div class="glass-panel code-table">
+        <div class="code-row"><b>0~9</b><span>표정 · 등장~마법·대치</span></div>
+        <div class="code-row"><b>FW</b><span>꽃다발</span></div>
+        <div class="code-row"><b>CL02</b><span>바 · 칵테일</span></div>
+        <div class="code-row"><b>C01·ALL·BT</b><span>테이블 · 베팅·승리 · 버스트·탈의</span></div>
+        <div class="code-row"><b>A01~A03</b><span>아카데미 (소속 + BK 예외)</span></div>
+        <div class="code-row"><b>N01~N04</b><span>NSFW · RS·엑스트라 제외</span></div>
+        <div class="code-row"><b>FI·F01·F02</b><span>여캐플 · §13 선지원</span></div>
+        <div class="code-row"><b>{CC}01</b><span>엑스트라·남캐 · 1장만</span></div>
+      </div>
+    </section>
+
+    <section>
+      <div class="section-head">
+        <h2>등록 에셋</h2>
+        <p>클릭 시 확대 · 마크다운 복사</p>
+      </div>
+      <p class="rule-strip">[노출 규칙] cast 분류 기준 · 1차 공개 코드만 · raw 폴더만 있고 지원 안 되는 조합은 표시하지 않음</p>
+      <div class="filter-row">
+        <select id="character-filter" aria-label="캐릭터 필터">
+          <option value="ALL">전체 캐릭터</option>
+        </select>
+        <select id="situation-filter" aria-label="상황 코드 필터">
+          <option value="ALL">전체 상황</option>
+        </select>
+      </div>
+      <div class="gallery-grid" id="asset-grid"></div>
+    </section>
+
+    <footer>QUEENS · Asset Gallery</footer>
+  </div>
+
+  <div id="toast">복사되었습니다!</div>
+  <div id="image-modal" style="display:none;position:fixed;z-index:2000;inset:0;overflow:auto;background:rgba(0,0,0,0.88);backdrop-filter:blur(5px);cursor:zoom-out;" onclick="closeModal()">
+    <span style="position:absolute;top:20px;right:30px;color:rgba(255,255,255,0.7);font-size:40px;font-weight:bold;">&times;</span>
+    <img id="modal-img" alt="" style="margin:auto;display:block;max-width:90%;max-height:90vh;position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);border-radius:8px;box-shadow:0 0 40px rgba(0,0,0,0.8);" />
+  </div>
+
+  <script src="queens-gallery-allow.js"></script>
+  <script>
+    var Allow = window.QueensGalleryAllow;
+    var filterSelect = document.getElementById("character-filter");
+    var situationSelect = document.getElementById("situation-filter");
+    var assetGrid = document.getElementById("asset-grid");
+    var toast = document.getElementById("toast");
+    var allAssets = [];
+
+    var I_REPO_BASE = "https://cheongyeon-dev.github.io/q";
+    var WORKER_BASE = "https://bi.pharang.workers.dev/i";
+
+    var CHAR_NAMES = {
+      AM: "아르망", AN: "아네스", AR: "아르카나", BE: "벨라돈나", BK: "백설아", BL: "블랑슈", BR: "블레어",
+      CA: "카르멘", CE: "클레망", CM: "카미유", CR: "샤를로트", CT: "캐서린", DH: "신도화", EM: "엠마",
+      GI: "지젤", HG: "휴고", HN: "이성한", HO: "이성후", HY: "설하영", LA: "로랑", LI: "릴리스", LN: "셀린",
+      LO: "루이", LU: "루시", LX: "렉시", MI: "미하엘", MU: "뮤리엘", MY: "마리즈", NA: "애나", OB: "오베리아",
+      RO: "로잘리", RS: "로제타", RN: "르네", RX: "록산느", SD: "서도윤", SH: "채서하", SL: "셀레스테",
+      TX: "트릭시", VA: "발레리", VC: "뱅상", VI: "비올레타", YS: "유세프", YU: "유리엔",
+    };
+
+    var CHAR_ORDER = [
+      "BK", "AR", "DH", "BE", "BL", "CT", "SH", "YU", "RS", "MU", "CA", "CR", "VI", "HY",
+      "LO", "LX", "TX", "NA", "RN", "SL", "RX", "EM", "SD", "CE", "LN", "LI",
+      "RO", "MY", "AM", "OB", "LA", "LU", "VC", "CM", "BR", "MI", "HO", "HN", "HG", "YS",
+    ];
+
+    var SIT_LABELS = {
+      "0": "등장·프로필", "1": "기본", "2": "짜증", "3": "슬픔", "4": "놀람", "5": "패배",
+      "6": "쑥스", "7": "설렘", "8": "웃음", "9": "마법·대치",
+      FW: "꽃다발", CL02: "바·칵테일", C01: "테이블", ALL: "베팅·승리", BT: "버스트·탈의",
+      A01: "아카데미·강의실", A02: "아카데미·캠퍼스", A03: "아카데미·도서관",
+      N01: "NSFW 1", N02: "NSFW 2", N03: "NSFW 3", N04: "NSFW 4",
+      FI: "여캐플", F01: "F01", F02: "F02",
+    };
+
+    function situationOf(asset) {
+      return asset.situation || Allow.situationPrefix(asset.code);
+    }
+
+    function showToast(message) {
+      toast.textContent = message;
+      toast.className = "show";
+      setTimeout(function () { toast.className = toast.className.replace("show", ""); }, 2000);
+    }
+
+    window.copyToClipboard = function (text) {
+      navigator.clipboard.writeText(text).then(function () {
+        showToast("복사되었습니다: " + text);
+      }).catch(function (err) { console.error(err); });
+    };
+
+    window.openModal = function (imgSrc) {
+      document.getElementById("image-modal").style.display = "block";
+      document.getElementById("modal-img").src = imgSrc;
+    };
+
+    window.closeModal = function () {
+      document.getElementById("image-modal").style.display = "none";
+    };
+
+    window.handleClick = function (mdText, imgSrc) {
+      copyToClipboard(mdText);
+      openModal(imgSrc);
+    };
+
+    function buildSituationFilter() {
+      var html = '<option value="ALL">전체 상황</option>';
+      Allow.PHASE1_FILTER_ORDER.forEach(function (code) {
+        var label = SIT_LABELS[code] || code;
+        html += '<option value="' + code + '">' + code + " (" + label + ")</option>";
+      });
+      situationSelect.innerHTML = html;
+    }
+
+    function buildCharacterFilter(groups) {
+      var html = '<option value="ALL">전체 캐릭터</option>';
+      groups.forEach(function (code) {
+        var name = CHAR_NAMES[code] || code;
+        html += '<option value="' + code + '">' + code + " (" + name + ")</option>";
+      });
+      filterSelect.innerHTML = html;
+    }
+
+    function sortIndex(code) {
+      var i = CHAR_ORDER.indexOf(code);
+      return i === -1 ? 999 : i;
+    }
+
+    function renderAssets() {
+      var charFilter = filterSelect.value;
+      var sitFilter = situationSelect.value;
+
+      var filtered = charFilter === "ALL"
+        ? allAssets.slice()
+        : allAssets.filter(function (a) { return a.group === charFilter; });
+
+      if (sitFilter !== "ALL") {
+        filtered = filtered.filter(function (a) {
+          return situationOf(a) === sitFilter;
+        });
+      }
+
+      filtered = filtered.filter(function (a) {
+        return Allow.isAllowed(a.group, situationOf(a));
+      });
+
+      filtered.sort(function (a, b) {
+        var ia = sortIndex(a.group);
+        var ib = sortIndex(b.group);
+        if (ia !== ib) return ia - ib;
+        return a.code.localeCompare(b.code, undefined, { numeric: true });
+      });
+
+      if (!filtered.length) {
+        assetGrid.innerHTML = '<p class="empty-msg">표시할 에셋이 없습니다. (cast·코드표 기준 미지원 또는 아직 push 전)</p>';
+        return;
+      }
+
+      assetGrid.innerHTML = filtered.map(function (asset) {
+        var sit = situationOf(asset);
+        var mdText = "![](" + WORKER_BASE + "/" + asset.group + "/" + sit + ")";
+        var imgSrc = I_REPO_BASE + "/" + asset.group + "/" + asset.code + ".webp";
+        var mdEsc = mdText.replace(/\\/g, "\\\\").replace(/'/g, "\\'");
+        var imgEsc = imgSrc.replace(/'/g, "\\'");
+        return (
+          '<article class="gallery-card" onclick="handleClick(\'' + mdEsc + '\', \'' + imgEsc + '\')">' +
+          '<img src="' + imgSrc + '" alt="' + asset.group + "/" + asset.code + '" loading="lazy" onerror="this.style.opacity=\'0.35\'" />' +
+          '<div class="card-cap"><strong>' + asset.group + "/" + sit + '</strong><span>복사</span></div>' +
+          "</article>"
+        );
+      }).join("");
+    }
+
+    filterSelect.addEventListener("change", renderAssets);
+    situationSelect.addEventListener("change", renderAssets);
+
+    buildSituationFilter();
+
+    fetch(I_REPO_BASE + "/manifest.json")
+      .then(function (response) { return response.json(); })
+      .then(function (manifest) {
+        allAssets = (manifest && manifest.assets) ? manifest.assets : [];
+        var groups = {};
+        allAssets.forEach(function (a) {
+          if (Allow.isAllowed(a.group, situationOf(a))) groups[a.group] = 1;
+        });
+        var groupList = Object.keys(groups).sort(function (a, b) {
+          return sortIndex(a) - sortIndex(b);
+        });
+        buildCharacterFilter(groupList);
+        renderAssets();
+      })
+      .catch(function (err) {
+        console.error(err);
+        assetGrid.innerHTML = '<p class="empty-msg">매니페스트를 불러오지 못했습니다. q 레포 push 후 다시 확인해 주세요.</p>';
+      });
+  </script>
+</body>
+</html>

@@ -913,134 +913,6 @@
 
     .gate-meta { margin: 40px 0 0; scroll-margin-top: 88px; }
 
-    .gate-cast-body { padding-top: 4px; }
-
-    .gate-cast-lead {
-      margin: 0 0 14px;
-      font-size: 13px;
-      color: var(--muted);
-    }
-
-    .gate-cast-nav {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin: 0 0 16px;
-    }
-
-    .gate-cast-nav a {
-      padding: 8px 14px;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      color: var(--muted);
-      border: 1px solid rgba(157, 107, 255, 0.25);
-      background: rgba(12, 8, 24, 0.75);
-      border-radius: 999px;
-      text-decoration: none;
-    }
-
-    .gate-cast-nav a:hover {
-      color: var(--pink-soft);
-      border-color: rgba(245, 174, 203, 0.35);
-    }
-
-    .gate-cast-scroll {
-      max-height: min(72vh, 920px);
-      overflow-y: auto;
-      padding-right: 6px;
-    }
-
-    .gate-cast-scroll .faction-block {
-      margin-bottom: 36px;
-      scroll-margin-top: 12px;
-    }
-
-    .gate-cast-scroll .faction-block h2 {
-      margin: 0 0 8px;
-      display: flex;
-      align-items: baseline;
-      justify-content: space-between;
-      flex-wrap: wrap;
-      gap: 6px 12px;
-      font-family: "Nanum Myeongjo", serif;
-      font-size: clamp(17px, 3.5vw, 20px);
-      color: var(--pink);
-    }
-
-    .gate-cast-scroll .faction-section-note,
-    .gate-cast-scroll .faction-block-note {
-      margin: 0 0 12px;
-      font-size: 13px;
-      color: rgba(168, 155, 184, 0.92);
-    }
-
-    .gate-cast-scroll .cast-grid {
-      display: grid;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 16px 14px;
-    }
-
-    .gate-cast-scroll .cast-photo {
-      aspect-ratio: 2 / 3;
-      border: 1px solid rgba(245, 174, 203, 0.22);
-      border-radius: 4px;
-      overflow: hidden;
-      background: linear-gradient(165deg, rgba(91, 157, 255, 0.14), rgba(157, 107, 255, 0.08) 45%, rgba(12, 8, 24, 0.96));
-      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-
-    .gate-cast-scroll .cast-photo span {
-      font-size: 12px;
-      letter-spacing: 0.1em;
-      color: #6b7280;
-    }
-
-    .gate-cast-scroll .cast-photo img {
-      display: block;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
-    .gate-cast-scroll .cast-meta { padding: 12px 2px 6px; }
-
-    .gate-cast-scroll .cast-meta strong {
-      display: block;
-      font-family: "Nanum Myeongjo", serif;
-      font-size: clamp(16px, 3.8vw, 18px);
-      color: var(--pink-soft);
-      line-height: 1.35;
-    }
-
-    .gate-cast-scroll .cast-meta em {
-      display: block;
-      margin-top: 2px;
-      font-style: normal;
-      font-size: 14px;
-      color: #93c5fd;
-    }
-
-    .gate-cast-scroll .cast-meta p {
-      margin: 8px 0 0;
-      font-size: 14px;
-      line-height: 1.55;
-      color: var(--muted);
-    }
-
-    .gate-cast-scroll .cast-asset-note {
-      display: block;
-      margin: 8px 0 0;
-      padding-top: 6px;
-      border-top: 1px solid rgba(147, 197, 253, 0.22);
-      font-size: 13px;
-      line-height: 1.4;
-      color: #93c5fd;
-    }
-
     /* rebirth footer block */
     .rebirth {
       margin: 64px 0 48px;
@@ -1434,19 +1306,6 @@
       </div>
     </section>
 
-    <section class="gate-meta section" id="cast">
-      <details class="gate-fold" open>
-        <summary>등장인물</summary>
-        <div class="gate-fold-body gate-cast-body">
-          <p class="gate-cast-lead">세력별 포토카드 · 2열</p>
-          <nav class="gate-cast-nav" id="gate-cast-nav" aria-label="세력 바로가기"></nav>
-          <div class="gate-cast-scroll">
-            <div id="gate-cast-sections"></div>
-          </div>
-        </div>
-      </details>
-    </section>
-
     <!-- 호출 · SVG -->
     <section class="gate-tools section" id="calls">
       <div class="gate-tools-head">
@@ -1522,16 +1381,6 @@
   <footer class="wrap">
     QUEENS · City-State of Magic
   </footer>
-
-  <script src="queens-cast-grid.js"></script>
-  <script>
-  QueensCastGrid.mount({
-    root: document,
-    navId: "gate-cast-nav",
-    sectionsId: "gate-cast-sections",
-    assetBase: "assets/cast/"
-  });
-  </script>
 
 </body>
 </html>

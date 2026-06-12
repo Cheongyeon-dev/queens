@@ -60,7 +60,8 @@
     if (CAST_ASSET_PENDING_CODES[charCode]) return false;
 
     if (isExtraOrMaleNoSit(charCode)) {
-      return situation === charCode + "01";
+      // 엑스트라·남캐: 폴더·URL은 표정 1(기본대화) 1장만. 구 {CC}01 manifest는 migrate 전까지 허용
+      return situation === "1" || situation === charCode + "01";
     }
 
     if (!PHASE1[situation]) return false;

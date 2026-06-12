@@ -913,6 +913,134 @@
 
     .gate-meta { margin: 40px 0 0; scroll-margin-top: 88px; }
 
+    .gate-cast-body { padding-top: 4px; }
+
+    .gate-cast-lead {
+      margin: 0 0 14px;
+      font-size: 13px;
+      color: var(--muted);
+    }
+
+    .gate-cast-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 0 0 16px;
+    }
+
+    .gate-cast-nav a {
+      padding: 8px 14px;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      color: var(--muted);
+      border: 1px solid rgba(157, 107, 255, 0.25);
+      background: rgba(12, 8, 24, 0.75);
+      border-radius: 999px;
+      text-decoration: none;
+    }
+
+    .gate-cast-nav a:hover {
+      color: var(--pink-soft);
+      border-color: rgba(245, 174, 203, 0.35);
+    }
+
+    .gate-cast-scroll {
+      max-height: min(72vh, 920px);
+      overflow-y: auto;
+      padding-right: 6px;
+    }
+
+    .gate-cast-scroll .faction-block {
+      margin-bottom: 36px;
+      scroll-margin-top: 12px;
+    }
+
+    .gate-cast-scroll .faction-block h2 {
+      margin: 0 0 8px;
+      display: flex;
+      align-items: baseline;
+      justify-content: space-between;
+      flex-wrap: wrap;
+      gap: 6px 12px;
+      font-family: "Nanum Myeongjo", serif;
+      font-size: clamp(17px, 3.5vw, 20px);
+      color: var(--pink);
+    }
+
+    .gate-cast-scroll .faction-section-note,
+    .gate-cast-scroll .faction-block-note {
+      margin: 0 0 12px;
+      font-size: 13px;
+      color: rgba(168, 155, 184, 0.92);
+    }
+
+    .gate-cast-scroll .cast-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 16px 14px;
+    }
+
+    .gate-cast-scroll .cast-photo {
+      aspect-ratio: 2 / 3;
+      border: 1px solid rgba(245, 174, 203, 0.22);
+      border-radius: 4px;
+      overflow: hidden;
+      background: linear-gradient(165deg, rgba(91, 157, 255, 0.14), rgba(157, 107, 255, 0.08) 45%, rgba(12, 8, 24, 0.96));
+      box-shadow: 0 8px 28px rgba(0, 0, 0, 0.35);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .gate-cast-scroll .cast-photo span {
+      font-size: 12px;
+      letter-spacing: 0.1em;
+      color: #6b7280;
+    }
+
+    .gate-cast-scroll .cast-photo img {
+      display: block;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .gate-cast-scroll .cast-meta { padding: 12px 2px 6px; }
+
+    .gate-cast-scroll .cast-meta strong {
+      display: block;
+      font-family: "Nanum Myeongjo", serif;
+      font-size: clamp(16px, 3.8vw, 18px);
+      color: var(--pink-soft);
+      line-height: 1.35;
+    }
+
+    .gate-cast-scroll .cast-meta em {
+      display: block;
+      margin-top: 2px;
+      font-style: normal;
+      font-size: 14px;
+      color: #93c5fd;
+    }
+
+    .gate-cast-scroll .cast-meta p {
+      margin: 8px 0 0;
+      font-size: 14px;
+      line-height: 1.55;
+      color: var(--muted);
+    }
+
+    .gate-cast-scroll .cast-asset-note {
+      display: block;
+      margin: 8px 0 0;
+      padding-top: 6px;
+      border-top: 1px solid rgba(147, 197, 253, 0.22);
+      font-size: 13px;
+      line-height: 1.4;
+      color: #93c5fd;
+    }
+
     /* rebirth footer block */
     .rebirth {
       margin: 64px 0 48px;
@@ -1153,7 +1281,7 @@
         <a href="#academy">아카데미</a>
         <a href="#calls">호출</a>
         <a href="#ui">SVG</a>
-        <a href="#rebirth">환생</a>
+        <a href="#rebirth">시작</a>
       </nav>
     </header>
 
@@ -1291,12 +1419,6 @@
         "모든 것을 잃었는가? 그렇다면 다시 일어나라.<br>
         짙은 꽃향기가 당신을 반길 테니."
       </p>
-      <p>
-        마나를 잃은 채 차가운 꽃집 입구에서 다시 눈을 뜨는 기이한 환생.
-        당신의 베팅으로 수로의 마나가 역류하고, 전광판에 새겨진 이름으로 도시 전체가 들썩일 때까지 —
-        이 치명적이고 매혹적인 도박의 굴레는 결코 멈추지 않습니다.
-      </p>
-      <span class="mode-badge">!로그라이크 모드 · 로어북 호출</span>
 
       <div class="start-choices">
         <div class="start-card soft">
@@ -1312,46 +1434,57 @@
       </div>
     </section>
 
+    <section class="gate-meta section" id="cast">
+      <details class="gate-fold" open>
+        <summary>등장인물</summary>
+        <div class="gate-fold-body gate-cast-body">
+          <p class="gate-cast-lead">세력별 포토카드 · 2열</p>
+          <nav class="gate-cast-nav" id="gate-cast-nav" aria-label="세력 바로가기"></nav>
+          <div class="gate-cast-scroll">
+            <div id="gate-cast-sections"></div>
+          </div>
+        </div>
+      </details>
+    </section>
+
     <!-- 호출 · SVG -->
     <section class="gate-tools section" id="calls">
       <div class="gate-tools-head">
-        <h2>호출 기능 안내<small style="display:block;margin-top:4px;font-family:Pretendard,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.12em;color:var(--blue);">Lorebook · Commands</small></h2>
-        <a href="reference.html">룰북 · 아르카나</a>
+        <h2>호출 기능 안내</h2>
       </div>
 
       <details class="gate-fold" open>
         <summary>호출 기능 안내</summary>
         <div class="gate-fold-body">
-          <p><strong>여캐플 모드</strong> · <code>!여캐플</code> <code>!백합</code><br>입력 시 여여 묘사 강화 · 상태창 <code>🌸</code> · 지원: AR·BK·BE·RS·BL·DH·SH·CT·YU</p>
-          <p><strong>블랙잭</strong> · <code>!블랙잭</code><br>테이블 참여 · 패 상태창 <code>theme=blackjack</code> SVG</p>
-          <p><strong>포커</strong> · <code>!포커</code><br>VIP 홀덤 · <code>theme=poker</code> SVG</p>
-          <p><strong>체스</strong> · <code>!체스</code><br>RP 체스판 · <code>theme=chess</code> SVG</p>
-          <p><strong>커뮤니티</strong> · <code>!커뮤</code><br>상태창 <code>🌐</code> · 게시판 표 (더미 · 상세는 로어북)</p>
+          <p><strong>여캐플 모드</strong> · <code>!여캐플</code> <code>!백합</code><br>입력 시 여여 묘사 강화 · <code>🌸</code> · 지원: AR·BK·BE·RS·BL·DH·SH·CT·YU</p>
+          <p><strong>블랙잭</strong> · <code>!블랙잭</code><br>테이블 참여 · 패가 표시되는 UI 이미지 출력</p>
+          <p><strong>포커</strong> · <code>!포커</code><br>VIP 홀덤 · 보드·홀카드·팟이 표시되는 UI 이미지 출력</p>
+          <p><strong>체스</strong> · <code>!체스</code><br>RP 체스판 · 기물 배치가 표시되는 UI 이미지 출력</p>
+          <p><strong>커뮤니티</strong> · <code>!커뮤</code><br>익명 커뮤니티 형식 마크다운 출력 · <code>🌐</code></p>
         </div>
       </details>
     </section>
 
     <section class="gate-tools section" id="ui">
       <div class="gate-tools-head">
-        <h2>시스템 UI 미리보기<small style="display:block;margin-top:4px;font-family:Pretendard,sans-serif;font-size:12px;font-weight:600;letter-spacing:0.12em;color:var(--blue);">SVG · bi.pharang.workers.dev</small></h2>
-        <a href="https://bi.pharang.workers.dev/?hub=queens" target="_blank" rel="noopener">Worker 허브</a>
+        <h2>시스템 UI 미리보기</h2>
       </div>
 
       <div class="ui-preview-grid">
         <article class="ui-preview">
           <h3>♠ 블랙잭</h3>
           <img src="https://bi.pharang.workers.dev/?theme=blackjack&amp;p1=6D,10C&amp;pl1=%EB%82%B4%ED%8C%A8&amp;p2=AS,%3F&amp;pl2=%EC%83%81%EB%8C%80%ED%8C%A8" alt="블랙잭 SVG" loading="lazy" />
-          <p><code>theme=blackjack</code> · p1/p2 · hole=%3F</p>
+          <p>내 패와 상대 패가 표시되는 테이블 UI</p>
         </article>
         <article class="ui-preview">
           <h3>♦ VIP 포커</h3>
           <img src="https://bi.pharang.workers.dev/?theme=poker&amp;board=AH,KS,9D,4C,2H&amp;hole=AD,KD&amp;pot=8600&amp;bet=600&amp;action=%EC%B2%B4%ED%81%AC&amp;deck=28" alt="포커 SVG" loading="lazy" />
-          <p><code>theme=poker</code> · board/hole/pot</p>
+          <p>보드·홀카드·팟이 표시되는 VIP 홀덤 UI</p>
         </article>
         <article class="ui-preview">
           <h3>♟ RP 체스</h3>
           <img src="https://bi.pharang.workers.dev/?theme=chess&amp;fen=rnbqkbnr/pppppppp/8/8/4P3/8/PPPP1PPP/RNBQKBNR" alt="체스 SVG" loading="lazy" />
-          <p><code>theme=chess</code> · fen= · 흑=<code>&amp;view=black</code></p>
+          <p>기물 배치가 표시되는 RP 체스판 UI</p>
         </article>
       </div>
     </section>
@@ -1360,19 +1493,27 @@
       <details class="gate-fold">
         <summary>에셋 코드</summary>
         <div class="gate-fold-body">
-          <p><strong>이미지 출력</strong><br><code>![](https://bi.pharang.workers.dev/i/{코드}/{상황})</code></p>
-          <p><strong>예시</strong> · BK/0 · AR/A01 · BE/N01 · 상황 코드 전체는 룰북·cast 참고</p>
-          <p><a href="cast.html" style="color:var(--pink-soft);font-weight:800;">→ 등장인물 · 지원 라벨</a> · <a href="reference.html" style="color:var(--blue);font-weight:800;">→ 룰북</a></p>
+          <p><strong>이미지 출력</strong><br><code>![](https://bi.pharang.workers.dev/i/캐릭터코드/상황코드)</code></p>
+          <p><strong>캐릭터코드</strong><br>AR(아르카나), BE(벨라돈나), BK(백설아), BL(블랑슈), CA(카르멘), CE(클레망), CR(샤를로트), CT(캐서린), DH(신도화), EM(엠마), HY(설하영), LI(릴리스), LN(셀린), LO(루이), LX(렉시), MU(뮤리엘), NA(애나), RN(르네), RS(로제타), RX(록산느), SD(서도윤), SH(채서하), SL(셀레스테), TX(트릭시), VI(비올레타), YU(유리엔)</p>
+          <p><strong>엑스트라 · 업데이트 예정</strong><br>
+          엑스트라(0, 1) · VC(뱅상), LU(루시), LA(로랑), AM(아르망), OB(오베리아), MY(마리즈), RO(로잘리)<br>
+          아카데미(0, 1 · A01~A03, HM) · CM(카미유), BR(블레어), HO(이성후), HN(이성한), HG(휴고), YS(유세프)<br>
+          업데이트 예정 · MI(미하엘), VA(발레리), GI(지젤), AN(아네스)</p>
+          <p><strong>상황코드</strong><br>
+          <strong style="color:var(--pink-soft);">표정</strong> · 0(프로필), 1(기본), 2(짜증), 3(슬픔), 4(놀람), 5(패배), 6(쑥스), 7(설렘), 8(웃음), 9(마법·대치)<br>
+          <strong style="color:var(--pink-soft);">카지노</strong> · CL02(바·칵테일), C01(테이블), ALL(베팅·승리), BT(버스트·탈의)<br>
+          <strong style="color:var(--pink-soft);">특별</strong> · FW(꽃다발)<br>
+          <strong style="color:var(--pink-soft);">아카데미</strong> · A01(강의실), A02(캠퍼스), A03(도서관), HM(햄버거) — 아카데미 소속과 백설아<br>
+          <strong style="color:var(--pink-soft);">NSFW</strong> · N01(측위), N02(도기), N03(기승), N04(정상)<br>
+          <strong style="color:var(--pink-soft);">여캐플</strong> · 로제타(여캐플 전용, N코드 미지원) · FI · F01 · F02 — 백설아·벨라돈나·아르카나·블랑슈·캐서린·신도화·채서하·유리엔·로제타</p>
+          <p style="color:var(--muted);font-size:14px;">이미지가 뜨지 않을 경우, 편집에 들어가 이미지 링크를 확인해 주세요. 간혹 AI가 workers를 word로 적는 등 주소를 잘못 입력할 때가 있습니다.</p>
+          <p><a href="https://cheongyeon-dev.github.io/queens/gallery.html" style="color:var(--pink-soft);font-weight:800;">→ 에셋 미리보기</a></p>
         </div>
       </details>
 
       <details class="gate-fold">
         <summary>업데이트 내역</summary>
-        <div class="gate-fold-body">
-          <p><strong style="color:var(--pink-soft);">2026-06-10</strong><br>홈 · 호출 기능 안내 · SVG UI 미리보기 섹션 추가</p>
-          <p><strong style="color:var(--pink-soft);">2026-06-10</strong><br>cast · LE 레아 공개 목록 제외 (업데이트용 신캐)</p>
-          <p><strong style="color:var(--pink-soft);">2026-06</strong><br>룰북 · 아르카나 공석 작위 · vacant 칩 UI</p>
-        </div>
+        <div class="gate-fold-body"></div>
       </details>
     </section>
 
@@ -1381,6 +1522,16 @@
   <footer class="wrap">
     QUEENS · City-State of Magic
   </footer>
+
+  <script src="queens-cast-grid.js"></script>
+  <script>
+  QueensCastGrid.mount({
+    root: document,
+    navId: "gate-cast-nav",
+    sectionsId: "gate-cast-sections",
+    assetBase: "assets/cast/"
+  });
+  </script>
 
 </body>
 </html>

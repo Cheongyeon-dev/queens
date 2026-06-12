@@ -235,14 +235,14 @@
     <section>
       <div class="section-head"><h2>출력 양식</h2></div>
       <article class="glass-panel">
-        <p style="margin:0 0 8px;"><b>입력 형식</b><br>![](https://bi.pharang.workers.dev/i/{캐릭터코드}/{상황코드})</p>
-        <p style="margin:0;"><b>예시</b><br>![](https://bi.pharang.workers.dev/i/BK/0)</p>
+        <p style="margin:0 0 8px;"><b>입력 형식</b><br>![](https://bi.pharang.workers.dev/q/{캐릭터코드}/{상황코드})</p>
+        <p style="margin:0;"><b>예시</b><br>![](https://bi.pharang.workers.dev/q/BK/1)</p>
       </article>
     </section>
 
     <section>
       <div class="section-head"><h2>캐릭터 코드표</h2></div>
-      <div class="glass-panel code-table">
+      <div class="code-table glass-panel">
         <div class="code-row"><b>AR</b><span>아르카나</span></div>
         <div class="code-row"><b>BE</b><span>벨라돈나</span></div>
         <div class="code-row"><b>BK</b><span>백설아</span></div>
@@ -276,7 +276,7 @@
     <section>
       <div class="section-head"><h2>상황 코드표</h2></div>
       <h3 style="color:var(--blue);margin:0 0 12px;font-size:17px;">표정</h3>
-      <div class="glass-panel code-table" style="margin-bottom:24px;">
+      <div class="code-table glass-panel" style="margin-bottom:24px;">
         <div class="code-row"><b>0</b><span>프로필</span></div>
         <div class="code-row"><b>1</b><span>기본</span></div>
         <div class="code-row"><b>2</b><span>짜증</span></div>
@@ -289,7 +289,7 @@
         <div class="code-row"><b>9</b><span>마법 · 대치</span></div>
       </div>
       <h3 style="color:var(--blue);margin:0 0 12px;font-size:17px;">카지노 · 특별</h3>
-      <div class="glass-panel code-table" style="margin-bottom:24px;">
+      <div class="code-table glass-panel" style="margin-bottom:24px;">
         <div class="code-row"><b>FW</b><span>꽃다발</span></div>
         <div class="code-row"><b>CL02</b><span>바 · 칵테일</span></div>
         <div class="code-row"><b>C01</b><span>테이블</span></div>
@@ -297,21 +297,21 @@
         <div class="code-row"><b>BT</b><span>버스트 · 탈의</span></div>
       </div>
       <h3 style="color:var(--blue);margin:0 0 12px;font-size:17px;">아카데미</h3>
-      <div class="glass-panel code-table" style="margin-bottom:24px;">
+      <div class="code-table glass-panel" style="margin-bottom:24px;">
         <div class="code-row"><b>A01</b><span>강의실</span></div>
         <div class="code-row"><b>A02</b><span>캠퍼스</span></div>
         <div class="code-row"><b>A03</b><span>도서관</span></div>
         <div class="code-row"><b>HM</b><span>햄버거</span></div>
       </div>
       <h3 style="color:var(--blue);margin:0 0 12px;font-size:17px;">NSFW</h3>
-      <div class="glass-panel code-table" style="margin-bottom:24px;">
+      <div class="code-table glass-panel" style="margin-bottom:24px;">
         <div class="code-row"><b>N01</b><span>측위</span></div>
         <div class="code-row"><b>N02</b><span>도기</span></div>
         <div class="code-row"><b>N03</b><span>기승</span></div>
         <div class="code-row"><b>N04</b><span>정상</span></div>
       </div>
       <h3 style="color:var(--blue);margin:0 0 12px;font-size:17px;">여캐플</h3>
-      <div class="glass-panel code-table">
+      <div class="code-table glass-panel">
         <div class="code-row"><b>FI</b><span>여캐플</span></div>
         <div class="code-row"><b>F01</b><span>여캐플 F01</span></div>
         <div class="code-row"><b>F02</b><span>여캐플 F02</span></div>
@@ -353,7 +353,7 @@
     var allAssets = [];
 
     var I_REPO_BASE = "https://cheongyeon-dev.github.io/q";
-    var WORKER_BASE = "https://bi.pharang.workers.dev/i";
+    var WORKER_BASE = "https://bi.pharang.workers.dev/q";
 
     var CHAR_NAMES = {
       AM: "아르망", AN: "아네스", AR: "아르카나", BE: "벨라돈나", BK: "백설아", BL: "블랑슈", BR: "블레어",

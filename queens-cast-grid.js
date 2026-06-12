@@ -144,9 +144,13 @@
 
   function mount(options) {
     var root = options.root || document;
-    var navEl = root.getElementById ? root.getElementById(options.navId) : root.querySelector("#" + options.navId);
     var sectionsEl = root.getElementById ? root.getElementById(options.sectionsId) : root.querySelector("#" + options.sectionsId);
-    if (!navEl || !sectionsEl) return;
+    if (!sectionsEl) return;
+
+    var navEl = null;
+    if (options.navId) {
+      navEl = root.getElementById ? root.getElementById(options.navId) : root.querySelector("#" + options.navId);
+    }
 
     var assetBase = options.assetBase || "assets/cast/";
     var navHtml = "";
@@ -154,7 +158,7 @@
 
     for (var i = 0; i < CAST_FACTIONS.length; i++) {
       var f = CAST_FACTIONS[i];
-      navHtml += '<a href="#faction-' + f.id + '">' + f.short + "</a>";
+      if (navEl) navHtml += '<a href="#faction-' + f.id + '">' + f.short + "</a>";
       bodyHtml += '<section class="faction-block" id="faction-' + f.id + '">';
       bodyHtml += "<h2><span>" + f.title + "</span>";
       if (f.id === "city") {
@@ -169,7 +173,7 @@
       bodyHtml += "</div></section>";
     }
 
-    navEl.innerHTML = navHtml;
+    if (navEl) navEl.innerHTML = navHtml;
     sectionsEl.innerHTML = bodyHtml;
     bindCastPhotos(root, assetBase);
   }

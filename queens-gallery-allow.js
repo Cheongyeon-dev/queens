@@ -1,13 +1,16 @@
 /**
- * 퀸즈 에셋 갤러리 · cast + CODES.md 1차 공개
- * 메인캐: PHASE1 전체(N01~N04·표정·카지노 등) · manifest 있으면 노출
- * 엑스트라(RO·MY·VC 등): `1`만 — raw에 표정 있어도 갤러리 미표시
- * RS: F01·F02만 · N·FI 불가
+ * 퀸즈 에셋 갤러리 · CODES.md 1차 공개 (2026-06-10) · cast 라벨
+ *
+ * 메인(1차 26명 − RO 갤러리 제한): PHASE1 전체 — N01~N04·표정·카지노 등 manifest 있으면 노출
+ * 도시 엑스트라·남캐: 0(프로필)+1(기본)만 — raw에 2~9 있어도 갤러리 미표시 (RO·MY·VC 등)
+ * 아카데미 엑스트라·pending: 0·1 + A01~A03·HM
+ * RS: F01·F02 + PHASE1(단 N·FI·A01~A03 불가)
  */
 
 (function (global) {
+  /** 도시·NPC 엑스트라 — 갤러리 0·1만 (로잘리 등 raw 표정 있어도 숨김) */
   var CAST_EXTRA_CODES = {
-    VC: 1, LU: 1, LA: 1, AM: 1, BR: 1, HO: 1, HN: 1, HG: 1, YS: 1, OB: 1, MY: 1, MI: 1, RO: 1,
+    VC: 1, LU: 1, LA: 1, AM: 1, OB: 1, MY: 1, RO: 1,
   };
 
   var CAST_MALE_NO_SITUATION = {
@@ -22,14 +25,12 @@
     RS: 1,
   };
 
-  /** 아카데미 소속 엑스트라 — `1` + A01~A03 (+ HM) */
   var ACADEMY_EXTRAS = {
     BR: 1, HO: 1, HN: 1, HG: 1, YS: 1,
   };
 
   var ACADEMY_SIT = { A01: 1, A02: 1, A03: 1 };
 
-  /** HM(햄버거) — 아카데미 소속 전원 + BK 방문 RP 예외 */
   var ACADEMY_HM = {
     BK: 1, CM: 1, AR: 1, MI: 1, EM: 1, BR: 1, YU: 1, HG: 1, RX: 1, SL: 1, YS: 1, CT: 1, GI: 1, SH: 1, RN: 1, SD: 1, HO: 1, HN: 1,
   };
@@ -58,8 +59,9 @@
     return !!(CAST_EXTRA_CODES[charCode] || CAST_MALE_NO_SITUATION[charCode]);
   }
 
+  /** 엑스트라·남캐: 0(등장·프로필) + 1(기본) */
   function extraBaseAllowed(charCode, situation) {
-    return situation === "1" || situation === charCode + "01";
+    return situation === "0" || situation === "1" || situation === charCode + "01";
   }
 
   function academyExtraAllowed(charCode, situation) {

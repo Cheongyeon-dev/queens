@@ -104,8 +104,8 @@
     }
 
     if (CAST_YURI_ONLY_CODES[charCode]) {
-      if (situation === "FI" || /^N0[1-4]$/.test(situation)) return false;
-      if (situation === "F01" || situation === "F02") return true;
+      if (/^N0[1-4]$/.test(situation)) return false;
+      if (situation === "FI" || situation === "F01" || situation === "F02") return true;
       if (ACADEMY_SIT[situation]) return false;
       return !!PHASE1[situation];
     }

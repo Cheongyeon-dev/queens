@@ -653,6 +653,19 @@
     .curriculum-table th { color: var(--pink-soft); font-weight: 700; }
     .curriculum-table td { color: rgba(243, 238, 248, 0.88); }
 
+    .schedule-wrap {
+      overflow-x: auto;
+      margin: 0 0 8px;
+      border: 1px solid rgba(157, 107, 255, 0.22);
+    }
+
+    .schedule-wrap .curriculum-table { margin: 0; }
+    .schedule-wrap .curriculum-table th:nth-child(2),
+    .schedule-wrap .curriculum-table th:nth-child(3),
+    .schedule-wrap .curriculum-table th:nth-child(4) { color: var(--blue); }
+    .schedule-wrap .curriculum-table th:nth-child(5),
+    .schedule-wrap .curriculum-table th:nth-child(6) { color: var(--pink); }
+
     .warn-tag {
       display: inline-flex;
       align-items: center;
@@ -1305,6 +1318,52 @@
 
           <h3 class="lore-sub">아카데미의 은밀한 룰 <span style="font-size:13px;color:var(--muted);font-weight:400">(소규모 카지노)</span></h3>
           <p>아카데미 내의 학생들 사이에서도 현금 대신 성적 포인트나 스크롤, 마도구, 심지어 기말고사 답안지를 걸고 은밀한 블랙잭과 포커가 벌어집니다. 대마녀와 교수들은 이를 금지하기는커녕, <em style="color:var(--pink-soft)">"도박 중 마법을 쓰다 들키는 것만 죄일 뿐, 도박 역시 실력이다."</em>라며 방관합니다.</p>
+
+          <h3 class="lore-sub">하루 일과</h3>
+          <div class="schedule-wrap">
+            <table class="curriculum-table">
+              <thead>
+                <tr>
+                  <th>07–09</th>
+                  <th>09–11</th>
+                  <th>11–13</th>
+                  <th>13–14</th>
+                  <th>14–16</th>
+                  <th>16–18</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>조식 뷔페</td>
+                  <td>전공 이론</td>
+                  <td>점심</td>
+                  <td>교양</td>
+                  <td>공강</td>
+                  <td>전공 실습</td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+
+          <h3 class="lore-sub">학사 일정</h3>
+          <div class="schedule-wrap">
+            <table class="curriculum-table">
+              <thead>
+                <tr>
+                  <th>구분</th>
+                  <th>일정</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr><td>졸업 · 입학</td><td><strong style="color:var(--pink-soft)">2월 28일</strong> 졸업식 · <strong style="color:var(--blue)">3월 2일</strong> 신입 입학</td></tr>
+                <tr><td>여름방학</td><td><strong style="color:var(--blue)">6월 20일</strong> ~ <strong style="color:var(--blue)">8월 31일</strong></td></tr>
+                <tr><td>겨울방학</td><td><strong style="color:var(--blue)">12월 20일</strong> ~ <strong style="color:var(--blue)">2월 21일</strong></td></tr>
+                <tr><td>연휴</td><td><strong style="color:var(--pink-soft)">할로윈 · 크리스마스</strong> 각 <strong style="color:var(--blue)">1주</strong> — 전야 <strong style="color:var(--purple)">프롬 무도회</strong> · <strong style="color:var(--purple)">마이너 아르카나 수여식</strong></td></tr>
+                <tr><td>학기 말</td><td>졸업·방학·연휴 <strong style="color:var(--pink-soft)">전날 밤</strong> — 교정 전체 <strong style="color:var(--purple)">프롬 무도회</strong></td></tr>
+                <tr><td>유학생</td><td>방학·연휴에도 <strong style="color:var(--blue)">기숙사 상주</strong> — 귀향 의무 없음</td></tr>
+              </tbody>
+            </table>
+          </div>
         </div>
       </div>
     </section>
@@ -1397,7 +1456,7 @@
           </div>
           <div class="asset-code-sub">
             <h4>그랑 델리리움</h4>
-            <p>BE(벨라돈나), CA(카르멘), CR(샤를로트), VI(비올레타) — 공연자</p>
+            <p>BE(벨라돈나), CA(카르멘), CR(샤를로트), VI(비올레트) — 공연자</p>
           </div>
           <p><strong>엑스트라 · 업데이트 예정</strong></p>
           <div class="asset-code-sub">

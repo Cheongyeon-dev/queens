@@ -4,7 +4,7 @@
  * 메인(1차 26명 − RO 갤러리 제한): PHASE1 전체 — N01~N04·표정·카지노 등 manifest 있으면 노출
  * 도시 엑스트라·남캐: 0(프로필)+1(기본)만 — raw에 2~9 있어도 갤러리 미표시 (RO·MY·VC 등)
  * 아카데미 엑스트라·pending: 0·1 + A01~A03·HM
- * RS: F01·F02 + PHASE1(단 N·FI·A01~A03 불가)
+ * RS: FI·F01·F02 + PHASE1(단 N01~N04·A01~A03 불가)
  */
 
 (function (global) {

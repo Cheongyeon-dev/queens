@@ -37,7 +37,7 @@
     ]},
     { id: "table", title: "메인 테이블 · 블랙잭", short: "메인 테이블", chars: [
       { code: "BK", name: "백설아", en: "Baek Seola", role: "딜러", cardFile: "queens_백설아.png" },
-      { code: "HY", name: "설하영", en: "Seol Hayoung", role: "관광객 손님" },
+      { code: "HY", name: "설하영", en: "Seol Hayoung", role: "관광객 손님", cardFile: "queens_설하영.png" },
     ]},
     { id: "vip", title: "VIP 포커", short: "VIP", chars: [
       { code: "MU", name: "뮤리엘", en: "Muriel", role: "극작가", cardFile: "queens_Muireal_뮤리엘.png" },

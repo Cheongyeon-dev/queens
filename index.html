@@ -35,6 +35,8 @@
       font-family: "Pretendard", "Noto Sans KR", "Apple SD Gothic Neo", sans-serif;
       line-height: 1.75;
       word-break: keep-all;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
       background:
         radial-gradient(ellipse 80% 50% at 50% -10%, rgba(157, 107, 255, 0.22), transparent 55%),
         radial-gradient(ellipse 60% 40% at 10% 30%, rgba(91, 157, 255, 0.12), transparent 50%),
@@ -44,6 +46,7 @@
       position: relative;
       overflow-x: hidden;
     }
+    body::-webkit-scrollbar { display: none; width: 0; height: 0; }
 
     /* floating mana particles */
     body::before,
@@ -867,6 +870,27 @@
 
     .gate-fold-body strong { color: var(--ink); font-weight: 700; }
 
+    .asset-code-sub {
+      margin: 0 0 10px;
+      padding-left: 10px;
+      border-left: 3px solid rgba(157, 107, 255, 0.35);
+    }
+    .asset-code-sub:last-of-type { margin-bottom: 14px; }
+    .asset-code-sub h4 {
+      margin: 0 0 4px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.03em;
+      color: var(--pink-soft);
+    }
+    .asset-code-sub .sit-hint {
+      display: block;
+      margin: 0 0 4px;
+      font-size: 12px;
+      color: rgba(168, 155, 184, 0.9);
+    }
+    .asset-code-sub p { margin: 0; }
+
     .gate-fold-body code {
       padding: 1px 6px;
       font-size: 13px;
@@ -874,6 +898,10 @@
       color: var(--blue);
       background: rgba(91, 157, 255, 0.1);
       border: 1px solid rgba(91, 157, 255, 0.22);
+      word-break: break-all;
+      overflow-wrap: anywhere;
+      display: inline-block;
+      max-width: 100%;
     }
 
     .ui-preview-grid {
@@ -1354,11 +1382,38 @@
         <summary>에셋 코드</summary>
         <div class="gate-fold-body">
           <p><strong>이미지 출력</strong><br><code>![](https://bi.pharang.workers.dev/q/캐릭터코드/상황코드)</code></p>
-          <p><strong>캐릭터코드</strong><br>AR(아르카나), BE(벨라돈나), BK(백설아), BL(블랑슈), CA(카르멘), CE(클레망), CR(샤를로트), CT(캐서린), DH(신도화), EM(엠마), HY(설하영), LI(릴리스), LN(셀린), LO(루이), LX(렉시), MU(뮤리엘), NA(애나), RN(르네), RS(로제타), RX(록산느), SD(서도윤), SH(채서하), SL(셀레스테), TX(트릭시), VI(비올레타), YU(유리엔)</p>
-          <p><strong>엑스트라 · 업데이트 예정</strong><br>
-          엑스트라(0, 1) · VC(뱅상), LU(루시), LA(로랑), AM(아르망), OB(오베리아), MY(마리즈), RO(로잘리)<br>
-          아카데미(0, 1 · A01~A03, HM) · CM(카미유), BR(블레어), HO(이성후), HN(이성한), HG(휴고), YS(유세프)<br>
-          업데이트 예정 · MI(미하엘), VA(발레리), GI(지젤), AN(아네스)</p>
+          <p><strong>캐릭터코드</strong></p>
+          <div class="asset-code-sub">
+            <h4>카지노 · VIP · 르 로즈</h4>
+            <p>BK(백설아), AR(아르카나), RN(르네), BL(블랑슈), DH(신도화), HY(설하영), MU(뮤리엘), LI(릴리스), LN(셀린), CE(클레망), RS(로제타)</p>
+          </div>
+          <div class="asset-code-sub">
+            <h4>아르카나 아카데미</h4>
+            <p>CM(카미유), EM(엠마), RX(록산느), SL(셀레스테), CT(캐서린), SH(채서하), SD(서도윤), YU(유리엔)</p>
+          </div>
+          <div class="asset-code-sub">
+            <h4>라 라핀 루즈</h4>
+            <p>LO(루이), LX(렉시), TX(트릭시), NA(애나) — 사장·매니저·서빙</p>
+          </div>
+          <div class="asset-code-sub">
+            <h4>그랑 델리리움</h4>
+            <p>BE(벨라돈나), CA(카르멘), CR(샤를로트), VI(비올레타) — 공연자</p>
+          </div>
+          <p><strong>엑스트라 · 업데이트 예정</strong></p>
+          <div class="asset-code-sub">
+            <h4>엑스트라 · 도시</h4>
+            <span class="sit-hint">상황코드 0, 1</span>
+            <p>VC(뱅상), LU(루시), LA(로랑), AM(아르망), OB(오베리아), MY(마리즈), RO(로잘리)</p>
+          </div>
+          <div class="asset-code-sub">
+            <h4>아카데미 · 엑스트라</h4>
+            <span class="sit-hint">상황코드 0, 1 · A01~A03, HM</span>
+            <p>BR(블레어), HO(이성후), HN(이성한), HG(휴고), YS(유세프)</p>
+          </div>
+          <div class="asset-code-sub">
+            <h4>업데이트 예정</h4>
+            <p>MI(미하엘), VA(발레리), GI(지젤), AN(아네스)</p>
+          </div>
           <p><strong>상황코드</strong><br>
           <strong style="color:var(--pink-soft);">표정</strong> · 0(프로필), 1(기본), 2(짜증), 3(슬픔), 4(놀람), 5(패배), 6(쑥스), 7(설렘), 8(웃음), 9(마법·대치)<br>
           <strong style="color:var(--pink-soft);">카지노</strong> · CL02(바·칵테일), C01(테이블), ALL(베팅·승리), BT(버스트·탈의)<br>

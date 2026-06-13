@@ -16,6 +16,8 @@
       --glass: rgba(18, 12, 32, 0.85);
     }
     * { box-sizing: border-box; }
+    html { scrollbar-width: none; -ms-overflow-style: none; }
+    html::-webkit-scrollbar { display: none; width: 0; height: 0; }
     body {
       margin: 0;
       color: var(--ink);
@@ -26,7 +28,10 @@
         radial-gradient(ellipse 70% 40% at 50% 0%, rgba(157, 107, 255, 0.2), transparent),
         linear-gradient(180deg, var(--bg-deep), #0a0618);
       min-height: 100vh;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
     }
+    body::-webkit-scrollbar { display: none; width: 0; height: 0; }
     .wrap { width: min(1000px, calc(100% - 32px)); margin: 0 auto; padding: 0 0 48px; }
     .page-head { margin: 28px 0 20px; }
     .page-head h1 { margin: 0; font-family: "Nanum Myeongjo", serif; font-size: clamp(22px, 4vw, 28px); color: var(--pink-soft); }
@@ -244,10 +249,10 @@
           <text x="54" y="-46" fill="#fde68a" font-size="11" font-weight="800">퀸즈 홀 ♔</text>
           <text x="54" y="-34" fill="#a89bb8" font-size="9">도시 국가 · 수도</text>
         </g>
-        <!-- 전광판 · 타로 (르 로즈 옆 빈 블록) -->
+        <!-- 타로 운세 (상점가 인근) -->
         <g transform="translate(372,330)">
           <rect x="-46" y="-10" width="92" height="20" rx="2" fill="rgba(157,107,255,.12)" stroke="rgba(157,107,255,.35)"/>
-          <text y="4" text-anchor="middle" fill="#c4b5fd" font-size="9" font-weight="700">전광판 · 타로 ☽</text>
+          <text y="4" text-anchor="middle" fill="#c4b5fd" font-size="9" font-weight="700">타로 운세 ☽</text>
         </g>
 
         <!-- 나침반 느낌 -->
@@ -289,18 +294,18 @@
         <span class="tag social">숙박</span>
       </div>
       <div class="legend-item">
-        <strong>전광판 · 타로</strong>
-        <span>도시 소식·이벤트·타로 안내.</span>
+        <strong>타로 운세</strong>
+        <span>거리 타로·운세.</span>
         <span class="tag social">안내</span>
       </div>
       <div class="legend-item">
         <strong>퀸즈 홀</strong>
-        <span>퀸즈 도시 국가의 수도·거버넌스 중심.</span>
+        <span>퀸즈 도시 국가의 수도.</span>
         <span class="tag social">도시 국가</span>
       </div>
       <div class="legend-item">
         <strong>르 로즈 → 블랙잭</strong>
-        <span>골목 너머 비밀 카지노. 도박·환생.</span>
+        <span>골목 너머 비밀 카지노.</span>
         <span class="tag gamble">도박</span>
       </div>
       <div class="legend-item">

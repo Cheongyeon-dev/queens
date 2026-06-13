@@ -85,6 +85,20 @@
     }
     .code-row b { color: var(--purple); letter-spacing: 0.06em; font-size: 15px; }
     .code-row span { color: var(--muted); font-weight: 600; }
+    .code-faction {
+      margin: 22px 0 10px;
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--blue);
+    }
+    .code-faction:first-of-type { margin-top: 0; }
+    .code-faction-note {
+      display: block;
+      margin-top: 2px;
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--muted);
+    }
     @media (max-width: 720px) {
       .code-table { grid-template-columns: repeat(2, minmax(0, 1fr)); }
     }
@@ -242,35 +256,77 @@
 
     <section>
       <div class="section-head"><h2>캐릭터 코드표</h2></div>
+
+      <h3 class="code-faction">카지노 · VIP · 르 로즈</h3>
       <div class="code-table glass-panel">
-        <div class="code-row"><b>AR</b><span>아르카나</span></div>
-        <div class="code-row"><b>BE</b><span>벨라돈나</span></div>
         <div class="code-row"><b>BK</b><span>백설아</span></div>
+        <div class="code-row"><b>AR</b><span>아르카나</span></div>
+        <div class="code-row"><b>RN</b><span>르네</span></div>
         <div class="code-row"><b>BL</b><span>블랑슈</span></div>
-        <div class="code-row"><b>CA</b><span>카르멘</span></div>
-        <div class="code-row"><b>CE</b><span>클레망</span></div>
-        <div class="code-row"><b>CR</b><span>샤를로트</span></div>
-        <div class="code-row"><b>CT</b><span>캐서린</span></div>
         <div class="code-row"><b>DH</b><span>신도화</span></div>
-        <div class="code-row"><b>EM</b><span>엠마</span></div>
         <div class="code-row"><b>HY</b><span>설하영</span></div>
+        <div class="code-row"><b>MU</b><span>뮤리엘</span></div>
         <div class="code-row"><b>LI</b><span>릴리스</span></div>
         <div class="code-row"><b>LN</b><span>셀린</span></div>
-        <div class="code-row"><b>LO</b><span>루이</span></div>
-        <div class="code-row"><b>LX</b><span>렉시</span></div>
-        <div class="code-row"><b>MU</b><span>뮤리엘</span></div>
-        <div class="code-row"><b>NA</b><span>애나</span></div>
-        <div class="code-row"><b>RN</b><span>르네</span></div>
+        <div class="code-row"><b>CE</b><span>클레망</span></div>
         <div class="code-row"><b>RS</b><span>로제타</span></div>
+      </div>
+
+      <h3 class="code-faction">아르카나 아카데미</h3>
+      <div class="code-table glass-panel">
+        <div class="code-row"><b>CM</b><span>카미유</span></div>
+        <div class="code-row"><b>EM</b><span>엠마</span></div>
         <div class="code-row"><b>RX</b><span>록산느</span></div>
-        <div class="code-row"><b>SD</b><span>서도윤</span></div>
-        <div class="code-row"><b>SH</b><span>채서하</span></div>
         <div class="code-row"><b>SL</b><span>셀레스테</span></div>
-        <div class="code-row"><b>TX</b><span>트릭시</span></div>
-        <div class="code-row"><b>VI</b><span>비올레타</span></div>
+        <div class="code-row"><b>CT</b><span>캐서린</span></div>
+        <div class="code-row"><b>SH</b><span>채서하</span></div>
+        <div class="code-row"><b>SD</b><span>서도윤</span></div>
         <div class="code-row"><b>YU</b><span>유리엔</span></div>
       </div>
-      <p style="margin:10px 0 0;font-size:14px;color:var(--muted);">엑스트라 · 업데이트 예정 · VC(뱅상), LU(루시), LA(로랑), AM(아르망), OB(오베리아), MY(마리즈), RO(로잘리), CM(카미유), BR(블레어), HO(이성후), HN(이성한), HG(휴고), YS(유세프), MI(미하엘), VA(발레리), GI(지젤), AN(아네스)</p>
+
+      <h3 class="code-faction">라 라핀 루즈<span class="code-faction-note">사장 · 매니저 · 서빙</span></h3>
+      <div class="code-table glass-panel">
+        <div class="code-row"><b>LO</b><span>루이</span></div>
+        <div class="code-row"><b>LX</b><span>렉시</span></div>
+        <div class="code-row"><b>TX</b><span>트릭시</span></div>
+        <div class="code-row"><b>NA</b><span>애나</span></div>
+      </div>
+
+      <h3 class="code-faction">그랑 델리리움<span class="code-faction-note">공연자</span></h3>
+      <div class="code-table glass-panel">
+        <div class="code-row"><b>BE</b><span>벨라돈나</span></div>
+        <div class="code-row"><b>CA</b><span>카르멘</span></div>
+        <div class="code-row"><b>CR</b><span>샤를로트</span></div>
+        <div class="code-row"><b>VI</b><span>비올레타</span></div>
+      </div>
+
+      <h3 class="code-faction">엑스트라 · 도시<span class="code-faction-note">상황코드 0, 1</span></h3>
+      <div class="code-table glass-panel">
+        <div class="code-row"><b>VC</b><span>뱅상</span></div>
+        <div class="code-row"><b>LU</b><span>루시</span></div>
+        <div class="code-row"><b>LA</b><span>로랑</span></div>
+        <div class="code-row"><b>AM</b><span>아르망</span></div>
+        <div class="code-row"><b>OB</b><span>오베리아</span></div>
+        <div class="code-row"><b>MY</b><span>마리즈</span></div>
+        <div class="code-row"><b>RO</b><span>로잘리</span></div>
+      </div>
+
+      <h3 class="code-faction">아카데미 · 엑스트라<span class="code-faction-note">0, 1 · A01~A03, HM</span></h3>
+      <div class="code-table glass-panel">
+        <div class="code-row"><b>BR</b><span>블레어</span></div>
+        <div class="code-row"><b>HO</b><span>이성후</span></div>
+        <div class="code-row"><b>HN</b><span>이성한</span></div>
+        <div class="code-row"><b>HG</b><span>휴고</span></div>
+        <div class="code-row"><b>YS</b><span>유세프</span></div>
+      </div>
+
+      <h3 class="code-faction">업데이트 예정</h3>
+      <div class="code-table glass-panel">
+        <div class="code-row"><b>MI</b><span>미하엘</span></div>
+        <div class="code-row"><b>VA</b><span>발레리</span></div>
+        <div class="code-row"><b>GI</b><span>지젤</span></div>
+        <div class="code-row"><b>AN</b><span>아네스</span></div>
+      </div>
     </section>
 
     <section>

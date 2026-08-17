@@ -64,7 +64,7 @@
   ];
 
   var CAST_MALE_NO_SITUATION = { VC: 1, YS: 1, HO: 1, HN: 1, HG: 1 };
-  var CAST_ASSET_PENDING_CODES = { BR: 1, MI: 1, VA: 1, GI: 1, AN: 1 };
+  var CAST_ASSET_PENDING_CODES = { AN: 1 };
   var CAST_YURI_ONLY_CODES = { RS: 1 };
   var CAST_NO_SITUATION_LABEL = "상황 에셋 미지원";
   var CAST_ASSET_PENDING_LABEL = "상황 에셋 미지원·추후 업데이트 예정";
